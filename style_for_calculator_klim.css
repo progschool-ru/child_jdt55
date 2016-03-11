@@ -1,0 +1,126 @@
+			.selector{
+				width: 150px;
+				float: left;
+				margin-right: 10px;
+				margin-bottom: 0px;
+			}
+			.calc{
+				float: left;
+				vertical-align: middle;
+				width: 450px;
+			}
+			a{
+				text-decoration: none;
+			}
+			table{
+				display: inline-block;
+				border: none;
+			}
+			tbody{
+				border:none;
+			}
+			.artkli-custom-select{
+				width: 130px;
+				height: 40px;
+				overflow: hidden;
+				border-radius: 5px;
+				box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+				background: #f7f7f7;
+				float: left;
+				margin-right: 10px;
+			}
+			.artkli-custom-button input{
+				width: 110px;
+				height: 40px;
+				overflow: hidden;
+				border-radius: 100%;
+				background: #f7f7f7;
+				box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+				font: 15px Arial;
+				outline: 0;
+				padding: 1px 3px;
+				display: inline-block;
+				margin-right: 10px;
+				text-align: center;
+			}
+			.artkli-custom-input{
+				margin: 10px;
+				margin-top: 0px;
+			}
+			.artkli-custom-input input{
+				width: 120px;
+				height: 25px;
+				overflow: hidden;
+				border-radius: 5px;
+				box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+				font: 15px Arial;
+				outline: 0;
+				padding: 3px 5px;
+				display: inline-block;
+			}
+			.artkli-footer {
+			  height:1px;
+			  clear: both;
+			  display: inline-block;
+			  text-align: right;
+			}
+			.artkli-hidden { 
+				display: none; 
+			} 
+			.layer1 {
+				float: left; /* Обтекание по правому краю */
+				border: 0px; /* Параметры рамки */
+				padding: 5px; /* Поля вокруг текста */
+				margin-right: 10px; /* Отступ справа */
+				width: 550px; /* Ширина блока */
+			}
+			.layer2 {
+				float: left; /* Обтекание по правому краю */
+				text-align: left;
+				align-content: left;
+				border: 0px ; /* Параметры рамки */
+				padding: 5px; /* Поля вокруг текста */
+				margin-right: 0px; /* Отступ справа */
+				width: 450px; /* Ширина блока */
+				margin-top: 10px;
+				display: inline-block;
+			}
+			.layer3 {
+				float:left; /* Обтекание по правому краю */
+				border: 0px ; /* Параметры рамки */
+				padding: 5px; /* Поля вокруг текста */
+				margin-right: 0px; /* Отступ справа */
+				width: 150px; /* Ширина блока */
+				margin-top: 10px;
+			}
+			.input {
+				display: inline-block;
+				/*width: 250px;*/
+				text-align: right;
+			}
+			.layer4 {
+				float:left; /* Обтекание по правому краю */
+				border: 0px ; /* Параметры рамки */
+				padding: 5px; /* Поля вокруг текста */
+				margin-right: 0px; /* Отступ справа */
+				width: 250px; /* Ширина блока */
+				margin-top: 10px;
+			}
+			.cities{
+				display: inline-block;
+				padding: 5px;
+				/*width: 500px;*/
+				margin: 10px;
+				vertical-align: middle;
+			}
+			.span{
+				display: block;
+				margin-top: 20px;
+			}
+			.but{
+				display: inline;
+				margin: 10px;
+			}
+			#artkli-choose_way{
+				margin: 10px;
+			}
