@@ -24,7 +24,8 @@ var artkli_city_names = {
 
 var artkli_way_names = {
 	jd_way: "ЖД",
-	auto_way: "АВТО"
+	auto_way: "АВТО",
+	default_way: "ЖД"
 };
 
 
