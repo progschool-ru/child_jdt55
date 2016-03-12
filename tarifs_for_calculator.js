@@ -22,7 +22,10 @@ var artkli_city_names = {
 	ulan_ude:"Улан-Удэ"
 };
 
-
+var artkli_way_names = {
+	jd_way: "ЖД",
+	auto_way: "АВТО"
+};
 
 
 
