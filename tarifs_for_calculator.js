@@ -27,7 +27,9 @@ var artkli_way_names = {
 	auto_way: "АВТО",
 	default_way: "ЖД"
 };
-
+var artkli_auto_way_tarifs = {
+	omsk: "piter"
+};
 
 
 var artkli_tarifs = {
