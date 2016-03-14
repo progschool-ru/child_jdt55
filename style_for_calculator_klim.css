@@ -23,9 +23,11 @@
 			tbody{
 				border:none;
 			}
+			#artkli-chooser{
+				float: left;
+				margin-right: 50px;
+			}
 			.input2, #artkli-choose_way{
-				
-				width: 350px;
 				text-align: left;
 				padding: 2px;
 			}
@@ -73,7 +75,7 @@
 			  height:1px;
 			  clear: both;
 			  display: inline-block;
-			  text-align: right;
+			  text-align: left;
 			}
 			.artkli-hidden { 
 				display: none; 
@@ -121,7 +123,7 @@
 				display: inline-block;
 				padding: 5px;
 				/*width: 500px;*/
-				margin: 10px;
+				margin: 0px;
 				vertical-align: middle;
 			}
 			.span{
