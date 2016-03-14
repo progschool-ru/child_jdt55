@@ -3,11 +3,11 @@
 				float: left;
 				margin-right: 10px;
 				margin-bottom: 0px;
+				margin-left: 0px;
 			}
 			#artkli-massa, #artkli-volume{
 				width: 250px;
 			}
-	
 			.calc{
 				float: left;
 				vertical-align: middle;
@@ -25,7 +25,9 @@
 			}
 			#artkli-chooser{
 				float: left;
-				margin-right: 50px;
+				margin-right: 45px;
+				padding-top: 12px;
+				margin-left: 10px;
 			}
 			.input2, #artkli-choose_way{
 				text-align: left;
@@ -56,7 +58,7 @@
 				text-align: center;
 			}
 			.input{
-				margin: 10px;
+				margin: 0px;
 				margin-top: 0px;
 				float: left;
 			}
@@ -80,6 +82,10 @@
 			.artkli-hidden { 
 				display: none; 
 			} 
+			.col-sm-10, #artkli-massa, #artkli-volume{
+				width: 200px;
+				margin-left: 10px; 
+			}
 			.layer1 {
 				float: left; /* Обтекание по правому краю */
 				border: 0px; /* Параметры рамки */
@@ -106,11 +112,6 @@
 				width: 150px; /* Ширина блока */
 				margin-top: 10px;
 			}
-			.input {
-				display: inline-block;
-				/*width: 250px;*/
-				text-align: right;
-			}
 			.layer4 {
 				float:left; /* Обтекание по правому краю */
 				border: 0px ; /* Параметры рамки */
@@ -122,17 +123,9 @@
 			.cities{
 				display: inline-block;
 				padding: 5px;
-				/*width: 500px;*/
+				width: 100%;
 				margin: 0px;
 				vertical-align: middle;
-			}
-			.span{
-				display: block;
-				margin-top: 20px;
-			}
-			.but{
-				display: inline;
-				margin: 10px;
 			}
 			#artkli-choose_way{
 				margin: 10px;
