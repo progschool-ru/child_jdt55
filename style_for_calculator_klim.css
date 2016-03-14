@@ -5,22 +5,21 @@
 				margin-bottom: 0px;
 				margin-left: 0px;
 			}
-			.htooltip .reset { /* Внешний вид нашего тултипа */
+			.htooltip .reset { 
 				background-color: rgba(0,0,0, 0.8);
 				border-radius: 15px 15px 15px 0px;
 				box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 				color: #fff;
 				margin-left: 2px;
 				margin-top: -55px;
-				opacity: 0; /* Делаем его прозрачным */
+				opacity: 0; 
 				padding: 10px 10px 10px 10px;
 				position: absolute;
 				text-decoration: none;
-				visibility: hidden; /* И прячем */
-				/*width: 350px;*/
+				visibility: hidden; 
 				z-index: 10;
 			}	
-			.htooltip:hover .reset { /* По hover отображаем тултип */
+			.htooltip:hover .reset { 
 				opacity: 1;
 				visibility: visible;
 			}
@@ -30,7 +29,8 @@
 			.calc{
 				float: left;
 				vertical-align: middle;
-				width: 450px;
+				width: 420px;
+				padding: 0px;
 			}
 			a{
 				text-decoration: none;
@@ -46,11 +46,10 @@
 				float: left;
 				margin-right: 45px;
 				padding-top: 12px;
-				margin-left: 10px;
 			}
 			.input2, #artkli-choose_way{
-				text-align: left;
 				padding: 2px;
+
 			}
 			.artkli-custom-select{
 				width: 130px;
@@ -103,7 +102,7 @@
 			} 
 			.col-sm-10, #artkli-massa, #artkli-volume{
 				width: 200px;
-				margin-left: 10px; 
+				margin-left: 0px; 
 			}
 			.layer1 {
 				float: left; /* Обтекание по правому краю */
