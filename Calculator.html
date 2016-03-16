@@ -2,26 +2,24 @@
 <html> 
 	<head> 
 	<script src="https://code.jquery.com/jquery.min.js"></script>
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
 	
-	<!-- <script src="tarifs_for_calculator.js"></script> -->
-	<!-- <link href="style_for_calculator_klim.css" rel="stylesheet"> -->
-	<!-- <link href="octicons.css" rel="stylesheet"> -->
-	<!-- <link rel='stylesheet' href='bootstrap.min.css' type='text/css'> -->
+	<script src="tarifs_for_calculator.js"></script>
+	<link href="style_for_calculator_klim.css" rel="stylesheet">
+	<link href="octicons.css" rel="stylesheet">
+	<link rel='stylesheet' href='bootstrap.min.css' type='text/css'>
 
 
 	 <!-- Для сайта -->
-	 	<script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script>
-		<link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet">
-		<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
-		<link rel='stylesheet' href='/sites/jdt55/files/users/Calc_files/bootstrap.min.css' type='text/css'>
+	 	<!-- <script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script> -->
+		<!-- <link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet"> -->
+		<!-- <link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet"> -->
+		<!-- <link rel='stylesheet' href='/sites/jdt55/files/users/Calc_files/bootstrap.min.css' type='text/css'> -->
 	
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Калькулятор грузоперевозок</title> 
 	</head> 
 <body> 
-
-<div class="layer1" align="left">
+<div class="layer1" align="left" id="tr">
 		<h2>Цены на доставку груза:</h2>
 			<p class="tarif" style="font-size: 12px"><a href="/sites/jdt55/files/users/admin1/prais-list_no1_zhd_perevozki.doc"><span style="color: rgb(102, 153, 102);">ЖД доставка сборных грузов</span></a></p><br>
 
@@ -51,15 +49,14 @@
 </div>
 <div class="calc">
 	<form name="calc"> 
-	
 		<div class="cities">
 		<h2>Предварительный расчет</h2>
 			<div align="left" class="selector">
-				<select name="artkli-from" id="artkli-from" class="form-control" style="padding-left: 10px;" onchange="artkli.fill_text();artkli.update_where();artkli.update_from();">	
+				<select name="artkli-from" id="artkli-from" class="form-control" style="padding-left: 10px;" onchange="artkli.check_radio();artkli.fill_text();artkli.update_where();artkli.update_from();">	
 				</select>
 			</div>
 			<div align="left" class="selector" id="artkli-where">
-				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.fill_text();artkli.update_from();artkli.update_where()">	
+				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.check_radio();artkli.fill_text();artkli.update_from();artkli.update_where()">	
 				</select>
 			</div>
 			<div class="htooltip">
@@ -80,27 +77,54 @@
 				</div>
 				<div class="form-group">
 					<label for="artkli-volume" class="col-sm-2 control-label" style=" width: 80px; margin-left: 7px;text-align: left;">Объем</label>
-					<div class="col-sm-10" style="width: 280px;">
+					<div class="col-sm-10" style="width: 200px;">
 						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="number" min="0" placeholder = "Куб.м." value="" oninput="artkli.fill_text()">
 					</div>
 				</div>
-				
 					<div name="result_field" class="alert alert-info" style="height: 36px width: 430px; margin-right: 55px; margin-left: 7px;" role="alert"><font size="3"><span style="margin-bottom: 180px" id = "artkli-result">Итог</span></font></div>
-					
-				
 			</div>
 	</form>
 </div>
 	<br>
-	
 </div>
+
+	<div class="layer2" id="tarifs_links">
+		<label><h3><input type="checkbox" id="tarifs_sv" onchange="artkli.show_tarifs()"> Тарифы</h3></label>
+	</div>
 <div class="artkli-footer" align="left" style="margin-left: 7px;">
 		<p style="font-size: 12px">	Калькулятор разработан при поддержке <a href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px">Школы программиста</a>.</p>
 		<p style="font-size: 12px">	Наставник: <a href="http://chivorotkiv.livejournal.com/">Сергей Шмаков</a></p>
 	</div>
 	<script>
 (function() {
+
 	var result_field = document.getElementsByName('result_field');
+	function build_but_tarif_checked(){
+		return "<label><h3><input type=\"checkbox\" id=\"tarifs_sv\" checked onchange=\"artkli.show_tarifs()\"> Тарифы</h3></label><br>"
+	}
+	function build_but_tarif(){
+		return "<label><h3><input type=\"checkbox\" id=\"tarifs_sv\" onchange=\"artkli.show_tarifs()\"> Тарифы</h3></label>"
+	}
+	function show_tarifs(){
+		var checker = document.getElementById('tarifs_sv');
+		var tarif = document.getElementsByClassName('tarif')
+		var field = document.getElementById('tarifs_links');
+		var link_tarifs = [];
+		if(checker.checked){
+			var but_tarif = build_but_tarif_checked();
+			link_tarifs.push(but_tarif);
+			for(var i = 0; i < tarif.length; i++){
+				link_tarifs.push(tarif[i].outerHTML);
+			}
+			var link_tarifs = link_tarifs.join("\n");
+			field.innerHTML = link_tarifs;
+		}
+		else{
+			var but_tarif = build_but_tarif();
+			link_tarifs.push(but_tarif);
+		}
+		field.innerHTML = link_tarifs;
+	}
 	function build_radio(radio_name, radio, value){
 		return "<label class=\"radio-inline \" style=\"padding-bottom:0px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"artkli.fill_text();\" value="+value+">"+radio+"</input></label>";
 	}
@@ -128,6 +152,7 @@
 			var buttons = buttons.join("\n");
 			chooser_dep.innerHTML = chooser;
 			dependency.innerHTML = buttons;
+			
 			if(Object.keys(artkli_tarifs[from][to]).length == 2){
 				dependency.setAttribute('class', ''); 
 				chooser_dep.setAttribute('class', ''); 
@@ -254,7 +279,6 @@
 	function build_first_option(){
 		return	"<option selected disabled value=\"undefined_city\">Выберите город</option>";
 	}
-
 	function get_where_cities_by_from(from, tarifs){
 		var cities = {};
 		var all_from = get_from_cities(tarifs);
@@ -444,7 +468,6 @@
 			}
 		}
 	}
-
 	function reset(){
 		var from_block = document.getElementsByName('artkli-from'); 
 		var where_block = document.getElementsByName('artkli-where');
@@ -499,8 +522,17 @@
 		where_select.innerHTML = options_html;
 	}
 	initialization();
-
+	function check_radio(){
+		var from_select = document.getElementsByName('artkli-from');
+		var where_select = document.getElementsByName('artkli-where'); 
+		var from_elem = from_select[0]; 
+		var where_elem = where_select[0];
+		var from = from_elem.value; 
+		var where = where_elem.value;
+		update_way_dependent(artkli_tarifs, from, where); 
+	}
 	function fill_text(){    			//ОСНОВНАЯ ФУНКЦИЯ
+		
 		var tax_by_mass = 0;
 		var tax_by_volume = 0;
 			
@@ -520,12 +552,12 @@
 
 		var check_auto = from + where;
 
-		update_way_dependent(artkli_tarifs, from, where); 
-
 		var tarifs = get_tarifs();
 
 		var way = document.getElementsByName('artkli-way');
+		
 		var way = what_is_way(way);
+		
 
 		if(from == "undefined_city"){
 			resultat = "Выберите пункт отправления!";
@@ -584,7 +616,6 @@
 					resultat = "Итоговая сумма - "+ resultat +" руб.";
 				}
 			}
-
 		document.getElementById('artkli-result').innerHTML = resultat;
 	}
 	window.artkli = {
@@ -592,7 +623,9 @@
 		fill_text: fill_text,
 		update_where: update_where,
 		update_from: update_from,
-		reset: reset
+		show_tarifs: show_tarifs,
+		reset: reset,
+		check_radio: check_radio
 	};
 })();
 	</script>
