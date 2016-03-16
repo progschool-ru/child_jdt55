@@ -10,9 +10,11 @@
 			}
 			p{
 				line-height: 5px;
+
 			}
 			h2{
-				padding-bottom: 25px;
+				padding-bottom: 15px;
+				padding-top: 0px;
 			}
 			.htooltip{
 				display: inline-block;
@@ -112,7 +114,7 @@
 			  /*height:1px;*/
 			  clear: both;
 			  /*display: inline-block;*/
-			  float: right;
+			  float: left;
 			  text-align: left;
 			}
 			.artkli-hidden { 
@@ -121,6 +123,9 @@
 			.col-sm-10, #artkli-massa, #artkli-volume{
 				width: 276px;
 				margin-left: 0px; 
+			}
+			.form-group{
+				margin: 0px;
 			}
 			.layer1 {
 				float: left; /* Обтекание по правому краю */
@@ -136,7 +141,7 @@
 				margin-right: 10px; /* Отступ справа */
 				display: none;
 				clear: both;
-				margin-left: 105px;
+				/*margin-left: 105px;*/
 			}
 			}
 			.cities{
@@ -145,6 +150,7 @@
 				width: 100%;
 				margin: 0px;
 				vertical-align: middle;
+				margin-bottom: 0px;
 			}
 			#artkli-choose_way{
 				margin: 10px;
