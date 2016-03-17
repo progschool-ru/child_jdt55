@@ -8,9 +8,28 @@
 				margin-bottom: 0px;
 				margin-left: 0px;
 			}
-			p{
+			p, a.tarif{
 				line-height: 5px;
 
+			}
+			.calc{
+				float: left;
+				vertical-align: middle;
+				width: 420px;
+				padding: 0px;
+				clear: right;
+				margin-left: 100px;
+
+			}
+			.calc .form-group{
+				margin-right:15px;
+				margin-left:-15px;
+			}
+			.calc .form-group:after,.calc .form-group:before{
+				display:table;content:" ";
+			}
+			.calc .form-group:after{
+				clear: both;
 			}
 			.tarif{
 				font-size: 12px;
@@ -27,8 +46,6 @@
 			}
 			@media (max-width: 930px) and (min-width: 470px) {
 				.layer1{
-					/*text-align: center;*/
-					/*align-content: center;*/
 					margin-left: 105px;
 				}
 			}
@@ -60,14 +77,7 @@
 				opacity: 1;
 				visibility: visible;
 			}
-			.calc{
-				float: left;
-				vertical-align: middle;
-				width: 420px;
-				padding: 0px;
-				clear: right;
-				margin-left: 100px;
-			}
+			
 			a{
 				text-decoration: none;
 			}
