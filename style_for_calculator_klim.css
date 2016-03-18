@@ -8,8 +8,10 @@
 				margin-bottom: 0px;
 				margin-left: 0px;
 			}
-			p, a.tarif{
-				line-height: 5px;
+			.tarif{
+				margin-bottom: 5px;
+				margin-top: 0px;
+				padding: 0px;
 
 			}
 			.calc{
@@ -134,7 +136,7 @@
 				display: none; 
 			} 
 			.col-sm-10, #artkli-massa, #artkli-volume{
-				width: 276px;
+				width: 295px;
 				margin-left: 0px; 
 			}
 			.form-group{
