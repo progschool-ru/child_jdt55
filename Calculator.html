@@ -3,17 +3,17 @@
 	<head> 
 	<script src="https://code.jquery.com/jquery.min.js"></script>
 	
-	<!-- <script src="tarifs_for_calculator.js"></script> -->
-	<!-- <link href="style_for_calculator_klim.css" rel="stylesheet"> -->
-	<!-- <link href="octicons.css" rel="stylesheet"> -->
-	<!-- <link rel='stylesheet' href='bootstrap.min.css' type='text/css'> -->
+	<script src="tarifs_for_calculator.js"></script>
+	<link href="style_for_calculator_klim.css" rel="stylesheet">
+	<link href="octicons.css" rel="stylesheet">
+	<link rel='stylesheet' href='bootstrap.min.css' type='text/css'>
 
 
 	 <!-- Для сайта -->
-	 	<script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script>
-		<link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet">
-		<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
-		<link rel='stylesheet' href='/sites/jdt55/files/users/Calc_files/bootstrap.min.css' type='text/css'>
+	 	<!-- <script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script> -->
+		<!-- <link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet"> -->
+		<!-- <link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet"> -->
+		<!-- <link rel='stylesheet' href='/sites/jdt55/files/users/Calc_files/bootstrap.min.css' type='text/css'> -->
 	
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Калькулятор грузоперевозок</title> 
@@ -52,11 +52,11 @@
 		<h2 style="margin-left:-15px; ">Предварительный расчет</h2>
 		<div class="form-group" style="margin-bottom: 0px;">
 			<div align="left" class="selector">
-				<select name="artkli-from" id="artkli-from" class="form-control" style="padding-left: 10px;" onchange="artkli.check_radio();artkli.fill_text();artkli.update_where();artkli.update_from();">	
+				<select name="artkli-from" id="artkli-from" class="form-control" style="padding-left: 10px;" onchange="artkli.check_radio();artkli.update_where();artkli.update_from();artkli.fill_text();">	
 				</select>
 			</div>
 			<div align="left" class="selector" id="artkli-where">
-				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.check_radio();artkli.fill_text();artkli.update_from();artkli.update_where()">	
+				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.check_radio();artkli.update_from();artkli.update_where();artkli.fill_text();">	
 				</select>
 			</div>
 			<div class="htooltip">
@@ -150,7 +150,7 @@
 
 	var result_field = document.getElementsByName('result_field');
 	function build_radio(radio_name, radio, value){
-		return "<label class=\"radio-inline \" style=\"margin-bottom:-8px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"artkli.fill_text();\" value="+value+">"+radio+"</input></label>";
+		return "<label class=\"radio-inline \" style=\"margin-bottom:-8px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"artkli.fill_text();\" checked value="+value+">"+radio+"</input></label>";
 	}
 	function build_radio_chooser(){
 		return "<label class=\"col-sm-2 control-label\" style=\"margin-bottom:-10px; width: 80px; margin-left: -14px; text-align: left;\" >Доставка</label>";
@@ -233,7 +233,6 @@
 				}
 			}
 		}
-
 		var wrapper = where_cities;
 		var nodes = wrapper;
 		var len = nodes.length;
@@ -592,6 +591,7 @@
 		if(from == "undefined_city"){
 			resultat = "Выберите пункт отправления!";
 			result_field[0].setAttribute('class','alert alert-warning');
+
 		}
 		else if(where == "undefined_city"){
 			resultat = "Выберите пункт назначения!";
@@ -600,10 +600,14 @@
 		else if(mass.value == 0){					
 			resultat = "Введите массу груза!";
 			result_field[0].setAttribute('class','alert alert-warning');
+			var call = document.getElementById('call');
+			call.setAttribute('class', 'artkli-hidden');
 		}
 		else if(volume.value == 0){
 			resultat = "Введите объем груза!";
 			result_field[0].setAttribute('class','alert alert-warning');
+			var call = document.getElementById('call');
+			call.setAttribute('class', 'artkli-hidden');
 		}
 		else{
 				var tax = conclusion_tax(artkli_tarifs, from, where, mass.value, volume.value, way);
