@@ -69,13 +69,13 @@
 					<br/>
 				</div>
 				<div class="form-group">
-					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px;"  >Вес</label>
+					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px; "  >Вес</label>
 					<div class="col-sm-10" style="width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; ">
 						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="number" min="0" step="1000" placeholder = "Кг" style="text-align: right;" value="" oninput="artkli.fill_text();"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="artkli-volume" class="col-sm-2 control-label" style=" width: 62px; margin-left: -14px;text-align: left;">Объем</label>
+					<label for="artkli-volume" class="col-sm-2 control-label" style=" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;">Объем</label>
 					<div class="col-sm-10" style="width: 200px;">
 						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="number" min="0" placeholder = "Куб.м." style="text-align: right;" value="" oninput="artkli.fill_text()">
 					</div>
@@ -86,22 +86,22 @@
 	<tbody>
 		<tr>
 			<td style="width: 70px;">
-				<img alt="" src="/sites/jdt55/files/content/pages/front/call.jpg" /></td>
+				<span class="mega-octicon octicon-device-mobile" style="margin-left: 4px;"></span></td>
 			<td>
-				<span style="text-align: justify;">Позвонить: (3812) 45-04-39,&nbsp;8-913-967-98-98.</span></td>
+				<span style="text-align: justify;">Позвонить: &nbsp; (3812) 45-04-39,<br><span style="text-align: right; margin-left: 65px;">&nbsp;8-913-967-98-98.</span></span></td>
 		</tr>
 		<tr>
 			<td>
-				<img alt="" src="/sites/jdt55/files/content/pages/front/mail.jpg" /></td>
+				<span class="mega-octicon octicon-mail-read"></span></td>
 			<td>
 				<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru">office@jdt55.ru</a>.</span></td>
 		</tr>
 		<tr>
 		<!-- /sites/jdt55/files/content/pages/front/ -->
 			<td>
-				<img alt="" src="/sites/jdt55/files/content/pages/front/write.jpg" /></td>
+				<span class="mega-octicon octicon-globe"></span></td>
 			<td>
-				<span style="text-align: justify;">Оставить заявку на нашем сайте: <a href="/contact">подать заявку</a>.</span></td>
+				<span style="text-align: justify;"><a target="_blank" href="/contact">Оставить заявку на сайте.</a></span></td>
 		</tr>
 	</tbody>
 </table>
@@ -135,8 +135,8 @@
 			<p>&nbsp;</p>
 	</div>
 		<div class="artkli-footer" align="left" style="margin-left: -14px; margin-top: 50px;">
-		<p style="font-size: 12px">	Калькулятор разработан при поддержке <a href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px">Школы программиста</a>.</p>
-		<p style="font-size: 12px">	Наставник: <a href="http://chivorotkiv.livejournal.com/">Сергей Шмаков</a></p>
+		<p style="font-size: 12px">	Калькулятор разработан при поддержке <a target="_blank" href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px">Школы программиста</a>.</p>
+		<p style="font-size: 12px">	Наставник: <a target="_blank" href="http://chivorotkiv.livejournal.com/">Сергей Шмаков</a></p>
 	</div>
 </div>
 	<br>
@@ -150,10 +150,10 @@
 
 	var result_field = document.getElementsByName('result_field');
 	function build_radio(radio_name, radio, value){
-		return "<label class=\"radio-inline \" style=\"margin-bottom:-8px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"artkli.fill_text();\" checked value="+value+">"+radio+"</input></label>";
+		return "<label class=\"radio-inline \" style=\"margin-bottom:-10px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"artkli.fill_text();\" checked value="+value+">"+radio+"</input></label>";
 	}
 	function build_radio_chooser(){
-		return "<label class=\"col-sm-2 control-label\" style=\"margin-bottom:-10px; width: 80px; margin-left: -14px; text-align: left;\" >Доставка</label>";
+		return "<label class=\"col-sm-2 control-label\" style=\"margin-bottom:-10px; width: 80px; margin-left: -14px; text-align: left; margin-top:2px;\" >Доставка</label>";
 	}
 	function update_way_dependent(tarifs, from, to) { 
 		var chooser_dep = document.getElementById('artkli-chooser');
