@@ -2,17 +2,17 @@
 <html> 
 	<head> 
 	<script src="https://code.jquery.com/jquery.min.js"></script>
-	
+	 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="tarifs_for_calculator.js"></script>
-	<link href="style_for_calculator_klim.css" rel="stylesheet">
 	<link href="octicons.css" rel="stylesheet">
-	<link rel='stylesheet' href='bootstrap.min.css' type='text/css'>
-
+	<link href="style_for_calculator_klim.css" rel="stylesheet">
+	<!-- <link rel='stylesheet' href='bootstrap.min.css' type='text/css'> -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	 <!-- Для сайта -->
 	 	<!-- <script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script> -->
+	 	<!-- <link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet"> -->
 		<!-- <link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet"> -->
-		<!-- <link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet"> -->
 		<!-- <link rel='stylesheet' href='/sites/jdt55/files/users/Calc_files/bootstrap.min.css' type='text/css'> -->
 	
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -27,7 +27,7 @@
 
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prays-list_no4_avtoekspedirovanie_po_moskve_i_oblasti.doc">Автоэкспедирование грузов по г.Москва</a></p><br>
 
-			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prays-list_no3_avtoekspedirovanie_po_omsku.doc">Автоэкспедирование грузов по г.Омску</a></p><br>
+			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prais-list_no3_avtoekspedirovanie_po_omsku.doc">Автоэкспедирование грузов по г.Омску</a></p><br>
 
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prays-list_no5_dop.upakovku_gruzov_v_g.moskva_0.doc"><span style="color: rgb(102, 153, 102);">Дополнительная упаковка грузов в г.Москва</span></a></p><br>
 
@@ -59,9 +59,8 @@
 				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.check_radio();artkli.update_from();artkli.update_where();artkli.fill_text();">	
 				</select>
 			</div>
-			<div class="htooltip">
-			<button type="button" class="btn btn-default" onclick="artkli.reset()"><span class="octicon octicon-x"><span class="reset">Сброс</span></span>
-			</button></div>
+			<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Сброс" onclick="artkli.reset()" ><span class="octicon octicon-x"></span>
+			</button>
 		</div>
 				<div class="form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
 					<div id="artkli-chooser" align="left" style="margin-right: 10px; margin-bottom: 0px; padding-bottom: 0px;"></div>
@@ -81,25 +80,25 @@
 					</div>
 				</div>
 					<div name="result_field" class="alert alert-info" style="height: 36px width: 100%; margin-right: 76px; margin-left: -15px;" role="alert"><font size="3"><span style="margin-bottom: 180px" id = "artkli-result">Итог</span></font></div>		
-<table border="0" class="dump-noborder form-group" id="call" style="font-size: 12px; padding-left:12px; margin-left: -14px; ">
+<table border="0" class="dump-noborder form-group" id="call" style="font-size: 12px; padding-left:12px; margin-left: -14px;">
 	
 	<tbody>
 		<tr>
-			<td style="width: 70px;">
-				<span class="mega-octicon octicon-device-mobile" style="margin-left: 4px;"></span></td>
+			<td style="width: 30px;height: 16px; padding-bottom: 10px; ">
+				<span class="octicon octicon-device-mobile" style="margin-left: 2px;vertical-align: bottom;"></span></td>
 			<td>
-				<span style="text-align: justify;">Позвонить: &nbsp; (3812) 45-04-39,<br><span style="text-align: right; margin-left: 65px;">&nbsp;8-913-967-98-98.</span></span></td>
+				<span style="text-align: justify;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
 		</tr>
 		<tr>
-			<td>
-				<span class="mega-octicon octicon-mail-read"></span></td>
+			<td style="padding-bottom: 10px;">
+				<span class="octicon octicon-mail-read" style="vertical-align: bottom;"></span></td>
 			<td>
 				<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru">office@jdt55.ru</a>.</span></td>
 		</tr>
 		<tr>
 		<!-- /sites/jdt55/files/content/pages/front/ -->
-			<td>
-				<span class="mega-octicon octicon-globe"></span></td>
+			<td style="padding-bottom: 10px;">
+				<span class="octicon octicon-globe" style="vertical-align: bottom;"></span></td>
 			<td>
 				<span style="text-align: justify;"><a target="_blank" href="/contact">Оставить заявку на сайте.</a></span></td>
 		</tr>
@@ -135,8 +134,8 @@
 			<p>&nbsp;</p>
 	</div>
 		<div class="artkli-footer" align="left" style="margin-left: -14px; margin-top: 50px;">
-		<p style="font-size: 12px">	Калькулятор разработан при поддержке <a target="_blank" href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px">Школы программиста</a>.</p>
-		<p style="font-size: 12px">	Наставник: <a target="_blank" href="http://chivorotkiv.livejournal.com/">Сергей Шмаков</a></p>
+		<p style="font-size: 11px">	Калькулятор разработан при поддержке <a target="_blank" href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px">Школы программиста</a>.</p>
+		<p style="font-size: 11px">	Наставник: <a target="_blank" href="http://chivorotkiv.livejournal.com/">Сергей Шмаков</a></p>
 	</div>
 </div>
 	<br>
@@ -146,8 +145,12 @@
 	
 </div>
 	<script>
-(function() {
 
+
+(function() {
+	$(document).ready(function(){
+    	$('[data-toggle="tooltip"]').tooltip();   
+	});
 	var result_field = document.getElementsByName('result_field');
 	function build_radio(radio_name, radio, value){
 		return "<label class=\"radio-inline \" style=\"margin-bottom:-10px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"artkli.fill_text();\" checked value="+value+">"+radio+"</input></label>";
@@ -598,7 +601,7 @@
 			result_field[0].setAttribute('class','alert alert-warning');
 		}
 		else if(mass.value == 0){					
-			resultat = "Введите массу груза!";
+			resultat = "Введите вес груза!";
 			result_field[0].setAttribute('class','alert alert-warning');
 			var call = document.getElementById('call');
 			call.setAttribute('class', 'artkli-hidden');
