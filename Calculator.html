@@ -6,21 +6,18 @@
 	<script src="tarifs_for_calculator.js"></script>
 	<link href="octicons.css" rel="stylesheet">
 	<link href="style_for_calculator_klim.css" rel="stylesheet">
-	<!-- <link rel='stylesheet' href='bootstrap.min.css' type='text/css'> -->
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	 <!-- Для сайта -->
-	 	<!-- <script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script> -->
-	 	<!-- <link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet"> -->
-		<!-- <link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet"> -->
-		<!-- <link rel='stylesheet' href='/sites/jdt55/files/users/Calc_files/bootstrap.min.css' type='text/css'> -->
-	
+	 	<script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script>
+	 	<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
+		<link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Калькулятор грузоперевозок</title> 
 	</head> 
 <body> 
 <div class="layer1" align="left">
-		<h2 style="margin-top: 15px;">Цены на доставку груза</h2>
+		<h2 style="margin-top: 15px; margin-bottom: 3px;">Цены на доставку груза</h2>
 			<p class="tarif"><a href="/sites/jdt55/files/users/admin1/prais-list_no1_zhd_perevozki.doc"><span style="color: rgb(102, 153, 102);">ЖД доставка сборных грузов</span></a></p><br>
 
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prays-list_no2_avtoperevozki.xls"><span style="color: rgb(102, 153, 102);">Автоперевозка сборных грузов</span></a></p><br>
@@ -84,22 +81,22 @@
 	
 	<tbody>
 		<tr>
-			<td style="width: 30px;height: 16px; padding-bottom: 10px; ">
+			<td style="width: 22px;height: 16px; padding-bottom: 10px; ">
 				<span class="octicon octicon-device-mobile" style="margin-left: 2px;vertical-align: bottom;"></span></td>
-			<td>
-				<span style="text-align: justify;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
+			<td style="padding-bottom: 6px;"> 
+				<span style="text-align: justify;padding-bottom: 3px; ">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
 		</tr>
 		<tr>
 			<td style="padding-bottom: 10px;">
 				<span class="octicon octicon-mail-read" style="vertical-align: bottom;"></span></td>
-			<td>
+			<td style="padding-bottom: 6px;">
 				<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru">office@jdt55.ru</a>.</span></td>
 		</tr>
 		<tr>
 		<!-- /sites/jdt55/files/content/pages/front/ -->
 			<td style="padding-bottom: 10px;">
 				<span class="octicon octicon-globe" style="vertical-align: bottom;"></span></td>
-			<td>
+			<td style="padding-bottom: 6px;"> 
 				<span style="text-align: justify;"><a target="_blank" href="/contact">Оставить заявку на сайте.</a></span></td>
 		</tr>
 	</tbody>
@@ -652,7 +649,7 @@
 					resultat = Math.round(resultat);
 					resultat = String(resultat);
 					resultat = digit(resultat);
-					result_field[0].setAttribute('class','alert alert-info');
+					result_field[0].setAttribute('class','alert alert-success');
 					var call = document.getElementById('call');
 					call.setAttribute('class', 'dump-noborder');
 					resultat = "Итоговая сумма - "+ resultat +" руб.";
