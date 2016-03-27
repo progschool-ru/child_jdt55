@@ -56,7 +56,7 @@
 				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.check_radio();artkli.update_from();artkli.update_where();artkli.fill_text();">	
 				</select>
 			</div>
-			<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Сброс" onclick="artkli.reset()" ><span class="octicon octicon-x"></span>
+			<button type="button" class="btn btn-default" id="butt" data-toggle="tooltip" data-placement="top" title="Сброс" onclick="artkli.reset();artkli.blur_button()" ><span class="octicon octicon-x"></span>
 			</button>
 		</div>
 				<div class="form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
@@ -151,6 +151,10 @@
     	$('[data-toggle="tooltip"]').tooltip();   
 	});
 	var result_field = document.getElementsByName('result_field');
+
+	function blur_button(){
+		document.getElementById("butt").blur();
+	}
 	function build_radio(radio_name, radio, value){
 		return "<label class=\"radio-inline \" style=\"margin-bottom:-10px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"artkli.fill_text();\" checked value="+value+">"+radio+"</input></label>";
 	}
@@ -665,7 +669,8 @@
 		update_where: update_where,
 		update_from: update_from,
 		reset: reset,
-		check_radio: check_radio
+		check_radio: check_radio,
+		blur_button: blur_button
 	};
 })();
 	</script>
