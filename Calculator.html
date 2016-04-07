@@ -3,19 +3,21 @@
 	<head> 
 	<script src="https://code.jquery.com/jquery.min.js"></script>
 	 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="calculator.js"></script>
 	<script src="tarifs_for_calculator.js"></script>
 	<link href="octicons.css" rel="stylesheet">
 	<link href="style_for_calculator_klim.css" rel="stylesheet">
 
 	 <!-- Для сайта -->
-	 	<script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script>
-	 	<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
-		<link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet">
+	 	<!-- <script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script> -->
+	 	<!-- <link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet"> -->
+		<!-- <link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet"> -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Калькулятор грузоперевозок</title> 
 	</head> 
 <body> 
+
 <div class="layer1" align="left">
 		<h2 style="margin-top: 15px; margin-bottom: 3px;">Цены на доставку груза</h2>
 			<p class="tarif"><a href="/sites/jdt55/files/users/admin1/prais-list_no1_zhd_perevozki.doc"><span style="color: rgb(102, 153, 102);">ЖД доставка сборных грузов</span></a></p><br>
@@ -43,6 +45,7 @@
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prays_iz_spb_v_kazahstan_3.xls">Из Санкт-Петербурга в Казахстан</a></p><br>
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prays_iz_ekb_i_tyumeni.xls">Из Екатеринбурга и Тюмени в Казахстан</a></p><br>
 			<p>&nbsp;</p>
+			
 </div>
 <div class="calc">
 	<form name="calc"> 
@@ -67,20 +70,19 @@
 				<div class="form-group">
 					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px; "  >Вес</label>
 					<div class="col-sm-10" style="width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; ">
-						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" oninput="artkli.change_check();this.value=parseInt(this.value) | 0; artkli.fill_text()"/>
+						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" oninput="artkli.change_check();this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="artkli-volume" class="col-sm-2 control-label" style=" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;">Объем</label>
 					<div>
 					<div class="col-sm-10" style="width: 200px;">
-						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="text" placeholder = "Куб.м." style="text-align: right;" value="" oninput="artkli.change_check();this.value=parseInt(this.value) | 0; artkli.fill_text()"/>
+						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="text" placeholder = "Куб.м." style="text-align: right;" value="" oninput="artkli.change_check();this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
 					</div>
 					</div>
 				</div>
-					<div name="result_field" class="alert alert-info" style="height: 36px width: 100%; margin-right: 76px; margin-left: -15px;" role="alert"><font size="3"><span style="margin-bottom: 180px" id = "artkli-result">Итог</span></font></div>		
-<table border="0" class="dump-noborder form-group" id="call" style="font-size: 12px; padding-left:12px; margin-left: -14px;">
-	
+					<div name="result_field" id="result_field" class="alert alert-info" style="height: 36px width: 100%; margin-right: 76px; margin-left: -15px;" role="alert"><font size="3"><span style="margin-bottom: 180px" id = "artkli-result">Итог</span></font></div>		
+<table border="0" class="dump-noborder form-group" id="call" style="font-size: 12px; padding-left:12px; margin-left: -14px;">	
 	<tbody>
 		<tr>
 			<td style="width: 22px;height: 16px; padding-bottom: 10px; ">
@@ -140,32 +142,23 @@
 	<br>
 
 </div>
-
-	
-</div>
+</body>
 	<script>
-
-
 (function() {
-	$(document).ready(function(){
+	$(document).ready(function(){ // Добавляет элемент
     	$('[data-toggle="tooltip"]').tooltip();   
 	});
 	
-	var result_field = document.getElementsByName('result_field');
+	var result_field = document.getElementById('result_field');
 	var initialization_check = 0;
-	function change_check(){
+	function change_check(){ // Меняет глобальную переменную
 		initialization_check = 1;
 	}
-	function blur_button(){
+	function blur_button(){ // Меняет состояние элемента
 		document.getElementById("butt").blur();
 	}
-	function build_radio(radio_name, radio, value){
-		return "<label class=\"radio-inline \" style=\"margin-bottom:-10px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"artkli.fill_text();\" checked value="+value+">"+radio+"</input></label>";
-	}
-	function build_radio_chooser(){
-		return "<label class=\"col-sm-2 control-label\" style=\"margin-bottom:-10px; width: 80px; margin-left: -14px; text-align: left; margin-top:2px;\" >Доставка</label>";
-	}
-	function update_way_dependent(tarifs, from, to) { 
+	
+	function update_way_dependent(tarifs, from, to) { // Меняет состояние элементов
 		var chooser_dep = document.getElementById('artkli-chooser');
 		var dependency = document.getElementById('artkli-choose_way'); 
 		if(!tarifs || to == "undefined_city" || from == "undefined_city"){
@@ -197,15 +190,15 @@
 			}
 		}
 	} 
-	function get_tarifs(){return artkli_tarifs;}
-	function get_from_cities(tarifs){
-		var all_from = Object.keys(tarifs);
+	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
+	function get_from_cities(tarifs){ // Использование глобальной переменной
+		var all_from = Object.keys(tarifs); 
 		var wrapper = all_from;
 		var nodes = wrapper;
 		var len = nodes.length;
 		var sorted = [];
 		while (nodes[0]) {
-			var city = artkli_city_names[nodes[0]];
+			var city = artkli_city_names[nodes[0]]; // Здесь!
 				sorted.push(new String(city));
 				sorted[sorted.length-1].element = nodes[0];
 				wrapper.splice(0,1);
@@ -217,104 +210,13 @@
 		all_from = wrapper;
 		return all_from;
 	 }
-	function get_where_cities(tarifs){
-		var all_from = Object.keys(tarifs);
-		var arr = [];
-		var i = 0;
-		for(var i = 0; i < all_from.length; i++){
-			var from_city = tarifs[all_from[i]];
-			var from_city = Object.keys(from_city);
-			arr[arr.length] = from_city;
-		}
-		var where_cities = arr[3], compare;
-		for(i = 0; i < arr.length; i++){
-			for(var j = 0; j < arr[i].length; j++){
-				var checker = arr[i];
-				var checker = checker[j];
-				for(var k = 0; k < where_cities.length; k++){
-					compare = -1;
-					if(checker == where_cities[k]){
-						c = 1;
-						where_cities.splice(k,k+1);
-					}
-				}
-				if(compare == -1){
-					where_cities[where_cities.length] = checker;
-				}
-			}
-		}
-		var wrapper = where_cities;
-		var nodes = wrapper;
-		var len = nodes.length;
-		var sorted = [];
-		while (nodes[0]) {
-			var city = artkli_city_names[nodes[0]];
-				sorted.push(new String(city));
-				sorted[sorted.length-1].element = nodes[0];
-				wrapper.splice(0,1);
-		}
-		sorted = sorted.sort();
-		for (var i = 0; i < len; i++) {
-			wrapper[i] = sorted[i].element;
-		}
-		where_cities = wrapper;
-		return where_cities;
-	}
-	function conclusion_tax(tarifs, from, where, mass, volume, way){
-		var from_tarifs = tarifs[from];
-		var ways = from_tarifs && from_tarifs[where];
-		var ranges = ways && (ways[way] || ways.default_way);
-		if(!ranges){
-			return {by_mass: NaN, by_volume: NaN}
-		}
-		return{
-				by_mass: get_tax(ranges.mass_range, ranges.mass_price, mass),
-				by_volume: get_tax(ranges.volume_range, ranges.volume_price, volume)
-		}
-	}
-	function get_tax(valueRange, taxRange, tax){
-		var gradation = valueRange;
-		var amount = gradation.length;
-		var end = 0;
-		var i;
-		for(i = amount; i >= 0; i--){
-			if(tax < gradation[i]){
-				end = taxRange[i];	
-			}
-		}
-		if(end == 0){
-			var amount = taxRange.length
-			end = taxRange[amount-1];
-		}
-		return end;
-	}
-	function what_is_way(way){
-		if(way.length == 0){
-			way.innerHTML = 
-			"<input type = \"radio\" id=\"artkli-+default_way+\" name=\"artkli-way\" onchange=\"artkli.fiil_text();\" checked><font-size=\"3\">ЖД</font></input>";
-		}
-		else{
-			if(way[0].checked){
-				var way = "jd_way";
-			}
-			else{
-				var way = "auto_way";
-			}
-		}
-		return way;
-	}
-	function build_option_html(city, city_name){
-		return "<option value=\"" + city + "\">" + city_name + "</option>";
-	} 
-	function build_option_html_selected(city, city_name){
-		return "<option selected value=\"" + city + "\">" + city_name + "</option>";
-	}
-	function build_first_option(){
-		return	"<option selected disabled value=\"undefined_city\">Выберите город</option>";
-	}
-	function get_where_cities_by_from(from, tarifs){
+	
+
+	
+	
+	function get_where_cities_by_from(from, tarifs){//Зависит от грязной
 		var cities = {};
-		var all_from = get_from_cities(tarifs);
+		var all_from = get_from_cities(tarifs); //Здесь!
 		var all_where = get_where_cities(tarifs);
 		if(from == "undefined_city"){
 			from = null;
@@ -342,8 +244,8 @@
 		}
 		return cities;
 	}
-	function get_from_cities_by_where(where, all_from, tarifs){
-		var all_from = get_from_cities(artkli_tarifs);
+	function get_from_cities_by_where(where, all_from, tarifs){//Зависит от грязной
+		var all_from = get_from_cities(artkli_tarifs);//Здесь
 		var cities = {};
 		if(where == "undefined_city"){
 			where = null;
@@ -380,40 +282,25 @@
 		}
 		return cities;
 	}
-	function selector_update(cities_n, options, sel_city, cities){
-		for(var i = 0; i < cities.length; i++) {
-			var city = cities[i];
-			if(cities_n[city] == true){
-				if(city == sel_city){
-					var option = build_option_html_selected(city, artkli_city_names[city]);
-				}
-				else{
-				var option = build_option_html(city, artkli_city_names[city]);
-				}
-				options.push(option);
-			}
-		}
-		var options_html = options.join("\n");
-		return options_html;
-	}	
-	function update_where_selector(tarifs, city_names, from, where_select) {
+
+	function update_where_selector(tarifs, city_names, from, where_select) {//Зависит от грязной
 		var sel_where = where_select.value;
-		var where_cities_n = get_where_cities_by_from(from, tarifs);
+		var where_cities_n = get_where_cities_by_from(from, tarifs);//Здесь
 		var where_cities = Object.keys(where_cities_n);
 		var options = [];
 		var options_html = selector_update(where_cities_n, options, sel_where, where_cities);
 		where_select.innerHTML = options_html;
 	}
-	function update_from_selector(tarifs, city_names, from_select, where){	
+	function update_from_selector(tarifs, city_names, from_select, where){	////Зависит от грязной
 		var sel_from = from_select.value;
-		var all_from = get_from_cities(tarifs);
-		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs);
+		var all_from = get_from_cities(tarifs);//Здесь!
+		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs);//Здесь!
 		var from_cities = Object.keys(from_cities_n);
 		var options = [];
 		var options_html = selector_update(from_cities_n, options, sel_from, from_cities);
 		from_select.innerHTML = options_html;
 	}
-	function update_where(){
+	function update_where(){//Зависит от грязной
 		var from_block = document.getElementsByName('artkli-from'); 
 		var where_block = document.getElementsByName('artkli-where');
 
@@ -423,9 +310,9 @@
 		var from = from_elem.value; 
 		var where = where_elem.value;
 
-		update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);
+		update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);//Здесь
 	}
-	function update_from(){
+	function update_from(){//Зависит от грязной
 		var from_block = document.getElementsByName('artkli-from'); 
 		var where_block = document.getElementsByName('artkli-where');
 
@@ -435,49 +322,29 @@
 		var from = from_elem.value; 
 		var where = where_elem.value;
 
-		update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);
+		update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);//Здесь
 	}
-	function digit(result){
+	function digit(result){// Изменяет число
 		return result.replace(/(\d{1,3}(?=(\d{3})+(?:\.\d|\b)))/g,"\$1 ");
 	}
-	function auto_way_check(from, where){
-		var count = 0;
-		if(artkli_auto_way_tarifs[from]){
-			var where_cities = [];
-			where_cities.push(artkli_auto_way_tarifs[from]);
-			for(var i = 0; i < where_cities.length; i++){
-				if(where_cities[i] == where){
-					break;
-				}
-				else{
-					count++;
-				}
-			}
-			if(count == where_cities.length){
-				return false;
-			}
-			else{
-				return true;
-			}
-		}
-	}
 	
-	function check_radio(){
+	
+	function check_radio(){//Зависит от грязной
 		var from_select = document.getElementsByName('artkli-from');
 		var where_select = document.getElementsByName('artkli-where'); 
 		var from_elem = from_select[0]; 
 		var where_elem = where_select[0];
 		var from = from_elem.value; 
 		var where = where_elem.value;
-		update_way_dependent(artkli_tarifs, from, where); 
+		update_way_dependent(artkli_tarifs, from, where); //Здесь
 	}
-	function reset(){
+	function reset(){//Зависит от грязной
 		var from_block = document.getElementsByName('artkli-from'); 
 		var where_block = document.getElementsByName('artkli-where');
 		var massa_block = document.getElementsByName('artkli-massa');
 		var volume_block = document.getElementsByName('artkli-volume');
 
-		update_way_dependent(); 
+		update_way_dependent(); //Здесь
 
 		var from_elem = from_block[0]; 
 		var where_elem = where_block[0];
@@ -493,12 +360,12 @@
 		var from = from_elem.value; 
 		var where = where_elem.value;
 
-		result_field[0].setAttribute('class','alert alert-info');
+		result_field.setAttribute('class','alert alert-info');
 
 		var resultat = "Итог";
 		document.getElementById('artkli-result').innerHTML = resultat;
 
-		var all_from = get_from_cities(artkli_tarifs);
+		var all_from = get_from_cities(artkli_tarifs);//Здесь
 		var from_cities = all_from;
 		var options = [];
 		var f_option = build_first_option();
@@ -527,10 +394,10 @@
 		var where_select = document.getElementById('artkli-where_select');
 		where_select.innerHTML = options_html;
 	}
-	function initialization(){
-		reset();
-		var by_from = get_where_cities_by_from(null, artkli_tarifs);
-		var by_where = get_from_cities_by_where(null, get_from_cities(artkli_tarifs), artkli_tarifs);
+	function initialization(){//Зависит от грязной
+		reset();//Здесь
+		var by_from = get_where_cities_by_from(null, artkli_tarifs);//Здесь
+		var by_where = get_from_cities_by_where(null, get_from_cities(artkli_tarifs), artkli_tarifs);//Здесь х2
 		var from_block = document.getElementsByName('artkli-from'); 
 		var where_block = document.getElementsByName('artkli-where');
 
@@ -540,9 +407,9 @@
 		var call = document.getElementById('call');
 		call.setAttribute('class', 'artkli-hidden');
 
-		update_way_dependent(); 
+		update_way_dependent(); //Здесь
 
-		var all_from = get_from_cities(artkli_tarifs);
+		var all_from = get_from_cities(artkli_tarifs);//Здесь
 		var from_cities = all_from;
 		var options = [];
 		var f_option = build_first_option();
@@ -571,7 +438,7 @@
 		var where_select = document.getElementById('artkli-where_select');
 		where_select.innerHTML = options_html;
 	}
-	function fill_text(){    			//ОСНОВНАЯ ФУНКЦИЯ
+	function fill_text(){ //Зависит от грязной, изменяет кучу всего
 		
 		var tax_by_mass = 0;
 		var tax_by_volume = 0;
@@ -592,44 +459,44 @@
 
 		var check_auto = from + where;
 
-		var tarifs = get_tarifs();
+		var tarifs = get_tarifs();//Здесь
 
 		var way = document.getElementsByName('artkli-way');
 		
 		var way = what_is_way(way);
 			if(from == "undefined_city" && where == "undefined_city" && mass.value == 0 && volume.value == 0){
 				resultat = "Итог";
-				result_field[0].setAttribute('class','alert alert-info');
+				result_field.setAttribute('class','alert alert-info');
 			}
 		
 			else if(from == "undefined_city" ){
 				resultat = "Выберите пункт отправления!";
-				result_field[0].setAttribute('class','alert alert-warning');
+				result_field.setAttribute('class','alert alert-warning');
 
 			}
 			else if(where == "undefined_city" ){
 				resultat = "Выберите пункт назначения!";
-				result_field[0].setAttribute('class','alert alert-warning');
+				result_field.setAttribute('class','alert alert-warning');
 			}
 			else if(mass.value == 0 ){					
 				resultat = "Введите вес груза!";
-				result_field[0].setAttribute('class','alert alert-warning');
+				result_field.setAttribute('class','alert alert-warning');
 				var call = document.getElementById('call');
 				call.setAttribute('class', 'artkli-hidden');
 			}
 			else if(volume.value == 0 ){
 				resultat = "Введите объем груза!";
-				result_field[0].setAttribute('class','alert alert-warning');
+				result_field.setAttribute('class','alert alert-warning');
 				var call = document.getElementById('call');
 				call.setAttribute('class', 'artkli-hidden');
 			}
 			else{
-					var tax = conclusion_tax(artkli_tarifs, from, where, mass.value, volume.value, way);
+					var tax = conclusion_tax(artkli_tarifs, from, where, mass.value, volume.value, way);//?
 					var tax_by_mass = tax.by_mass;
 					var tax_by_volume = tax.by_volume;
 
-					var ans1 = tax_by_mass * mass.value; // ВЫЧИСЛЕНИЕ СТОИМОСТИ ПО ВЕСУ
-					var ans2 = tax_by_volume * volume.value; // ВЫЧИСЛЕНИЕ СТОИМОСТИ ПО ОБЪЕМУ
+					var ans1 = tax_by_mass * mass.value;
+					var ans2 = tax_by_volume * volume.value;
 
 					if(ans1 > ans2){
 						resultat = ans1;
@@ -640,16 +507,16 @@
 					if(auto_way_check(from, where)){
 						if( mass.value > 5000 || volume.value >  25){
 							resultat = "Цена договорная";
-							result_field[0].setAttribute('class','alert alert-success');
+							result_field.setAttribute('class','alert alert-success');
 						}
 						else{
 						resultat = Math.round(resultat);
 						resultat = String(resultat);
-						resultat = digit(resultat);
-						result_field[0].setAttribute('class','alert alert-success');
+						resultat = digit(resultat);//Здесь
+						result_field.setAttribute('class','alert alert-success');
 						var call = document.getElementById('call');
 						call.setAttribute('class', 'dump-noborder');
-						resultat = "Автоперевозка! Итоговая сумма - "+resultat+" руб."; 
+						resultat = "Автоперевозка! Итоговая сумма: "+resultat+" руб."; 
 						}
 					}
 					else if(isNaN(resultat)){
@@ -657,22 +524,22 @@
 					}
 					else if(tax_by_volume == -2 || tax_by_mass == -2){
 						resultat = "Цена договорная";
-						result_field[0].setAttribute('class','alert alert-success');
+						result_field.setAttribute('class','alert alert-success');
 					}
 					else{
 						resultat = Math.round(resultat);
 						resultat = String(resultat);
-						resultat = digit(resultat);
-						result_field[0].setAttribute('class','alert alert-success');
+						resultat = digit(resultat);//Здесь
+						result_field.setAttribute('class','alert alert-success');
 						var call = document.getElementById('call');
 						call.setAttribute('class', 'dump-noborder');
-						resultat = "Итоговая сумма - "+ resultat +" руб.";
+						resultat = "Итоговая сумма: "+ resultat +" руб.";
 					}
 				}
 			document.getElementById('artkli-result').innerHTML = resultat;
 	}
 	
-	 initialization();
+	initialization();//Грязь?
 	window.artkli = {
 		update_where: update_where,
 		fill_text: fill_text,
