@@ -150,7 +150,10 @@ var artkli_calculator = (function() {
 		build_radio: build_radio,
 		build_radio_chooser: build_radio_chooser,
 		get_where_cities: get_where_cities,
-		what_is_way: what_is_way, 
-		build_option_html: build_option_html
+		what_is_way: what_is_way,
+		build_option_html: build_option_html,
+		build_first_option: build_first_option,
+		auto_way_check: auto_way_check
+
 	};
 })();

@@ -5,14 +5,19 @@
 	 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="calculator.js"></script>
 	<script src="tarifs_for_calculator.js"></script>
+	<script src="metrika.js"></script> 
 	<link href="octicons.css" rel="stylesheet">
 	<link href="style_for_calculator_klim.css" rel="stylesheet">
 
 	 <!-- Для сайта -->
-	 	<!-- <script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script> -->
-	 	<!-- <link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet"> -->
-		<!-- <link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet"> -->
+ 	<script src="/sites/jdt55/files/users/Calc_files/calculator.js.txt"></script>
+ 	<script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script>
+ 	<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
+	<link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script type="text/javascript">
+		var Params;
+	</script>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Калькулятор грузоперевозок</title> 
 	</head> 
@@ -44,11 +49,10 @@
 
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prays_iz_spb_v_kazahstan_3.xls">Из Санкт-Петербурга в Казахстан</a></p><br>
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin3/prays_iz_ekb_i_tyumeni.xls">Из Екатеринбурга и Тюмени в Казахстан</a></p><br>
-			<p>&nbsp;</p>
-			
+			<p>&nbsp;</p>		
 </div>
 <div class="calc">
-	<form name="calc"> 
+	<form name="calc" id="calc"> 
 		<h2 style="margin-left:-15px; ">Предварительный расчет</h2>
 		<div class="form-group" style="margin-bottom: 0px;">
 			<div align="left" class="selector">
@@ -70,14 +74,14 @@
 				<div class="form-group">
 					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px; "  >Вес</label>
 					<div class="col-sm-10" style="width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; ">
-						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" oninput="artkli.change_check();this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
+						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" onchange="yaCounter+artkli_yandex_metrika_id.reachGoal('city_from'); return true;" oninput="artkli.change_check();this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="artkli-volume" class="col-sm-2 control-label" style=" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;">Объем</label>
 					<div>
 					<div class="col-sm-10" style="width: 200px;">
-						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="text" placeholder = "Куб.м." style="text-align: right;" value="" oninput="artkli.change_check();this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
+						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="text" placeholder = "Куб.м." style="text-align: right;" value="" n oninput="artkli.change_check();this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
 					</div>
 					</div>
 				</div>
@@ -88,20 +92,19 @@
 			<td style="width: 22px;height: 16px; padding-bottom: 10px; ">
 				<span class="octicon octicon-device-mobile" style="margin-left: 2px;vertical-align: bottom;"></span></td>
 			<td style="padding-bottom: 6px;"> 
-				<span style="text-align: justify;padding-bottom: 3px; ">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
+				<span style="text-align: justify;padding-bottom: 3px;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
 		</tr>
 		<tr>
 			<td style="padding-bottom: 10px;">
 				<span class="octicon octicon-mail-read" style="vertical-align: bottom;"></span></td>
 			<td style="padding-bottom: 6px;">
-				<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru">office@jdt55.ru</a>.</span></td>
+				<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru" onclick="console.log(123)">office@jdt55.ru</a>.</span></td>
 		</tr>
 		<tr>
-		<!-- /sites/jdt55/files/content/pages/front/ -->
 			<td style="padding-bottom: 10px;">
 				<span class="octicon octicon-globe" style="vertical-align: bottom;"></span></td>
 			<td style="padding-bottom: 6px;"> 
-				<span style="text-align: justify;"><a target="_blank" href="/contact">Оставить заявку на сайте.</a></span></td>
+				<span style="text-align: justify;"><a target="_blank" href="/contact" onclick="yaCounter+artkli_yandex_metrika_id.reachGoal('test'); return true;">Оставить заявку на сайте.</a></span></td>
 		</tr>
 	</tbody>
 </table>
@@ -135,7 +138,7 @@
 			<p>&nbsp;</p>
 	</div>
 		<div class="artkli-footer" align="left" style="margin-left: -14px; margin-top: 50px;">
-		<p style="font-size: 11px">	Калькулятор разработан при поддержке <a target="_blank" href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px">Школы программиста</a>.</p>
+		<p style="font-size: 11px">	Калькулятор разработан при поддержке <a target="_blank" href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px" onclick="yaCounter+artkli_yandex_metrika_id.reachGoal('par', params(Params)); return true;">Школы программиста</a>.</p>
 		<p style="font-size: 11px">	Наставник: <a target="_blank" href="http://chivorotkiv.livejournal.com/">Сергей Шмаков</a></p>
 	</div>
 </div>
@@ -163,17 +166,17 @@
 		var dependency = document.getElementById('artkli-choose_way'); 
 		if(!tarifs || to == "undefined_city" || from == "undefined_city"){
 			var buttons = [];
-			var chooser = build_radio_chooser();
+			var chooser = artkli_calculator.build_radio_chooser();
 			dependency.setAttribute('class', 'artkli-hidden');
 			chooser_dep.setAttribute('class', 'artkli-hidden'); 
 		}
 		else{
 			var buttons = [];
 			var ways = Object.keys(artkli_tarifs[from][to]);
-			var chooser = build_radio_chooser();
+			var chooser = artkli_calculator.build_radio_chooser();
 			for(var i = 0; i < ways.length; i++){
 				var radio_name = ways[i];
-				var radio = build_radio(radio_name, artkli_way_names[radio_name], i+1);
+				var radio = artkli_calculator.build_radio(radio_name, artkli_way_names[radio_name], i+1);
 				buttons.push(radio);
 			}
 			var buttons = buttons.join("\n");
@@ -217,7 +220,7 @@
 	function get_where_cities_by_from(from, tarifs){//Зависит от грязной
 		var cities = {};
 		var all_from = get_from_cities(tarifs); //Здесь!
-		var all_where = get_where_cities(tarifs);
+		var all_where = artkli_calculator.get_where_cities(tarifs);
 		if(from == "undefined_city"){
 			from = null;
 		}
@@ -288,7 +291,7 @@
 		var where_cities_n = get_where_cities_by_from(from, tarifs);//Здесь
 		var where_cities = Object.keys(where_cities_n);
 		var options = [];
-		var options_html = selector_update(where_cities_n, options, sel_where, where_cities);
+		var options_html = artkli_calculator.selector_update(where_cities_n, options, sel_where, where_cities);
 		where_select.innerHTML = options_html;
 	}
 	function update_from_selector(tarifs, city_names, from_select, where){	////Зависит от грязной
@@ -297,7 +300,7 @@
 		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs);//Здесь!
 		var from_cities = Object.keys(from_cities_n);
 		var options = [];
-		var options_html = selector_update(from_cities_n, options, sel_from, from_cities);
+		var options_html = artkli_calculator.selector_update(from_cities_n, options, sel_from, from_cities);
 		from_select.innerHTML = options_html;
 	}
 	function update_where(){//Зависит от грязной
@@ -368,11 +371,11 @@
 		var all_from = get_from_cities(artkli_tarifs);//Здесь
 		var from_cities = all_from;
 		var options = [];
-		var f_option = build_first_option();
+		var f_option = artkli_calculator.build_first_option();
 		options.push(f_option);
 		for(var i = 0; i < from_cities.length; i++){
 			var city = from_cities[i];
-				var option = build_option_html(city, artkli_city_names[city]);
+				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
 				options.push(option);		
 		}
 		var options_html = options.join("\n");
@@ -380,14 +383,14 @@
 		from_select.innerHTML = options_html;
 		
 
-		var where_cities = get_where_cities(artkli_tarifs);
+		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs);
 		var from_select = document.getElementById('artkli-where_select');
 		var options = [];
-		var f_option = build_first_option();
+		var f_option = artkli_calculator.build_first_option();
 		options.push(f_option);
 		for(var i = 0; i < where_cities.length; i++) {
 			var city = where_cities[i];
-				var option = build_option_html(city, artkli_city_names[city]);
+				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
 				options.push(option);
 		}
 		var options_html = options.join("\n");
@@ -412,11 +415,11 @@
 		var all_from = get_from_cities(artkli_tarifs);//Здесь
 		var from_cities = all_from;
 		var options = [];
-		var f_option = build_first_option();
+		var f_option = artkli_calculator.build_first_option();
 		options.push(f_option);
 		for(var i = 0; i < from_cities.length; i++){
 			var city = from_cities[i];
-				var option = build_option_html(city, artkli_city_names[city]);
+				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
 				options.push(option);		
 		}
 		var options_html = options.join("\n");
@@ -424,20 +427,21 @@
 		from_select.innerHTML = options_html;
 		
 
-		var where_cities = get_where_cities(artkli_tarifs);
+		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs);
 		var from_select = document.getElementById('artkli-where_select');
 		var options = [];
-		var f_option = build_first_option();
+		var f_option = artkli_calculator.build_first_option();
 		options.push(f_option);
 		for(var i = 0; i < where_cities.length; i++) {
 			var city = where_cities[i];
-				var option = build_option_html(city, artkli_city_names[city]);
+				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
 				options.push(option);
 		}
 		var options_html = options.join("\n");
 		var where_select = document.getElementById('artkli-where_select');
 		where_select.innerHTML = options_html;
 	}
+	var resultat;
 	function fill_text(){ //Зависит от грязной, изменяет кучу всего
 		
 		var tax_by_mass = 0;
@@ -448,7 +452,7 @@
 		var where_select = document.getElementsByName('artkli-where');
 		var volume_block = document.getElementsByName('artkli-volume');
 
-		var resultat;
+		resultat;
 		var from_elem = from_select[0]; 
 		var where_elem = where_select[0];
 		var mass = massa_block[0];
@@ -463,7 +467,7 @@
 
 		var way = document.getElementsByName('artkli-way');
 		
-		var way = what_is_way(way);
+		var way = artkli_calculator.what_is_way(way);
 			if(from == "undefined_city" && where == "undefined_city" && mass.value == 0 && volume.value == 0){
 				resultat = "Итог";
 				result_field.setAttribute('class','alert alert-info');
@@ -491,7 +495,7 @@
 				call.setAttribute('class', 'artkli-hidden');
 			}
 			else{
-					var tax = conclusion_tax(artkli_tarifs, from, where, mass.value, volume.value, way);//?
+					var tax = artkli_calculator.conclusion_tax(artkli_tarifs, from, where, mass.value, volume.value, way);//?
 					var tax_by_mass = tax.by_mass;
 					var tax_by_volume = tax.by_volume;
 
@@ -504,7 +508,7 @@
 					else{
 						resultat = ans2;
 					}
-					if(auto_way_check(from, where)){
+					if(artkli_calculator.auto_way_check(from, where)){
 						if( mass.value > 5000 || volume.value >  25){
 							resultat = "Цена договорная";
 							result_field.setAttribute('class','alert alert-success');
@@ -534,11 +538,13 @@
 						var call = document.getElementById('call');
 						call.setAttribute('class', 'dump-noborder');
 						resultat = "Итоговая сумма: "+ resultat +" руб.";
+
+
 					}
 				}
 			document.getElementById('artkli-result').innerHTML = resultat;
 	}
-	
+	Params = {itog: resultat};
 	initialization();//Грязь?
 	window.artkli = {
 		update_where: update_where,
@@ -551,7 +557,38 @@
 		change_check: change_check
 	};
 })();
+
 	</script>
+
+
+	<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter36619975 = new Ya.Metrika({
+                    id:36619975,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<!-- /Yandex.Metrika counter -->
 </body>
 </html>
 
