@@ -1,22 +1,27 @@
 'use strict';
 var artkli_calculator = (function() {
 
-	function selector_update(cities_n, options, sel_city, cities){
-		for(var i = 0; i < cities.length; i++) {
-			var city = cities[i];
-			if(cities_n[city] == true){
-				if(city == sel_city){
-					var option = build_option_html_selected(city, artkli_city_names[city]);
-				}
-				else{
-					var option = build_option_html(city, artkli_city_names[city]);
-				}
-				options.push(option);
-			}
+
+	function get_from_cities(tarifs, city_names){ 
+		var nodes = Object.keys(tarifs); 
+		var len = nodes.length;
+		var sorted = [];
+		while (nodes[0]) {
+			var city = city_names[nodes[0]];
+			sorted.push(new String(city));
+			sorted[sorted.length-1].element = nodes[0];
+			nodes.splice(0,1);
 		}
-		var options_html = options.join("\n");
-		return options_html;
-	}   
+		sorted = sorted.sort();
+		for (var i = 0; i < len; i++) {
+			nodes[i] = sorted[i].element;
+		}
+		var all_from = nodes;
+		return all_from;
+	 }
+	function blur_button(button){
+		button.blur();
+	}
 	function conclusion_tax(tarifs, from, where, mass, volume, way){
 		var from_tarifs = tarifs[from];
 		var ways = from_tarifs && from_tarifs[where];
@@ -122,7 +127,102 @@ var artkli_calculator = (function() {
 			}
 		}
 	}
+	function get_where_cities_by_from(from, tarifs){
+		var cities = {};
+		var all_from = artkli_calculator.get_from_cities(tarifs, artkli_city_names);
+		var all_where = artkli_calculator.get_where_cities(tarifs);
+		if(from == "undefined_city"){
+			from = null;
+		}
+		if(!from){
+			for(var i = 0; i < all_where.length; i++){
+				cities[all_where[i]] = true;
+			}
+		}
+		else{
+			var concrete_where = tarifs[from];
+			var concrete_where = Object.keys(concrete_where);
+			for(var i = 0; i < all_where.length; i++){
+				var city_check = all_where[i];
+				for(var j = 0; j < concrete_where.length; j++){
+					if(city_check == concrete_where[j]){
+						cities[city_check] = true;
+						break;
+					}
+					else{
+						cities[city_check] = false;
+					}
+				}
+			}
+		}
+		return cities;
+	}
+	function get_from_cities_by_where(where, all_from, tarifs){//Зависит от грязной
+		var all_from = artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names);
+		var cities = {};
+		if(where == "undefined_city"){
+			where = null;
+		}
+		if(!where){
+			for(var i = 0; i < all_from.length; i++){
+				cities[all_from[i]] = true;
+			}
+		}
+		else{
+			var from_cities = [];
+			for(var i = 0; i < all_from.length; i++){
+				var from = all_from[i];
+				var from = Object.keys(tarifs[from]);
+				for(var j = 0;j < from.length; j++){
+					if(from[j] == where){
+						from_cities[from_cities.length] = all_from[i];
+						break;
+					}
+				}
+			}
+			for(var i = 0; i < all_from.length; i++){
+				var city_check = all_from[i];
+				for(var j = 0; j < from_cities.length; j++){
+					if(city_check == from_cities[j]){
+						cities[city_check] = true;
+						break;
+					}
+					else{
+						cities[city_check] = false;
+					}
+				}
+			}
+		}
+		return cities;
+	}
+	
+	function update_where(){
+		var from_block = document.getElementsByName('artkli-from'); 
+		var where_block = document.getElementsByName('artkli-where');
 
+		var from_elem = from_block[0]; 
+		var where_elem = where_block[0];
+
+		var from = from_elem.value; 
+		var where = where_elem.value;
+
+		update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);
+	}
+	function update_from(){
+		var from_block = document.getElementsByName('artkli-from'); 
+		var where_block = document.getElementsByName('artkli-where');
+
+		var from_elem = from_block[0]; 
+		var where_elem = where_block[0];
+
+		var from = from_elem.value; 
+		var where = where_elem.value;
+
+		update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);
+	}
+	function digit(result){
+		return result.replace(/(\d{1,3}(?=(\d{3})+(?:\.\d|\b)))/g,"\$1 ");
+	}
 
 
 
@@ -143,9 +243,46 @@ var artkli_calculator = (function() {
 		}
 		return end;
 	}
+	function selector_update(cities_n, options, sel_city, cities){
+		for(var i = 0; i < cities.length; i++) {
+			var city = cities[i];
+			if(cities_n[city] == true){
+				if(city == sel_city){
+					var option = build_option_html_selected(city, artkli_city_names[city]);
+				}
+				else{
+					var option = build_option_html(city, artkli_city_names[city]);
+				}
+				options.push(option);
+			}
+		}
+		var options_html = options.join("\n");
+		return options_html;
+	}   
+	function update_where_selector(tarifs, city_names, from, where_select) {//Зависит от грязной
+		var sel_where = where_select.value;
+		var where_cities_n = get_where_cities_by_from(from, tarifs);
+		var where_cities = Object.keys(where_cities_n);
+		var options = [];
+		var options_html = selector_update(where_cities_n, options, sel_where, where_cities);
+		where_select.innerHTML = options_html;
+	}
+	function update_from_selector(tarifs, city_names, from_select, where){
+		var sel_from = from_select.value;
+		var all_from = get_from_cities(tarifs, artkli_city_names);
+		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs);
+		var from_cities = Object.keys(from_cities_n);
+		var options = [];
+		var options_html = selector_update(from_cities_n, options, sel_from, from_cities);
+		from_select.innerHTML = options_html;
+	}
+
+
+
+
+
 	return {
 		build_radio_chooser: build_radio_chooser,
-		selector_update: selector_update,
 		conclusion_tax: conclusion_tax,
 		build_radio: build_radio,
 		build_radio_chooser: build_radio_chooser,
@@ -153,7 +290,14 @@ var artkli_calculator = (function() {
 		what_is_way: what_is_way,
 		build_option_html: build_option_html,
 		build_first_option: build_first_option,
-		auto_way_check: auto_way_check
+		auto_way_check: auto_way_check,
+		get_from_cities: get_from_cities,
+		blur_button: blur_button,
+		get_where_cities_by_from: get_where_cities_by_from,
+		get_from_cities_by_where: get_from_cities_by_where,
+		update_where: update_where,
+		update_from: update_from,
+		digit: digit
 
 	};
-})();
+})()

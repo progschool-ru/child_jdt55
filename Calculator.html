@@ -11,6 +11,7 @@
 
 	 <!-- Для сайта -->
  	<script src="/sites/jdt55/files/users/Calc_files/calculator.js.txt"></script>
+ 	<script src="/sites/jdt55/files/users/Calc_files/metrika.js.txt"></script> 
  	<script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script>
  	<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
 	<link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet">
@@ -56,14 +57,14 @@
 		<h2 style="margin-left:-15px; ">Предварительный расчет</h2>
 		<div class="form-group" style="margin-bottom: 0px;">
 			<div align="left" class="selector">
-				<select name="artkli-from" id="artkli-from" class="form-control" style="padding-left: 10px;" onchange="artkli.change_check();artkli.check_radio();artkli.update_where();artkli.update_from();artkli.fill_text();">	
+				<select name="artkli-from" id="artkli-from" class="form-control" style="padding-left: 10px;" onchange="artkli.check_radio();artkli_calculator.update_where();artkli_calculator.update_from();artkli.fill_text();">	
 				</select>
 			</div>
 			<div align="left" class="selector" id="artkli-where">
-				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.change_check();artkli.check_radio();artkli.update_from();artkli.update_where();artkli.fill_text();">	
+				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.check_radio();artkli_calculator.update_from();artkli_calculator.update_where();artkli.fill_text();">	
 				</select>
 			</div>
-			<button type="button" class="btn btn-default" id="butt" data-toggle="tooltip" data-placement="top" title="Сброс" onclick="artkli.reset();artkli.blur_button()" ><span class="octicon octicon-x"></span>
+			<button type="button" class="btn btn-default" id="butt" data-toggle="tooltip" data-placement="top" title="Сброс" onclick="artkli.reset();artkli_calculator.blur_button(this)" ><span class="octicon octicon-x"></span>
 			</button>
 		</div>
 				<div class="form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
@@ -74,14 +75,14 @@
 				<div class="form-group">
 					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px; "  >Вес</label>
 					<div class="col-sm-10" style="width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; ">
-						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" onchange="yaCounter+artkli_yandex_metrika_id.reachGoal('city_from'); return true;" oninput="artkli.change_check();this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
+						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" onchange="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('city_from'); return true;" oninput="this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="artkli-volume" class="col-sm-2 control-label" style=" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;">Объем</label>
 					<div>
 					<div class="col-sm-10" style="width: 200px;">
-						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="text" placeholder = "Куб.м." style="text-align: right;" value="" n oninput="artkli.change_check();this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
+						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="text" placeholder = "Куб.м." style="text-align: right;" value="" n oninput="this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
 					</div>
 					</div>
 				</div>
@@ -104,7 +105,7 @@
 			<td style="padding-bottom: 10px;">
 				<span class="octicon octicon-globe" style="vertical-align: bottom;"></span></td>
 			<td style="padding-bottom: 6px;"> 
-				<span style="text-align: justify;"><a target="_blank" href="/contact" onclick="yaCounter+artkli_yandex_metrika_id.reachGoal('test'); return true;">Оставить заявку на сайте.</a></span></td>
+				<span style="text-align: justify;"><a target="_blank" href="/contact" onclick="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('test'); return true;">Оставить заявку на сайте.</a></span></td>
 		</tr>
 	</tbody>
 </table>
@@ -138,7 +139,7 @@
 			<p>&nbsp;</p>
 	</div>
 		<div class="artkli-footer" align="left" style="margin-left: -14px; margin-top: 50px;">
-		<p style="font-size: 11px">	Калькулятор разработан при поддержке <a target="_blank" href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px" onclick="yaCounter+artkli_yandex_metrika_id.reachGoal('par', params(Params)); return true;">Школы программиста</a>.</p>
+		<p style="font-size: 11px">	Калькулятор разработан при поддержке <a target="_blank" href="http://www.progschool.ru"><img src="http://www.progschool.ru/favicon.ico" style="vertical-align:-3px;width:16px;height:16px;margin-right:1px" onclick="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('par', params(Params)); return true;">Школы программиста</a>.</p>
 		<p style="font-size: 11px">	Наставник: <a target="_blank" href="http://chivorotkiv.livejournal.com/">Сергей Шмаков</a></p>
 	</div>
 </div>
@@ -153,14 +154,6 @@
 	});
 	
 	var result_field = document.getElementById('result_field');
-	var initialization_check = 0;
-	function change_check(){ // Меняет глобальную переменную
-		initialization_check = 1;
-	}
-	function blur_button(){ // Меняет состояние элемента
-		document.getElementById("butt").blur();
-	}
-	
 	function update_way_dependent(tarifs, from, to) { // Меняет состояние элементов
 		var chooser_dep = document.getElementById('artkli-chooser');
 		var dependency = document.getElementById('artkli-choose_way'); 
@@ -194,142 +187,9 @@
 		}
 	} 
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
-	function get_from_cities(tarifs){ // Использование глобальной переменной
-		var all_from = Object.keys(tarifs); 
-		var wrapper = all_from;
-		var nodes = wrapper;
-		var len = nodes.length;
-		var sorted = [];
-		while (nodes[0]) {
-			var city = artkli_city_names[nodes[0]]; // Здесь!
-				sorted.push(new String(city));
-				sorted[sorted.length-1].element = nodes[0];
-				wrapper.splice(0,1);
-		}
-		sorted = sorted.sort();
-		for (var i = 0; i < len; i++) {
-			wrapper[i] = sorted[i].element;
-		}
-		all_from = wrapper;
-		return all_from;
-	 }
-	
 
 	
 	
-	function get_where_cities_by_from(from, tarifs){//Зависит от грязной
-		var cities = {};
-		var all_from = get_from_cities(tarifs); //Здесь!
-		var all_where = artkli_calculator.get_where_cities(tarifs);
-		if(from == "undefined_city"){
-			from = null;
-		}
-		if(!from){
-			for(var i = 0; i < all_where.length; i++){
-				cities[all_where[i]] = true;
-			}
-		}
-		else{
-			var concrete_where = tarifs[from];
-			var concrete_where = Object.keys(concrete_where);
-			for(var i = 0; i < all_where.length; i++){
-				var city_check = all_where[i];
-				for(var j = 0; j < concrete_where.length; j++){
-					if(city_check == concrete_where[j]){
-						cities[city_check] = true;
-						break;
-					}
-					else{
-						cities[city_check] = false;
-					}
-				}
-			}
-		}
-		return cities;
-	}
-	function get_from_cities_by_where(where, all_from, tarifs){//Зависит от грязной
-		var all_from = get_from_cities(artkli_tarifs);//Здесь
-		var cities = {};
-		if(where == "undefined_city"){
-			where = null;
-		}
-		if(!where){
-			for(var i = 0; i < all_from.length; i++){
-				cities[all_from[i]] = true;
-			}
-		}
-		else{
-			var from_cities = [];
-			for(var i = 0; i < all_from.length; i++){
-				var from = all_from[i];
-				var from = Object.keys(tarifs[from]);
-				for(var j = 0;j < from.length; j++){
-					if(from[j] == where){
-						from_cities[from_cities.length] = all_from[i];
-						break;
-					}
-				}
-			}
-			for(var i = 0; i < all_from.length; i++){
-				var city_check = all_from[i];
-				for(var j = 0; j < from_cities.length; j++){
-					if(city_check == from_cities[j]){
-						cities[city_check] = true;
-						break;
-					}
-					else{
-						cities[city_check] = false;
-					}
-				}
-			}
-		}
-		return cities;
-	}
-
-	function update_where_selector(tarifs, city_names, from, where_select) {//Зависит от грязной
-		var sel_where = where_select.value;
-		var where_cities_n = get_where_cities_by_from(from, tarifs);//Здесь
-		var where_cities = Object.keys(where_cities_n);
-		var options = [];
-		var options_html = artkli_calculator.selector_update(where_cities_n, options, sel_where, where_cities);
-		where_select.innerHTML = options_html;
-	}
-	function update_from_selector(tarifs, city_names, from_select, where){	////Зависит от грязной
-		var sel_from = from_select.value;
-		var all_from = get_from_cities(tarifs);//Здесь!
-		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs);//Здесь!
-		var from_cities = Object.keys(from_cities_n);
-		var options = [];
-		var options_html = artkli_calculator.selector_update(from_cities_n, options, sel_from, from_cities);
-		from_select.innerHTML = options_html;
-	}
-	function update_where(){//Зависит от грязной
-		var from_block = document.getElementsByName('artkli-from'); 
-		var where_block = document.getElementsByName('artkli-where');
-
-		var from_elem = from_block[0]; 
-		var where_elem = where_block[0];
-
-		var from = from_elem.value; 
-		var where = where_elem.value;
-
-		update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);//Здесь
-	}
-	function update_from(){//Зависит от грязной
-		var from_block = document.getElementsByName('artkli-from'); 
-		var where_block = document.getElementsByName('artkli-where');
-
-		var from_elem = from_block[0]; 
-		var where_elem = where_block[0];
-
-		var from = from_elem.value; 
-		var where = where_elem.value;
-
-		update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);//Здесь
-	}
-	function digit(result){// Изменяет число
-		return result.replace(/(\d{1,3}(?=(\d{3})+(?:\.\d|\b)))/g,"\$1 ");
-	}
 	
 	
 	function check_radio(){//Зависит от грязной
@@ -368,7 +228,7 @@
 		var resultat = "Итог";
 		document.getElementById('artkli-result').innerHTML = resultat;
 
-		var all_from = get_from_cities(artkli_tarifs);//Здесь
+		var all_from = artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names);//Здесь
 		var from_cities = all_from;
 		var options = [];
 		var f_option = artkli_calculator.build_first_option();
@@ -399,8 +259,8 @@
 	}
 	function initialization(){//Зависит от грязной
 		reset();//Здесь
-		var by_from = get_where_cities_by_from(null, artkli_tarifs);//Здесь
-		var by_where = get_from_cities_by_where(null, get_from_cities(artkli_tarifs), artkli_tarifs);//Здесь х2
+		var by_from = artkli_calculator.get_where_cities_by_from(null, artkli_tarifs);//Здесь
+		var by_where = artkli_calculator.get_from_cities_by_where(null, artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names), artkli_tarifs);
 		var from_block = document.getElementsByName('artkli-from'); 
 		var where_block = document.getElementsByName('artkli-where');
 
@@ -412,7 +272,7 @@
 
 		update_way_dependent(); //Здесь
 
-		var all_from = get_from_cities(artkli_tarifs);//Здесь
+		var all_from = artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names);//Здесь
 		var from_cities = all_from;
 		var options = [];
 		var f_option = artkli_calculator.build_first_option();
@@ -472,7 +332,6 @@
 				resultat = "Итог";
 				result_field.setAttribute('class','alert alert-info');
 			}
-		
 			else if(from == "undefined_city" ){
 				resultat = "Выберите пункт отправления!";
 				result_field.setAttribute('class','alert alert-warning');
@@ -516,7 +375,7 @@
 						else{
 						resultat = Math.round(resultat);
 						resultat = String(resultat);
-						resultat = digit(resultat);//Здесь
+						resultat = artkli_calculator.digit(resultat);//Здесь
 						result_field.setAttribute('class','alert alert-success');
 						var call = document.getElementById('call');
 						call.setAttribute('class', 'dump-noborder');
@@ -533,7 +392,7 @@
 					else{
 						resultat = Math.round(resultat);
 						resultat = String(resultat);
-						resultat = digit(resultat);//Здесь
+						resultat = artkli_calculator.digit(resultat);//Здесь
 						result_field.setAttribute('class','alert alert-success');
 						var call = document.getElementById('call');
 						call.setAttribute('class', 'dump-noborder');
@@ -547,14 +406,9 @@
 	Params = {itog: resultat};
 	initialization();//Грязь?
 	window.artkli = {
-		update_where: update_where,
 		fill_text: fill_text,
-		update_where: update_where,
-		update_from: update_from,
 		reset: reset,
-		check_radio: check_radio,
-		blur_button: blur_button,
-		change_check: change_check
+		check_radio: check_radio
 	};
 })();
 
@@ -566,8 +420,8 @@
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function() {
             try {
-                w.yaCounter36619975 = new Ya.Metrika({
-                    id:36619975,
+                w['yaCounter' + artkli_yandex_metrika_id] = new Ya.Metrika({
+                    id:artkli_yandex_metrika_id,
                     clickmap:true,
                     trackLinks:true,
                     accurateTrackBounce:true,
