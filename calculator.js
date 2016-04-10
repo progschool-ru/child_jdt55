@@ -40,7 +40,7 @@ var artkli_calculator = (function() {
 	function build_radio_chooser(){
 		return "<label class=\"col-sm-2 control-label\" style=\"margin-bottom:-10px; width: 80px; margin-left: -14px; text-align: left; margin-top:2px;\" >Доставка</label>";
 	}
-	function get_where_cities(tarifs){
+	function get_where_cities(tarifs, city_names){
 		var all_from = Object.keys(tarifs);
 		var arr = [];
 		var i = 0;
@@ -70,7 +70,7 @@ var artkli_calculator = (function() {
 		var len = nodes.length;
 		var sorted = [];
 		while (nodes[0]) {
-			var city = artkli_city_names[nodes[0]];
+			var city = city_names[nodes[0]];
 				sorted.push(new String(city));
 				sorted[sorted.length-1].element = nodes[0];
 				wrapper.splice(0,1);
@@ -106,11 +106,11 @@ var artkli_calculator = (function() {
 	function build_first_option(){
 		return  "<option selected disabled value=\"undefined_city\">Выберите город</option>";
 	}
-	function auto_way_check(from, where){
+	function auto_way_check(from, where, auto_way_tarifs){
 		var count = 0;
-		if(artkli_auto_way_tarifs[from]){
+		if(auto_way_tarifs[from]){
 			var where_cities = [];
-			where_cities.push(artkli_auto_way_tarifs[from]);
+			where_cities.push(auto_way_tarifs[from]);
 			for(var i = 0; i < where_cities.length; i++){
 				if(where_cities[i] == where){
 					break;
@@ -127,10 +127,10 @@ var artkli_calculator = (function() {
 			}
 		}
 	}
-	function get_where_cities_by_from(from, tarifs){
+	function get_where_cities_by_from(from, tarifs, city_names){
 		var cities = {};
-		var all_from = artkli_calculator.get_from_cities(tarifs, artkli_city_names);
-		var all_where = artkli_calculator.get_where_cities(tarifs);
+		var all_from = artkli_calculator.get_from_cities(tarifs, city_names);
+		var all_where = artkli_calculator.get_where_cities(tarifs, city_names);
 		if(from == "undefined_city"){
 			from = null;
 		}
@@ -160,15 +160,15 @@ var artkli_calculator = (function() {
 	function digit(result){
 		return result.replace(/(\d{1,3}(?=(\d{3})+(?:\.\d|\b)))/g,"\$1 ");
 	}
-	function selector_update(cities_n, options, sel_city, cities){
+	function selector_update(cities_n, options, sel_city, cities, city_names){
 		for(var i = 0; i < cities.length; i++) {
 			var city = cities[i];
 			if(cities_n[city] == true){
 				if(city == sel_city){
-					var option = build_option_html_selected(city, artkli_city_names[city]);
+					var option = build_option_html_selected(city, city_names[city]);
 				}
 				else{
-					var option = build_option_html(city, artkli_city_names[city]);
+					var option = build_option_html(city, city_names[city]);
 				}
 				options.push(option);
 			}
@@ -178,10 +178,10 @@ var artkli_calculator = (function() {
 	} 
 	function update_where_selector(tarifs, city_names, from, where_select) {//Зависит от грязной
 		var sel_where = where_select.value;
-		var where_cities_n = get_where_cities_by_from(from, tarifs);
+		var where_cities_n = get_where_cities_by_from(from, tarifs, city_names);
 		var where_cities = Object.keys(where_cities_n);
 		var options = [];
-		var options_html = selector_update(where_cities_n, options, sel_where, where_cities);
+		var options_html = selector_update(where_cities_n, options, sel_where, where_cities, city_names);
 		where_select.innerHTML = options_html;
 	}
 

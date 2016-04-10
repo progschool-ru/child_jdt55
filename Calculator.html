@@ -232,7 +232,7 @@
 		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs);//Здесь
 		var from_cities = Object.keys(from_cities_n);
 		var options = [];
-		var options_html = artkli_calculator.selector_update(from_cities_n, options, sel_from, from_cities);
+		var options_html = artkli_calculator.selector_update(from_cities_n, options, sel_from, from_cities, city_names);
 		from_select.innerHTML = options_html;
 	}
 	function update_from(){// Зависит от грязной, изменяет элементы
@@ -311,7 +311,7 @@
 		from_select.innerHTML = options_html;
 		
 
-		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs);
+		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
 		var from_select = document.getElementById('artkli-where_select');
 		var options = [];
 		var f_option = artkli_calculator.build_first_option();
@@ -327,7 +327,7 @@
 	}
 	function initialization(){//Зависит от грязной
 		reset();//Здесь
-		var by_from = artkli_calculator.get_where_cities_by_from(null, artkli_tarifs);//Здесь
+		var by_from = artkli_calculator.get_where_cities_by_from(null, artkli_tarifs, artkli_city_names);//Здесь
 		var by_where = get_from_cities_by_where(null, artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names), artkli_tarifs);
 		var from_block = document.getElementsByName('artkli-from'); 
 		var where_block = document.getElementsByName('artkli-where');
@@ -355,7 +355,7 @@
 		from_select.innerHTML = options_html;
 		
 
-		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs);
+		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
 		var from_select = document.getElementById('artkli-where_select');
 		var options = [];
 		var f_option = artkli_calculator.build_first_option();
@@ -435,7 +435,7 @@
 					else{
 						resultat = ans2;
 					}
-					if(artkli_calculator.auto_way_check(from, where)){
+					if(artkli_calculator.auto_way_check(from, where, artkli_auto_way_tarifs)){
 						if( mass.value > 5000 || volume.value >  25){
 							resultat = "Цена договорная";
 							result_field.setAttribute('class','alert alert-success');
