@@ -6,12 +6,20 @@ var artkli_calculator = (function() {
 		var city_keys = Object.keys(tarifs); 
 		var len = city_keys.length;
 		var sorted = [];
+		var city_name;
 		while (city_keys[0]) {
 			var city_name = city_names[city_keys[0]];
+			/*sorted.push({
+				city_name = city_names(city_keys[0]),
+				city_key = city_keys[i]
+			})*/
 			sorted.push(new String(city_name));
 			sorted[sorted.length-1].element = city_keys[0];
 			city_keys.splice(0,1);
 		}
+		/*sorted.sort(function(a, b){
+			return a.city_name < b.city_name ? -1 : a.city_name > b.city_name ? 1 : 0;
+		});*/
 		sorted = sorted.sort();
 		for (var i = 0; i < len; i++) {
 			city_keys[i] = sorted[i].element;
@@ -87,13 +95,10 @@ var artkli_calculator = (function() {
 			way.innerHTML = 
 			"<input type = \"radio\" id=\"artkli-+default_way+ name=\"artkli-way\" onchange=\"artkli.fiil_text();\" checked><font-size=\"3\">ЖД</font></input>";
 		}
-		else{
-			if(way[0].checked){
+		else if(way[0].checked){
 				var way = "jd_way";
-			}
-			else{
+		}else{
 				var way = "auto_way";
-			}
 		}
 		return way;
 	}
