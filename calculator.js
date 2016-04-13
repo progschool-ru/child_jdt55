@@ -18,9 +18,53 @@ var artkli_calculator = (function() {
 			elements.push(sorted[i].city_key);
 		}
 		return elements;
-	 }
-	function blur_button(button){
-		button.blur();
+	}
+	function get_from_cities_by_where(where, all_from, tarifs, city_names){
+		var all_from = artkli_calculator.get_from_cities_keys(artkli_tarifs, city_names);
+		var cities = {};
+		if(where == "undefined_city"){
+			where = null;
+		}
+		if(!where){
+			for(var i = 0; i < all_from.length; i++){
+				cities[all_from[i]] = true;
+			}
+		}
+		else{
+			var from_cities = [];
+			for(var i = 0; i < all_from.length; i++){
+				var from = all_from[i];
+				var from = Object.keys(tarifs[from]);
+				for(var j = 0;j < from.length; j++){
+					if(from[j] == where){
+						from_cities[from_cities.length] = all_from[i];
+						break;
+					}
+				}
+			}
+			for(var i = 0; i < all_from.length; i++){
+				var city_check = all_from[i];
+				for(var j = 0; j < from_cities.length; j++){
+					if(city_check == from_cities[j]){
+						cities[city_check] = true;
+						break;
+					}
+					else{
+						cities[city_check] = false;
+					}
+				}
+			}
+		}
+		return cities;
+	}
+	function update_from_selector(tarifs, city_names, from_select, where){
+		var sel_from = from_select.value;
+		var all_from = artkli_calculator.get_from_cities_keys(tarifs, city_names);
+		var from_cities_n = artkli_calculator.get_from_cities_by_where(where, all_from, tarifs, city_names);
+		var from_cities = Object.keys(from_cities_n);
+		var options = [];
+		var options_html = artkli_calculator.selector_update(from_cities_n, options, sel_from, from_cities, city_names);
+		from_select.innerHTML = options_html;
 	}
 	function conclusion_tax(tarifs, from, where, mass, volume, way){
 		var from_tarifs = tarifs[from];
@@ -208,6 +252,8 @@ var artkli_calculator = (function() {
 	return {
 		build_radio_chooser: build_radio_chooser,
 		conclusion_tax: conclusion_tax,
+		get_from_cities_by_where: get_from_cities_by_where,
+		update_from_selector: update_from_selector,
 		build_radio: build_radio,
 		build_radio_chooser: build_radio_chooser,
 		get_where_cities: get_where_cities,
@@ -216,7 +262,6 @@ var artkli_calculator = (function() {
 		build_first_option: build_first_option,
 		auto_way_check: auto_way_check,
 		get_from_cities_keys: get_from_cities_keys,
-		blur_button: blur_button,
 		get_where_cities_by_from: get_where_cities_by_from,
 		selector_update: selector_update,
 		update_where_selector: update_where_selector,

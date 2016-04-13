@@ -211,53 +211,6 @@
 	} 
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
 
-	function get_from_cities_by_where(where, all_from, tarifs){//Зависит от грязной
-		var all_from = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);
-		var cities = {};
-		if(where == "undefined_city"){
-			where = null;
-		}
-		if(!where){
-			for(var i = 0; i < all_from.length; i++){
-				cities[all_from[i]] = true;
-			}
-		}
-		else{
-			var from_cities = [];
-			for(var i = 0; i < all_from.length; i++){
-				var from = all_from[i];
-				var from = Object.keys(tarifs[from]);
-				for(var j = 0;j < from.length; j++){
-					if(from[j] == where){
-						from_cities[from_cities.length] = all_from[i];
-						break;
-					}
-				}
-			}
-			for(var i = 0; i < all_from.length; i++){
-				var city_check = all_from[i];
-				for(var j = 0; j < from_cities.length; j++){
-					if(city_check == from_cities[j]){
-						cities[city_check] = true;
-						break;
-					}
-					else{
-						cities[city_check] = false;
-					}
-				}
-			}
-		}
-		return cities;
-	}
-	function update_from_selector(tarifs, city_names, from_select, where){//Зависит от грязной
-		var sel_from = from_select.value;
-		var all_from = artkli_calculator.get_from_cities_keys(tarifs, artkli_city_names);
-		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs);//Здесь
-		var from_cities = Object.keys(from_cities_n);
-		var options = [];
-		var options_html = artkli_calculator.selector_update(from_cities_n, options, sel_from, from_cities, city_names);
-		from_select.innerHTML = options_html;
-	}
 	function update_from(){// Зависит от грязной, изменяет элементы
 		var from_block = $("[name = 'artkli-from']");//
 		var where_block = $("[name = 'artkli-where']");
@@ -268,7 +221,7 @@
 		var from = from_elem.value; 
 		var where = where_elem.value;
 
-		update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);//Здесь
+		artkli_calculator.update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);//Здесь
 	}
 	function update_where(){
 		var from_block = $("[name = 'artkli-from']");
@@ -351,7 +304,7 @@
 	function initialization(){//Зависит от грязной
 		reset();//Здесь
 		var by_from = artkli_calculator.get_where_cities_by_from(null, artkli_tarifs, artkli_city_names);//Здесь
-		var by_where = get_from_cities_by_where(null, artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names), artkli_tarifs);
+		var by_where = artkli_calculator.get_from_cities_by_where(null, artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names), artkli_tarifs, artkli_city_names);
 		var from_block = $("[name = 'artkli-from']");
 		var where_block = $("[name = 'artkli-where']");
 
