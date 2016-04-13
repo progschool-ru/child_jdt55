@@ -358,7 +358,7 @@
 				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
 				options.push(option);		
 		}
-		var options_html = options.join("\n");		
+		var options_html = options.join("\n");	
 		var from_select = $('#artkli-from')[0];
 		from_select.innerHTML = options_html;
 		
@@ -382,7 +382,7 @@
 		
 		var tax_by_mass = 0;
 		var tax_by_volume = 0;
-		
+
 		var from_select = $("[name = 'artkli-from']");
 		var massa_block = $("[name = 'artkli-massa']");
 		var where_select = $("[name = 'artkli-where']");

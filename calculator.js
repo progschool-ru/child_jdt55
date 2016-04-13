@@ -1,31 +1,25 @@
 'use strict';
 var artkli_calculator = (function() {
 
-
 	function get_from_cities_keys(tarifs, city_names){ 
 		var city_keys = Object.keys(tarifs); 
 		var len = city_keys.length;
 		var sorted = [];
 		var city_name;
-		while (city_keys[0]) {
-			var city_name = city_names[city_keys[0]];
-			/*sorted.push({
-				city_name = city_names(city_keys[0]),
-				city_key = city_keys[i]
-			})*/
-			sorted.push(new String(city_name));
-			sorted[sorted.length-1].element = city_keys[0];
-			city_keys.splice(0,1);
+		for(var i = 0; i < len; i++){
+			sorted.push({
+				city_name: city_names[city_keys[i]],
+				city_key: city_keys[i]
+			});
 		}
-		/*sorted.sort(function(a, b){
+		sorted.sort(function(a, b){
 			return a.city_name < b.city_name ? -1 : a.city_name > b.city_name ? 1 : 0;
-		});*/
-		sorted = sorted.sort();
+		});
+		var elements = [];
 		for (var i = 0; i < len; i++) {
-			city_keys[i] = sorted[i].element;
+			elements.push(sorted[i].city_key);
 		}
-		var all_from = city_keys;
-		return all_from;
+		return elements;
 	 }
 	function blur_button(button){
 		button.blur();
@@ -74,21 +68,23 @@ var artkli_calculator = (function() {
 			}
 		}
 		var wrapper = where_cities;
-		var nodes = wrapper;
-		var len = nodes.length;
+		var city_keys = wrapper;
+		var len = wrapper.length;
 		var sorted = [];
-		while (nodes[0]) {
-			var city = city_names[nodes[0]];
-				sorted.push(new String(city));
-				sorted[sorted.length-1].element = nodes[0];
-				wrapper.splice(0,1);
+		for(var i = 0; i < len; i++){
+			sorted.push({
+				city_name: city_names[city_keys[i]],
+				city_key: city_keys[i]
+			});
 		}
-		sorted = sorted.sort();
+		sorted.sort(function(a, b){
+			return a.city_name < b.city_name ? -1 : a.city_name > b.city_name ? 1 : 0;
+		});
+		var elements = [];
 		for (var i = 0; i < len; i++) {
-			wrapper[i] = sorted[i].element;
+			elements[i] = sorted[i].city_key;
 		}
-		where_cities = wrapper;
-		return where_cities;
+		return elements;
 	}
 	function what_is_way(way){
 		if(way.length == 0){
