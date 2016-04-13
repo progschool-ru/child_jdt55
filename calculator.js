@@ -129,8 +129,8 @@ var artkli_calculator = (function() {
 	}
 	function get_where_cities_by_from(from, tarifs, city_names){
 		var cities = {};
-		var all_from = artkli_calculator.get_from_cities(tarifs, city_names);
-		var all_where = artkli_calculator.get_where_cities(tarifs, city_names);
+		var all_from = get_from_cities(tarifs, city_names);
+		var all_where = get_where_cities(tarifs, city_names);
 		if(from == "undefined_city"){
 			from = null;
 		}
