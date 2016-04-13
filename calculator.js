@@ -12,9 +12,7 @@ var artkli_calculator = (function() {
 				city_key: city_keys[i]
 			});
 		}
-		sorted.sort(function(a, b){
-			return a.city_name < b.city_name ? -1 : a.city_name > b.city_name ? 1 : 0;
-		});
+		
 		var elements = [];
 		for (var i = 0; i < len; i++) {
 			elements.push(sorted[i].city_key);
@@ -86,16 +84,9 @@ var artkli_calculator = (function() {
 		}
 		return elements;
 	}
-	function what_is_way(way){
-		if(way.length == 0){
-			var way = "default_way";
-		}
-		else if(way[0].checked){
-				var way = "jd_way";
-		}else{
-				var way = "auto_way";
-		}
-		return way;
+	function what_is_way(way_element_arr){
+		return way_element_arr.length == 0 ? 'default_way':
+		way_element_arr[0].checked ? 'jd_way' : 'auto_way';
 	}
 	function build_option_html(city, city_name){
 		return "<option value=\"" + city + "\">" + city_name + "</option>";
@@ -161,6 +152,9 @@ var artkli_calculator = (function() {
 		return result.replace(/(\d{1,3}(?=(\d{3})+(?:\.\d|\b)))/g,"\$1 ");
 	}
 	function selector_update(cities_n, options, sel_city, cities, city_names){
+		cities.sort(function(a, b){
+			return a < b ? -1 : a > b ? 1 : 0;
+		});
 		for(var i = 0; i < cities.length; i++) {
 			var city = cities[i];
 			if(cities_n[city] == true){
