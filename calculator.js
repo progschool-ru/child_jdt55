@@ -2,21 +2,21 @@
 var artkli_calculator = (function() {
 
 
-	function get_from_cities(tarifs, city_names){ 
-		var nodes = Object.keys(tarifs); 
-		var len = nodes.length;
+	function get_from_cities_keys(tarifs, city_names){ 
+		var city_keys = Object.keys(tarifs); 
+		var len = city_keys.length;
 		var sorted = [];
-		while (nodes[0]) {
-			var city = city_names[nodes[0]];
-			sorted.push(new String(city));
-			sorted[sorted.length-1].element = nodes[0];
-			nodes.splice(0,1);
+		while (city_keys[0]) {
+			var city_name = city_names[city_keys[0]];
+			sorted.push(new String(city_name));
+			sorted[sorted.length-1].element = city_keys[0];
+			city_keys.splice(0,1);
 		}
 		sorted = sorted.sort();
 		for (var i = 0; i < len; i++) {
-			nodes[i] = sorted[i].element;
+			city_keys[i] = sorted[i].element;
 		}
-		var all_from = nodes;
+		var all_from = city_keys;
 		return all_from;
 	 }
 	function blur_button(button){
@@ -129,7 +129,7 @@ var artkli_calculator = (function() {
 	}
 	function get_where_cities_by_from(from, tarifs, city_names){
 		var cities = {};
-		var all_from = get_from_cities(tarifs, city_names);
+		var all_from = get_from_cities_keys(tarifs, city_names);
 		var all_where = get_where_cities(tarifs, city_names);
 		if(from == "undefined_city"){
 			from = null;
@@ -189,7 +189,7 @@ var artkli_calculator = (function() {
 
 
 
-  	function get_tax(valueRange, taxRange, tax){
+	function get_tax(valueRange, taxRange, tax){
 		var gradation = valueRange;
 		var amount = gradation.length;
 		var end = 0;
@@ -221,7 +221,7 @@ var artkli_calculator = (function() {
 		build_option_html: build_option_html,
 		build_first_option: build_first_option,
 		auto_way_check: auto_way_check,
-		get_from_cities: get_from_cities,
+		get_from_cities_keys: get_from_cities_keys,
 		blur_button: blur_button,
 		get_where_cities_by_from: get_where_cities_by_from,
 		selector_update: selector_update,

@@ -10,10 +10,10 @@
 	<link href="style_for_calculator_klim.css" rel="stylesheet">
 
 	 <!-- Для сайта -->
- 	<script src="/sites/jdt55/files/users/Calc_files/calculator.js.txt"></script>
- 	<script src="/sites/jdt55/files/users/Calc_files/metrika.js.txt"></script> 
- 	<script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script>
- 	<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
+	<script src="/sites/jdt55/files/users/Calc_files/calculator.js.txt"></script>
+	<script src="/sites/jdt55/files/users/Calc_files/metrika.js.txt"></script> 
+	<script src="/sites/jdt55/files/users/Calc_files/tarifs_for_calculator.js.txt"></script>
+	<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
 	<link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script type="text/javascript">
@@ -150,7 +150,7 @@
 	<script>
 (function() {
 	$(document).ready(function(){ // Добавляет элемент
-    	$('[data-toggle="tooltip"]').tooltip();   
+		$('[data-toggle="tooltip"]').tooltip();   
 	});
 	
 	var result_field = document.getElementById('result_field');
@@ -189,7 +189,7 @@
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
 
 	function get_from_cities_by_where(where, all_from, tarifs){//Зависит от грязной
-		var all_from = artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names);
+		var all_from = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);
 		var cities = {};
 		if(where == "undefined_city"){
 			where = null;
@@ -228,7 +228,7 @@
 	}
 	function update_from_selector(tarifs, city_names, from_select, where){//Зависит от грязной
 		var sel_from = from_select.value;
-		var all_from = artkli_calculator.get_from_cities(tarifs, artkli_city_names);
+		var all_from = artkli_calculator.get_from_cities_keys(tarifs, artkli_city_names);
 		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs);//Здесь
 		var from_cities = Object.keys(from_cities_n);
 		var options = [];
@@ -296,7 +296,7 @@
 		var resultat = "Итог";
 		document.getElementById('artkli-result').innerHTML = resultat;
 
-		var all_from = artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names);//Здесь
+		var all_from = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
 		var from_cities = all_from;
 		var options = [];
 		var f_option = artkli_calculator.build_first_option();
@@ -328,7 +328,7 @@
 	function initialization(){//Зависит от грязной
 		reset();//Здесь
 		var by_from = artkli_calculator.get_where_cities_by_from(null, artkli_tarifs, artkli_city_names);//Здесь
-		var by_where = get_from_cities_by_where(null, artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names), artkli_tarifs);
+		var by_where = get_from_cities_by_where(null, artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names), artkli_tarifs);
 		var from_block = document.getElementsByName('artkli-from'); 
 		var where_block = document.getElementsByName('artkli-where');
 
@@ -340,7 +340,7 @@
 
 		update_way_dependent(); //Здесь
 
-		var all_from = artkli_calculator.get_from_cities(artkli_tarifs, artkli_city_names);//Здесь
+		var all_from = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
 		var from_cities = all_from;
 		var options = [];
 		var f_option = artkli_calculator.build_first_option();
@@ -487,30 +487,30 @@
 
 	<!-- Yandex.Metrika counter -->
 <script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w['yaCounter' + artkli_yandex_metrika_id] = new Ya.Metrika({
-                    id:artkli_yandex_metrika_id,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                });
-            } catch(e) { }
-        });
+	(function (d, w, c) {
+		(w[c] = w[c] || []).push(function() {
+			try {
+				w['yaCounter' + artkli_yandex_metrika_id] = new Ya.Metrika({
+					id:artkli_yandex_metrika_id,
+					clickmap:true,
+					trackLinks:true,
+					accurateTrackBounce:true,
+					webvisor:true
+				});
+			} catch(e) { }
+		});
 
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
+		var n = d.getElementsByTagName("script")[0],
+			s = d.createElement("script"),
+			f = function () { n.parentNode.insertBefore(s, n); };
+		s.type = "text/javascript";
+		s.async = true;
+		s.src = "https://mc.yandex.ru/metrika/watch.js";
 
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
+		if (w.opera == "[object Opera]") {
+			d.addEventListener("DOMContentLoaded", f, false);
+		} else { f(); }
+	})(document, window, "yandex_metrika_callbacks");
 </script>
 <!-- /Yandex.Metrika counter -->
 </body>
