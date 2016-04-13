@@ -92,8 +92,7 @@ var artkli_calculator = (function() {
 	}
 	function what_is_way(way){
 		if(way.length == 0){
-			way.innerHTML = 
-			"<input type = \"radio\" id=\"artkli-+default_way+ name=\"artkli-way\" onchange=\"artkli.fiil_text();\" checked><font-size=\"3\">ЖД</font></input>";
+			var way = "default_way";
 		}
 		else if(way[0].checked){
 				var way = "jd_way";
