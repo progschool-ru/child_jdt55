@@ -61,10 +61,10 @@
 				</select>
 			</div>
 			<div align="left" class="selector" id="artkli-where">
-				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.check_radio();artkli.update_from();artkli.update_where();artkli.fill_text();">	
+				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="artkli.handle_where_changed()">	
 				</select>
 			</div>
-			<button type="button" class="btn btn-default" id="butt" data-toggle="tooltip" data-placement="top" title="Сброс" onclick="artkli.reset();this.blur()" ><span class="octicon octicon-x"></span>
+			<button type="button" class="btn btn-default" id="butt" data-toggle="tooltip" data-placement="top" title="Сброс" onclick="artkli.handle_reset_changed(this);"><span class="octicon octicon-x"></span>
 			</button>
 		</div>
 				<div class="form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
@@ -73,16 +73,16 @@
 					<br/>
 				</div>
 				<div class="form-group">
-					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px; "  >Вес</label>
+					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px;">Вес</label>
 					<div class="col-sm-10" style="width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; ">
-						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" onchange="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('city_from'); return true;" oninput="this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
+						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" onchange="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('city_from'); return true;" oninput="artkli.handle_massa_and_volume_changed(this)"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="artkli-volume" class="col-sm-2 control-label" style=" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;">Объем</label>
 					<div>
 					<div class="col-sm-10" style="width: 200px;">
-						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="text" placeholder = "Куб.м." style="text-align: right;" value="" n oninput="this.value=parseInt(this.value) || 0; artkli.fill_text()"/>
+						<input id="artkli-volume" name= "artkli-volume" class="form-control" type="text" placeholder = "Куб.м." style="text-align: right;" value="" oninput="artkli.handle_massa_and_volume_changed(this)"/>
 					</div>
 					</div>
 				</div>
@@ -143,8 +143,6 @@
 		<p style="font-size: 11px">	Наставник: <a target="_blank" href="http://chivorotkiv.livejournal.com/">Сергей Шмаков</a></p>
 	</div>
 </div>
-	<br>
-
 </div>
 </body>
 	<script>
@@ -159,6 +157,23 @@
 		check_radio();
 		update_where();
 		update_from();
+		fill_text();
+	}
+	function handle_where_changed(event){
+		check_radio();
+		update_from();
+		update_where();
+		fill_text();
+	}
+	function handle_reset_changed(event){
+		reset();
+		event.blur();
+	}
+	function handle_massa_and_volume_changed(event){
+		event.value=parseInt(event.value) || 0; 
+		fill_text()
+	}
+	function handle_radio_changed(event){
 		fill_text();
 	}
 
@@ -350,6 +365,10 @@
 
 		var all_from = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
 		var from_cities = all_from;
+		from_cities.sort(function(a, b){
+			return a < b ? -1 : a > b ? 1 : 0;
+		});
+		console.log(from_cities);
 		var options = [];
 		var f_option = artkli_calculator.build_first_option();
 		options.push(f_option);
@@ -482,11 +501,10 @@
 	initialization();//Грязь?
 	window.artkli = {
 		handle_from_changed: handle_from_changed,
-		fill_text: fill_text,
-		reset: reset,
-		update_from: update_from,
-		update_where: update_where,
-		check_radio: check_radio
+		handle_where_changed: handle_where_changed,
+		handle_radio_changed: handle_radio_changed,
+		handle_reset_changed: handle_reset_changed,
+		handle_massa_and_volume_changed: handle_massa_and_volume_changed
 	};
 })();
 
