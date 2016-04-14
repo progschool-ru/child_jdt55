@@ -20,7 +20,7 @@ var artkli_calculator = (function() {
 		return elements;
 	}
 	function get_from_cities_by_where(where, all_from, tarifs, city_names){
-		var all_from = artkli_calculator.get_from_cities_keys(artkli_tarifs, city_names);
+		var all_from = get_from_cities_keys(artkli_tarifs, city_names);
 		var cities = {};
 		if(where == "undefined_city"){
 			where = null;
@@ -59,11 +59,11 @@ var artkli_calculator = (function() {
 	}
 	function update_from_selector(tarifs, city_names, from_select, where){
 		var sel_from = from_select.value;
-		var all_from = artkli_calculator.get_from_cities_keys(tarifs, city_names);
-		var from_cities_n = artkli_calculator.get_from_cities_by_where(where, all_from, tarifs, city_names);
+		var all_from = get_from_cities_keys(tarifs, city_names);
+		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs, city_names);
 		var from_cities = Object.keys(from_cities_n);
 		var options = [];
-		var options_html = artkli_calculator.selector_update(from_cities_n, options, sel_from, from_cities, city_names);
+		var options_html = selector_update(from_cities_n, options, sel_from, from_cities, city_names);
 		from_select.innerHTML = options_html;
 	}
 	function conclusion_tax(tarifs, from, where, mass, volume, way){
@@ -129,8 +129,9 @@ var artkli_calculator = (function() {
 		return elements;
 	}
 	function what_is_way(way_element_arr){
-		return way_element_arr.length == 0 ? 'default_way':
-		way_element_arr[0].checked ? 'jd_way' : 'auto_way';
+		return way_element_arr.length == 0 ? 'default_way'
+			:way_element_arr[0].checked ? 'jd_way' 
+			: 'auto_way';
 	}
 	function build_option_html(city, city_name){
 		return "<option value=\"" + city + "\">" + city_name + "</option>";
