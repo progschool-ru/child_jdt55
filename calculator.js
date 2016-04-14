@@ -3,18 +3,16 @@ var artkli_calculator = (function() {
 
 	function get_from_cities_keys(tarifs, city_names){ 
 		var city_keys = Object.keys(tarifs); 
-		var len = city_keys.length;
 		var sorted = [];
 		var city_name;
-		for(var i = 0; i < len; i++){
+		for(var i = 0; i < city_keys.length; i++){
 			sorted.push({
 				city_name: city_names[city_keys[i]],
 				city_key: city_keys[i]
 			});
 		}
-		
 		var elements = [];
-		for (var i = 0; i < len; i++) {
+		for (var i = 0; i < city_keys.length; i++) {
 			elements.push(sorted[i].city_key);
 		}
 		return elements;
@@ -33,8 +31,7 @@ var artkli_calculator = (function() {
 		else{
 			var from_cities = [];
 			for(var i = 0; i < all_from.length; i++){
-				var from = all_from[i];
-				var from = Object.keys(tarifs[from]);
+				var from = Object.keys(tarifs[all_from[i]]);
 				for(var j = 0;j < from.length; j++){
 					if(from[j] == where){
 						from_cities[from_cities.length] = all_from[i];
@@ -109,11 +106,9 @@ var artkli_calculator = (function() {
 				}
 			}
 		}
-		var wrapper = where_cities;
-		var city_keys = wrapper;
-		var len = wrapper.length;
+		var city_keys = where_cities;
 		var sorted = [];
-		for(var i = 0; i < len; i++){
+		for(var i = 0; i < city_keys.length; i++){
 			sorted.push({
 				city_name: city_names[city_keys[i]],
 				city_key: city_keys[i]
@@ -123,7 +118,7 @@ var artkli_calculator = (function() {
 			return a.city_name < b.city_name ? -1 : a.city_name > b.city_name ? 1 : 0;
 		});
 		var elements = [];
-		for (var i = 0; i < len; i++) {
+		for (var i = 0; i < city_keys.length; i++) {
 			elements[i] = sorted[i].city_key;
 		}
 		return elements;
@@ -158,9 +153,7 @@ var artkli_calculator = (function() {
 			if(count == where_cities.length){
 				return false;
 			}
-			else{
-				return true;
-			}
+			return true;
 		}
 	}
 	function get_where_cities_by_from(from, tarifs, city_names){
@@ -176,8 +169,7 @@ var artkli_calculator = (function() {
 			}
 		}
 		else{
-			var concrete_where = tarifs[from];
-			var concrete_where = Object.keys(concrete_where);
+			var concrete_where = Object.keys(tarifs[from]);
 			for(var i = 0; i < all_where.length; i++){
 				var city_check = all_where[i];
 				for(var j = 0; j < concrete_where.length; j++){
@@ -216,11 +208,9 @@ var artkli_calculator = (function() {
 		return options_html;
 	} 
 	function update_where_selector(tarifs, city_names, from, where_select) {//Зависит от грязной
-		var sel_where = where_select.value;
 		var where_cities_n = get_where_cities_by_from(from, tarifs, city_names);
-		var where_cities = Object.keys(where_cities_n);
 		var options = [];
-		var options_html = selector_update(where_cities_n, options, sel_where, where_cities, city_names);
+		var options_html = selector_update(where_cities_n, options, where_select.value, Object.keys(where_cities_n), city_names);
 		where_select.innerHTML = options_html;
 	}
 
@@ -232,8 +222,7 @@ var artkli_calculator = (function() {
 		var gradation = valueRange;
 		var amount = gradation.length;
 		var end = 0;
-		var i;
-		for(i = amount; i >= 0; i--){
+		for(var i = amount; i >= 0; i--){
 			if(tax < gradation[i]){
 				end = taxRange[i];  
 			}

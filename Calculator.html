@@ -188,20 +188,18 @@
 		massa.addEventListener('input', handle_massa_and_volume_changed);
 		volume.addEventListener('input', handle_massa_and_volume_changed);
 	}
-
+	var radioListener = 0;
 	function update_way_dependent(tarifs, from, to) { // Меняет состояние элементов
 		var chooser_dep = $('#artkli-chooser')[0];
 		var dependency = $('#artkli-choose_way')[0];
+		var buttons = [];
+		var chooser = artkli_calculator.build_radio_chooser();
 		if(!tarifs || to == "undefined_city" || from == "undefined_city"){
-			var buttons = [];
-			var chooser = artkli_calculator.build_radio_chooser();
 			dependency.setAttribute('class', 'artkli-hidden');
 			chooser_dep.setAttribute('class', 'artkli-hidden'); 
 		}
 		else{
-			var buttons = [];
 			var ways = Object.keys(artkli_tarifs[from][to]);
-			var chooser = artkli_calculator.build_radio_chooser();
 			for(var i = 0; i < ways.length; i++){
 				var radio_name = ways[i];
 				var radio = artkli_calculator.build_radio(radio_name, artkli_way_names[radio_name], i+1);
@@ -210,11 +208,14 @@
 			var buttons = buttons.join("\n");
 			chooser_dep.innerHTML = chooser;
 			dependency.innerHTML = buttons;
-			
-			var auto_way = $('#artkli-auto_way')[0];
-			var jd_way = $('#artkli-jd_way')[0];
-			auto_way.addEventListener('change', handle_radio_changed);
-			jd_way.addEventListener('change', handle_radio_changed);
+
+			/*if(radioListener == 0){
+				var auto_way = $('#artkli-auto_way')[0];
+				var jd_way = $('#artkli-jd_way')[0];
+				auto_way.addEventListener('change', handle_radio_changed);
+				jd_way.addEventListener('change', handle_radio_changed);
+				radioListener = 1;
+			}*/
 			
 			if(Object.keys(artkli_tarifs[from][to]).length == 2){
 				dependency.setAttribute('class', ''); 
@@ -229,37 +230,21 @@
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
 
 	function update_from(){// Зависит от грязной, изменяет элементы
-		var from_block = $("[name = 'artkli-from']");//
-		var where_block = $("[name = 'artkli-where']");
-
-		var from_elem = from_block[0]; 
-		var where_elem = where_block[0];
-
-		var from = from_elem.value; 
-		var where = where_elem.value;
+		var from_elem = $("[name = 'artkli-from']")[0]; 
+		var where = $("[name = 'artkli-where']")[0].value;
 
 		artkli_calculator.update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);//Здесь
 	}
 	function update_where(){
-		var from_block = $("[name = 'artkli-from']");
-		var where_block = $("[name = 'artkli-where']");
-
-		var from_elem = from_block[0]; 
-		var where_elem = where_block[0];
-
-		var from = from_elem.value; 
-		var where = where_elem.value;
+		var where_elem = $("[name = 'artkli-where']")[0];
+		var from = $("[name = 'artkli-from']")[0].value; 
 
 		artkli_calculator.update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);
 	}
 	
 	function check_radio(){//Зависит от грязной
-		var from_select = $("[name = 'artkli-from']");
-		var where_select = $("[name = 'artkli-where']");
-		var from_elem = from_select[0]; 
-		var where_elem = where_select[0];
-		var from = from_elem.value; 
-		var where = where_elem.value;
+		var from = $("[name = 'artkli-from']")[0].value; 
+		var where = $("[name = 'artkli-where']")[0].value;
 		update_way_dependent(artkli_tarifs, from, where); //Здесь
 	}
 	function init_build_selectors(way_cities){
@@ -273,27 +258,16 @@
 		}
 		return options.join("\n");
 	}
-	function reset(){//Зависит от грязной
-		var from_block = $("[name = 'artkli-from']");
-		var where_block = $("[name = 'artkli-where']");
-		var massa_block = $("[name = 'artkli-massa']");
-		var volume_block = $("[name = 'artkli-volume']");		
-
+	function reset(){//Зависит от грязной		
 		update_way_dependent(); //Здесь
 
-		var from_elem = from_block[0]; 
-		var where_elem = where_block[0];
-		var mass = massa_block[0];
-		var volume = volume_block[0]; 
+		var from = $("[name = 'artkli-from']")[0].value; 
+		var where = $("[name = 'artkli-where']")[0].value;
+		var mass = $("[name = 'artkli-massa']")[0].value = "";
+		var volume = $("[name = 'artkli-volume']")[0].value = ""; 
 
 		var call = $('#call')[0];
 		call.setAttribute('class', 'artkli-hidden');
-
-		mass.value = "";
-		volume.value = "";
-
-		var from = from_elem.value; 
-		var where = where_elem.value;
 
 		result_field.setAttribute('class','alert alert-info');
 
@@ -302,6 +276,9 @@
 
 		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
 		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
+		from_cities.sort(function(a, b){
+			return a < b ? -1 : a > b ? 1 : 0;
+		});
 
 		var from_select = $('#artkli-from')[0];
 		var where_select = $('#artkli-where_select')[0];
@@ -315,9 +292,6 @@
 	function initialization(){//Зависит от грязной
 		reset();//Здесь
 		init_event_handlers();
-
-		var from_block = $("[name = 'artkli-from']");
-		var where_block = $("[name = 'artkli-where']");
 		
 		var call = $('#call')[0];
 		call.setAttribute('class', 'artkli-hidden');
@@ -341,26 +315,12 @@
 	}
 	var resultat;
 	function fill_text(){ //Зависит от грязной, изменяет кучу всего
-		
-		var tax_by_mass = 0;
-		var tax_by_volume = 0;
 
-		var from_select = $("[name = 'artkli-from']");
-		var massa_block = $("[name = 'artkli-massa']");
-		var where_select = $("[name = 'artkli-where']");
-		var volume_block = $("[name = 'artkli-volume']");
-
-		resultat;
-		var from_elem = from_select[0]; 
-		var where_elem = where_select[0];
-		var mass = massa_block[0];
-		var volume = volume_block[0]; 
-		var ch_elem = from_select[0];
-		var from = from_elem.value; 
-		var where = where_elem.value;
-
+		var from = $("[name = 'artkli-from']")[0].value;
+		var where = $("[name = 'artkli-where']")[0].value;
+		var mass = $("[name = 'artkli-massa']")[0];
+		var volume = $("[name = 'artkli-volume']")[0];
 		var check_auto = from + where;
-
 		var tarifs = get_tarifs();//Здесь
 
 		var way = $("[name = 'artkli-way']");
@@ -410,9 +370,7 @@
 							result_field.setAttribute('class','alert alert-success');
 						}
 						else{
-						resultat = Math.round(resultat);
-						resultat = String(resultat);
-						resultat = artkli_calculator.digit(resultat);//Здесь
+						resultat = artkli_calculator.digit(String(Math.round(resultat)));
 						result_field.setAttribute('class','alert alert-success');
 						var call = $('#call')[0];
 						call.setAttribute('class', 'dump-noborder');
@@ -427,23 +385,17 @@
 						result_field.setAttribute('class','alert alert-success');
 					}
 					else{
-						resultat = Math.round(resultat);
-						resultat = String(resultat);
-						resultat = artkli_calculator.digit(resultat);//Здесь
+						resultat = artkli_calculator.digit(String(Math.round(resultat)));
 						result_field.setAttribute('class','alert alert-success');
 						var call = $('#call')[0];
 						call.setAttribute('class', 'dump-noborder');
 						resultat = "Итоговая сумма: "+ resultat +" руб.";
-
-
 					}
 				}
 			$('#artkli-result')[0].innerHTML = resultat;
 	}
 	Params = {itog: resultat};
 	initialization();//Грязь?
-	window.artkli = {
-	};
 })();
 
 	</script>
