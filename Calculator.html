@@ -262,6 +262,17 @@
 		var where = where_elem.value;
 		update_way_dependent(artkli_tarifs, from, where); //Здесь
 	}
+	function init_build_selectors(way_cities){
+		var options = [];
+		var f_option = artkli_calculator.build_first_option();
+		options.push(f_option);
+		for(var i = 0; i < way_cities.length; i++){
+			var city = way_cities[i];
+				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
+				options.push(option);		
+		}
+		return options.join("\n");
+	}
 	function reset(){//Зависит от грязной
 		var from_block = $("[name = 'artkli-from']");
 		var where_block = $("[name = 'artkli-where']");
@@ -290,36 +301,21 @@
 		$('#artkli-result')[0].innerHTML = resultat;
 
 		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
-		var options = [];
-		var f_option = artkli_calculator.build_first_option();
-		options.push(f_option);
-		for(var i = 0; i < from_cities.length; i++){
-			var city = from_cities[i];
-				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
-				options.push(option);		
-		}
-		var options_html = options.join("\n");
+		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
+
 		var from_select = $('#artkli-from')[0];
+		var where_select = $('#artkli-where_select')[0];
+
+		var options_html = init_build_selectors(from_cities);
 		from_select.innerHTML = options_html;
 		
-
-		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
-		var from_select = $('#artkli-where_select')[0];
-		var options = [];
-		var f_option = artkli_calculator.build_first_option();
-		options.push(f_option);
-		for(var i = 0; i < where_cities.length; i++) {
-			var city = where_cities[i];
-				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
-				options.push(option);
-		}
-		var options_html = options.join("\n");
-		var where_select = $('#artkli-where_select')[0];
+		var options_html = init_build_selectors(where_cities);
 		where_select.innerHTML = options_html;
 	}
 	function initialization(){//Зависит от грязной
 		reset();//Здесь
 		init_event_handlers();
+
 		var from_block = $("[name = 'artkli-from']");
 		var where_block = $("[name = 'artkli-where']");
 		
@@ -328,36 +324,18 @@
 
 		update_way_dependent(); //Здесь
 
-		var all_from = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
-		var from_cities = all_from;
+		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
+		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
+		
 		from_cities.sort(function(a, b){
 			return a < b ? -1 : a > b ? 1 : 0;
 		});
-		console.log(from_cities);
-		var options = [];
-		var f_option = artkli_calculator.build_first_option();
-		options.push(f_option);
-		for(var i = 0; i < from_cities.length; i++){
-			var city = from_cities[i];
-				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
-				options.push(option);		
-		}
-		var options_html = options.join("\n");	
+
+		var options_html = init_build_selectors(from_cities);	
 		var from_select = $('#artkli-from')[0];
 		from_select.innerHTML = options_html;
 		
-
-		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
-		var from_select = $('#artkli-where_select')[0];
-		var options = [];
-		var f_option = artkli_calculator.build_first_option();
-		options.push(f_option);
-		for(var i = 0; i < where_cities.length; i++) {
-			var city = where_cities[i];
-				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
-				options.push(option);
-		}
-		var options_html = options.join("\n");
+		var options_html = init_build_selectors(where_cities)
 		var where_select = $('#artkli-where_select')[0];
 		where_select.innerHTML = options_html;
 	}
