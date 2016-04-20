@@ -31,7 +31,6 @@ var artkli_auto_way_tarifs = {
 	omsk: "piter"
 };
 
-
 var artkli_tarifs = {
 		"moscow": {
 			"omsk": {

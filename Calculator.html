@@ -23,7 +23,6 @@
 		<title>Калькулятор грузоперевозок</title> 
 	</head> 
 <body> 
-
 <div class="layer1" align="left">
 		<h2 style="margin-top: 15px; margin-bottom: 3px;">Цены на доставку груза</h2>
 			<p class="tarif"><a href="/sites/jdt55/files/users/admin1/prais-list_no1_zhd_perevozki.doc"><span style="color: rgb(102, 153, 102);">ЖД доставка сборных грузов</span></a></p><br>
@@ -57,11 +56,11 @@
 		<h2 style="margin-left:-15px; ">Предварительный расчет</h2>
 		<div class="form-group" style="margin-bottom: 0px;">
 			<div align="left" class="selector">
-				<select name="artkli-from" id="artkli-from" class="form-control" style="padding-left: 10px;" onchange="">	
+				<select name="artkli-from" id="artkli-from" class="form-control" style="padding-left: 10px;">	
 				</select>
 			</div>
 			<div align="left" class="selector" id="artkli-where">
-				<select name="artkli-where" id="artkli-where_select" class="form-control" onchange="">	
+				<select name="artkli-where" id="artkli-where_select" class="form-control">	
 				</select>
 			</div>
 			<button type="button" class="btn btn-default" id="butt" data-toggle="tooltip" data-placement="top" title="Сброс" onclick="this.blur();"><span class="octicon octicon-x"></span>
@@ -152,7 +151,6 @@
 	});
 	var result_field = $('#result_field')[0];
 
-
 	function handle_from_changed(event){
 		check_radio();
 		update_where();
@@ -169,7 +167,7 @@
 		reset();
 	}
 	function handle_massa_and_volume_changed(event){
-		event.value=parseInt(event.value) || 0; 
+		this.value = parseInt(this.value) || 0; 
 		fill_text()
 	}
 	function handle_radio_changed(event){
@@ -208,13 +206,19 @@
 			var buttons = buttons.join("\n");
 			chooser_dep.innerHTML = chooser;
 			dependency.innerHTML = buttons;
-
-			/*if(radioListener == 0){
+			if($('#artkli-auto_way')[0]){
 				var auto_way = $('#artkli-auto_way')[0];
 				var jd_way = $('#artkli-jd_way')[0];
 				auto_way.addEventListener('change', handle_radio_changed);
 				jd_way.addEventListener('change', handle_radio_changed);
-				radioListener = 1;
+				console.log("add");
+			}
+			/*else{
+				var auto_way = $('#artkli-auto_way')[0];
+				auto_way.removeEventListener('change', handle_radio_changed);
+				var jd_way = $('#artkli-jd_way')[0];
+				jd_way.removeEventListener('change', handle_radio_changed);
+				console.log("remove");
 			}*/
 			
 			if(Object.keys(artkli_tarifs[from][to]).length == 2){
