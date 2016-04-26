@@ -167,8 +167,10 @@
 		reset();
 	}
 	function handle_massa_and_volume_changed(event){
-		this.value = parseInt(this.value) || 0; 
-		fill_text()
+		if(this.value != 0 && this.value != '.'){
+			this.value = parseFloat(this.value)  || (this.value == '.' || this.value == '0') ? this.value : ''; 
+			fill_text()
+		}
 	}
 	function handle_radio_changed(event){
 		fill_text();
