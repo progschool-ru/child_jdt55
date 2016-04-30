@@ -3,11 +3,11 @@
 	<head> 
 	<script src="https://code.jquery.com/jquery.min.js"></script>
 	 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="calculator.js"></script>
+	<!-- <script src="calculator.js"></script>
 	<script src="tarifs_for_calculator.js"></script>
 	<script src="metrika.js"></script> 
 	<link href="octicons.css" rel="stylesheet">
-	<link href="style_for_calculator_klim.css" rel="stylesheet">
+	<link href="style_for_calculator_klim.css" rel="stylesheet"> -->
 
 	 <!-- Для сайта -->
 	<script src="/sites/jdt55/files/users/Calc_files/calculator.js.txt"></script>
@@ -16,9 +16,6 @@
 	<link href="/sites/jdt55/files/users/Calc_files/octicons.css" rel="stylesheet">
 	<link href="/sites/jdt55/files/users/Calc_files/style_for_calculator_klim.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<script type="text/javascript">
-		var Params;
-	</script>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Калькулятор грузоперевозок</title> 
 	</head> 
@@ -52,7 +49,7 @@
 			<p>&nbsp;</p>		
 </div>
 <div class="calc">
-	<form name="calc" id="calc"> 
+	<form name="calc" id="calc" onclick="window['yaCounter' + artkli_yandex_metrika_id].reachGoal('was_click'); return true;"> 
 		<h2 style="margin-left:-15px; ">Предварительный расчет</h2>
 		<div class="form-group" style="margin-bottom: 0px;">
 			<div align="left" class="selector">
@@ -74,7 +71,7 @@
 				<div class="form-group">
 					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px;">Вес</label>
 					<div class="col-sm-10" style="width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; ">
-						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" onchange="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('city_from'); return true;" oninput=""/>
+						<input id="artkli-massa" name= "artkli-massa" class="form-control" type="text" placeholder = "Кг" style="text-align: right;" value="" onchange="" oninput=""/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -92,7 +89,7 @@
 			<td style="width: 22px;height: 16px; padding-bottom: 10px; ">
 				<span class="octicon octicon-device-mobile" style="margin-left: 2px;vertical-align: bottom;"></span></td>
 			<td style="padding-bottom: 6px;"> 
-				<span style="text-align: justify;padding-bottom: 3px;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
+				<span style="text-align: justify;padding-bottom: 3px;" onmouseover="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('focus_phone'); return true;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
 		</tr>
 		<tr>
 			<td style="padding-bottom: 10px;">
@@ -104,7 +101,7 @@
 			<td style="padding-bottom: 10px;">
 				<span class="octicon octicon-globe" style="vertical-align: bottom;"></span></td>
 			<td style="padding-bottom: 6px;"> 
-				<span style="text-align: justify;"><a target="_blank" href="/contact" onclick="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('test'); return true;">Оставить заявку на сайте.</a></span></td>
+				<span style="text-align: justify;"><a target="_blank" href="/contact" onclick="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_blank'); return true;">Оставить заявку на сайте.</a></span></td>
 		</tr>
 	</tbody>
 </table>
@@ -146,6 +143,12 @@
 </body>
 	<script>
 (function() {
+
+	function send_ya_goal(){
+		var call = $('#call')[0];
+		if(call.className == 'dump-noborder')
+			window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_blank'); return true;
+	}
 	$(document).ready(function(){ // Добавляет элемент
 		$('[data-toggle="tooltip"]').tooltip();   
 	});
@@ -181,7 +184,7 @@
 		var button = $('#butt')[0];
 		var massa = $('#artkli-massa')[0];
 		var volume = $('#artkli-volume')[0];
-
+		
 		from.addEventListener('change', handle_from_changed);
 		where.addEventListener('change', handle_where_changed);
 		button.addEventListener('click', handle_reset_changed);
@@ -321,7 +324,6 @@
 	}
 	var resultat;
 	function fill_text(){ //Зависит от грязной, изменяет кучу всего
-
 		var from = $("[name = 'artkli-from']")[0].value;
 		var where = $("[name = 'artkli-where']")[0].value;
 		var mass = $("[name = 'artkli-massa']")[0];
@@ -435,6 +437,9 @@
 	})(document, window, "yandex_metrika_callbacks");
 </script>
 <!-- /Yandex.Metrika counter -->
+
+
+
 </body>
 </html>
 
