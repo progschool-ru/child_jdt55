@@ -39,15 +39,23 @@ var artkli_calculator = (function() {
 				}
 			}
 		}
-		return cities;
+		var ans = [];
+		var length = Object.keys(cities).length;
+		for(var i = 0; i < length; i++){
+			var city = all_from[i];
+			if(cities[city] == true){
+				ans.push(city);
+			}
+		}
+		return ans;
 	}
 	function update_from_selector(tarifs, city_names, from_select, where){
 		var sel_from = from_select.value;
 		var all_from = get_from_cities_keys(tarifs, city_names);
-		var from_cities_n = get_from_cities_by_where(where, all_from, tarifs, city_names);
-		var from_cities = Object.keys(from_cities_n);
+		var from_cities = get_from_cities_by_where(where, all_from, tarifs, city_names);
+
 		var options = [];
-		var options_html = selector_update(from_cities_n, options, sel_from, from_cities, city_names);
+		var options_html = selector_update(from_cities, options, sel_from, city_names);
 		from_select.innerHTML = options_html;
 	}
 	function conclusion_tax(tarifs, from, where, mass, volume, way){
@@ -93,20 +101,10 @@ var artkli_calculator = (function() {
 				}
 			}
 		}
-		var city_keys = where_cities;
-		var sorted = [];
-		for(var i = 0; i < city_keys.length; i++){
-			sorted.push({
-				city_name: city_names[city_keys[i]],
-				city_key: city_keys[i]
-			});
-		}
-		sorted.sort(function(a, b){
-			return a.city_name < b.city_name ? -1 : a.city_name > b.city_name ? 1 : 0;
-		});
+
 		var elements = [];
-		for (var i = 0; i < city_keys.length; i++) {
-			elements[i] = sorted[i].city_key;
+		for(var i = 0; i < where_cities.length; i++){
+			elements[i] = where_cities[i];
 		}
 		return elements;
 	}
@@ -170,14 +168,21 @@ var artkli_calculator = (function() {
 				}
 			}
 		}
-		return cities;
+		var ans = [];
+		var length = Object.keys(cities).length;
+		for(var i = 0; i < length; i++){
+			var city = all_where[i];
+			if(cities[city] == true){
+				ans.push(city);
+			}
+		}
+		return ans;
 	}
 	function digit(result){
 		return result.replace(/(\d{1,3}(?=(\d{3})+(?:\.\d|\b)))/g,"\$1 ");
 	}
-	function selector_update(cities_n, options, sel_city, cities, city_names){
-
-		var city_keys = Object.keys(cities_n); 
+	function selector_update(cities, options, sel_city, city_names){
+		var city_keys = cities;
 		var sorted = [];
 		var city_name;
 		for(var i = 0; i < city_keys.length; i++){
@@ -187,13 +192,16 @@ var artkli_calculator = (function() {
 			});
 		}
 		cities = [];
+
+		sorted.sort(function(a, b){
+			return a.city_name < b.city_name ? -1 : a.city_name > b.city_name ? 1 : 0;
+		});
+
 		for (var i = 0; i < city_keys.length; i++) {
 			cities.push(sorted[i].city_key);
 		}
-
 		for(var i = 0; i < cities.length; i++) {
 			var city = cities[i];
-			if(cities_n[city] == true){
 				if(city == sel_city){
 					var option = build_option_html_selected(city, city_names[city]);
 				}
@@ -201,7 +209,6 @@ var artkli_calculator = (function() {
 					var option = build_option_html(city, city_names[city]);
 				}
 				options.push(option);
-			}
 		}
 		var options_html = options.join("\n");
 		return options_html;
@@ -209,7 +216,7 @@ var artkli_calculator = (function() {
 	function update_where_selector(tarifs, city_names, from, where_select) {//Зависит от грязной
 		var where_cities_n = get_where_cities_by_from(from, tarifs, city_names);
 		var options = [];
-		var options_html = selector_update(where_cities_n, options, where_select.value, Object.keys(where_cities_n), city_names);
+		var options_html = selector_update(where_cities_n, options, where_select.value, city_names);
 		where_select.innerHTML = options_html;
 	}
 
