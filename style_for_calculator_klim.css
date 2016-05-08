@@ -1,6 +1,9 @@
 			.tarif{
 				display: inline-block;
 			}
+			.span_tarif{
+				color: rgb(102, 153, 102);
+			}
 			.selector{
 				width: 150px;
 				float: left;
@@ -90,14 +93,13 @@
 			tbody{
 				border:none;
 			}
-			#artkli-chooser{
+			.artkli-chooser{
 				float: left;
 				margin-right: 45px;
 				padding-top: 12px;
 			}
 			.input2, #artkli-choose_way{
 				padding: 2px;
-
 			}
 			.artkli-custom-select{
 				width: 130px;

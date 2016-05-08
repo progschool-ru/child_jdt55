@@ -55,7 +55,7 @@ var artkli_calculator = (function() {
 		var from_cities = get_from_cities_by_where(where, all_from, tarifs, city_names);
 
 		var options = [];
-		var options_html = selector_update(from_cities, options, sel_from, city_names);
+		var options_html = selector_update(from_cities, sel_from, city_names);
 		from_select.innerHTML = options_html;
 	}
 	function conclusion_tax(tarifs, from, where, mass, volume, way){
@@ -181,34 +181,21 @@ var artkli_calculator = (function() {
 	function digit(result){
 		return result.replace(/(\d{1,3}(?=(\d{3})+(?:\.\d|\b)))/g,"\$1 ");
 	}
-	function selector_update(cities, options, sel_city, city_names){
-		var city_keys = cities;
-		var sorted = [];
-		var city_name;
-		for(var i = 0; i < city_keys.length; i++){
-			sorted.push({
-				city_name: city_names[city_keys[i]],
-				city_key: city_keys[i]
-			});
-		}
-		cities = [];
-
+	function selector_update(cities, sel_city, city_names){
+		var options = [];
+		var sorted = cities.slice();
 		sorted.sort(function(a, b){
-			return a.city_name < b.city_name ? -1 : a.city_name > b.city_name ? 1 : 0;
+			return city_names[a] < city_names[b] ? -1 : city_names[a] > city_names[b] ? 1 : 0;
 		});
-
-		for (var i = 0; i < city_keys.length; i++) {
-			cities.push(sorted[i].city_key);
-		}
-		for(var i = 0; i < cities.length; i++) {
-			var city = cities[i];
-				if(city == sel_city){
-					var option = build_option_html_selected(city, city_names[city]);
-				}
-				else{
-					var option = build_option_html(city, city_names[city]);
-				}
-				options.push(option);
+		for(var i = 0; i < sorted.length; i++) {
+			var city = sorted[i];
+			if(city == sel_city){
+				var option = build_option_html_selected(city, city_names[city]);
+			}
+			else{
+				var option = build_option_html(city, city_names[city]);
+			}
+			options.push(option);
 		}
 		var options_html = options.join("\n");
 		return options_html;
@@ -216,7 +203,7 @@ var artkli_calculator = (function() {
 	function update_where_selector(tarifs, city_names, from, where_select) {//Зависит от грязной
 		var where_cities_n = get_where_cities_by_from(from, tarifs, city_names);
 		var options = [];
-		var options_html = selector_update(where_cities_n, options, where_select.value, city_names);
+		var options_html = selector_update(where_cities_n, where_select.value, city_names);
 		where_select.innerHTML = options_html;
 	}
 
