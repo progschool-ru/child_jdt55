@@ -200,41 +200,18 @@
 		massa.addEventListener('input', handle_massa_and_volume_changed);
 		volume.addEventListener('input', handle_massa_and_volume_changed);
 	}
-	var radioListener = 0;
+	
 	function update_way_dependent(tarifs, from, to) { // Меняет состояние элементов
-		var $calc = $('.artkli-calc');
-		var chooser_dep = $calc.find('.artkli-chooser')[0];
-		var dependency = $calc.find('.artkli-choose_way')[0];
-
-		if(chooser_dep == undefined){
-			chooser_dep = $calc.find('.artkli_chooser.artkli-hidden')[0];
-		}
-		if(dependency == undefined){
-			dependency = $calc.find('.artkli-choose_way.artkli-hidden')[0];
-		}
-		var buttons = [];
-		var chooser = artkli_calculator.build_radio_chooser();
-		if(!tarifs || to == "undefined_city" || from == "undefined_city"){
+		var check = artkli_calculator.dev_update_dependent(tarifs, to, from);
+		var dependency = artkli_calculator.find_depedency_var().dependency;
+		var chooser_dep = artkli_calculator.find_depedency_var().chooser_dep;
+		if(check == -1){
 			dependency.setAttribute('class', 'artkli-choose_way artkli-hidden');
-			chooser_dep.setAttribute('class', 'artkli_chooser artkli-hidden'); 
-		}
+			chooser_dep.setAttribute('class', 'artkli_chooser artkli-hidden');
+		}	
 		else{
-			var ways = Object.keys(artkli_tarifs[from][to]);
-			for(var i = 0; i < ways.length; i++){
-				var radio_name = ways[i];
-				var radio = artkli_calculator.build_radio(radio_name, artkli_way_names[radio_name], i+1);
-				buttons.push(radio);
-			}
-			var buttons = buttons.join("\n");
-			chooser_dep.innerHTML = chooser;
-			dependency.innerHTML = buttons;
-			if($calc.find('.artkli-auto_way')[0]){
-				var auto_way = $calc.find('.artkli-auto_way')[0];
-				var jd_way = $calc.find('.artkli-jd_way')[0];
-				auto_way.addEventListener('change', handle_radio_changed);
-				jd_way.addEventListener('change', handle_radio_changed);
-			}
-			if(Object.keys(artkli_tarifs[from][to]).length == 2){
+			var state = artkli_calculator.state_way_dependent(tarifs, from, to);
+			if(state){
 				dependency.setAttribute('class', 'artkli-choose_way'); 
 				chooser_dep.setAttribute('class', 'artkli-chooser'); 
 			}
@@ -242,7 +219,17 @@
 				dependency.setAttribute('class', 'artkli-choose_way artkli-hidden'); 
 				chooser_dep.setAttribute('class', 'artkli-chooser artkli-hidden'); 
 			}
-		}
+
+			dependency.innerHTML = check.buttons;
+			chooser_dep.innerHTML = check.chooser;
+			var $calc = $('.artkli-calc');
+			if($calc.find('.artkli-auto_way')[0]){
+				var auto_way = $calc.find('.artkli-auto_way')[0];
+				var jd_way = $calc.find('.artkli-jd_way')[0];
+				auto_way.addEventListener('change', handle_radio_changed);
+				jd_way.addEventListener('change', handle_radio_changed);
+			}		
+		}	
 	} 
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
 

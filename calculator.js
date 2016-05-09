@@ -1,6 +1,47 @@
 'use strict';
 var artkli_calculator = (function() {
 
+	function find_depedency_var(){
+		var $calc = $('.artkli-calc');
+		var dependency = $calc.find('.artkli-choose_way')[0];
+		var chooser_dep = $calc.find('.artkli-chooser')[0];
+		if(dependency == undefined)
+			dependency = $calc.find('.artkli-choose_way.artkli-hidden')[0];
+		if(chooser_dep == undefined)
+			chooser_dep = $calc.find('.artkli_chooser.artkli-hidden')[0];
+		return {
+			dependency: dependency,
+			chooser_dep: chooser_dep
+		}
+	}
+	function dev_update_dependent(tarifs, to, from){
+		var dependency = find_depedency_var().dependency;
+		var chooser_dep = find_depedency_var().chooser_dep;
+		var buttons = [];
+		var chooser = build_radio_chooser();
+
+		if(!tarifs || to == "undefined_city" || from == "undefined_city") 
+			return -1;
+		else {
+			var ways = Object.keys(tarifs[from][to]);
+			for(var i = 0; i < ways.length; i++){
+				var radio_name = ways[i];
+				var radio = build_radio(radio_name, artkli_way_names[radio_name], i+1);
+				buttons.push(radio);
+			}
+			var buttons = buttons.join("\n");
+			return {
+				buttons: buttons,
+				chooser: chooser
+			}
+		}
+	}
+	function state_way_dependent(tarifs, from, to){
+		if(Object.keys(tarifs[from][to]).length == 2)
+			return true;
+		else
+			return false;
+	}
 	function init_build_selectors(way_cities){
 		var options = [];
 		var f_option = artkli_calculator.build_first_option();
@@ -244,6 +285,9 @@ var artkli_calculator = (function() {
 
 
 	return {
+		find_depedency_var: find_depedency_var,
+		dev_update_dependent: dev_update_dependent,
+		state_way_dependent: state_way_dependent,
 		init_build_selectors: init_build_selectors,
 		build_radio_chooser: build_radio_chooser,
 		conclusion_tax: conclusion_tax,
