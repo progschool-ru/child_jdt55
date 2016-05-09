@@ -1,6 +1,17 @@
 'use strict';
 var artkli_calculator = (function() {
 
+	function init_build_selectors(way_cities){
+		var options = [];
+		var f_option = artkli_calculator.build_first_option();
+		options.push(f_option);
+		for(var i = 0; i < way_cities.length; i++){
+			var city = way_cities[i];
+				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
+				options.push(option);		
+		}
+		return options.join("\n");
+	}
 	function get_from_cities_keys(tarifs, city_names){ 
 		return Object.keys(tarifs);
 	}
@@ -71,7 +82,7 @@ var artkli_calculator = (function() {
 		}
 	}
 	function build_radio(radio_name, radio, value){
-		return "<label class=\"radio-inline \" style=\"margin-bottom:-10px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" id=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"\" checked value="+value+">"+radio+"</input></label>";
+		return "<label class=\"radio-inline \" style=\"margin-bottom:-10px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" class=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"\" checked value="+value+">"+radio+"</input></label>";
 	}
 	function build_radio_chooser(){
 		return "<label class=\"col-sm-2 control-label\" style=\"margin-bottom:-10px; width: 80px; margin-left: -14px; text-align: left; margin-top:2px;\" >Доставка</label>";
@@ -233,6 +244,7 @@ var artkli_calculator = (function() {
 
 
 	return {
+		init_build_selectors: init_build_selectors,
 		build_radio_chooser: build_radio_chooser,
 		conclusion_tax: conclusion_tax,
 		get_from_cities_by_where: get_from_cities_by_where,

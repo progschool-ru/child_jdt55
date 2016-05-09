@@ -17,7 +17,7 @@
 				padding: 0px;
 
 			}	
-			.calc{
+			.artkli-calc{
 				float: left;
 				vertical-align: middle;
 				width: 420px;
@@ -26,14 +26,14 @@
 				margin-left: 100px;
 
 			}
-			.calc .form-group{
+			.artkli-calc .form-group{
 				margin-right:15px;
 				margin-left:-15px;
 			}
-			.calc .form-group:after,.calc .form-group:before{
+			.artkli-calc .form-group:after, .artkli-calc .form-group:before{
 				display:table;content:" ";
 			}
-			.calc .form-group:after{
+			.artkli-calc .form-group:after{
 				clear: both;
 			}
 			.tarif{
@@ -58,7 +58,7 @@
 				.later1{
 					margin-left: 105px;
 				}
-				.col-sm-10, #artkli-massa, #artkli-volume{
+				.col-sm-10, .artkli-massa, .artkli-volume{
 					width: 100px;
 				}
 
@@ -98,7 +98,7 @@
 				margin-right: 45px;
 				padding-top: 12px;
 			}
-			.input2, #artkli-choose_way{
+			.input2, .artkli-choose_way{
 				padding: 2px;
 			}
 			.artkli-custom-select{
@@ -137,7 +137,7 @@
 			.artkli-hidden { 
 				display: none; 
 			} 
-			.col-sm-10, #artkli-massa, #artkli-volume{
+			.col-sm-10, .form-control.artkli-massa, .form-control.artkli-volume{
 				width: 295px;
 				margin-left: 0px; 
 			}
@@ -169,7 +169,7 @@
 				vertical-align: middle;
 				margin-bottom: 0px;
 			}
-			#artkli-choose_way{
+			.artkli-choose_way{
 				margin: 10px;
 			}
 			@media (max-width: 930px) and (min-width: 470px) {
@@ -191,7 +191,7 @@
 				.layer2{
 					display: block;
 				}
-				.col-sm-10, #artkli-massa, #artkli-volume{
+				.col-sm-10, .artkli-massa, .artkli-volume{
 					width: 200px;
 					margin-left: 3px;
 				}
