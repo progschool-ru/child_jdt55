@@ -143,6 +143,7 @@
 (function() {
 
 	function send_ya_goal_complete(){
+		var $calc = $('.artkli-calc');
 		var call = $('.call')[0];
 		if(call.className == 'dump-noborder call')
 			window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_form'); return true;
@@ -153,7 +154,7 @@
 	$(document).ready(function(){ // Добавляет элемент
 		$('[data-toggle="tooltip"]').tooltip();   
 	});
-	var result_field = $('.result_field')[0];
+	// var result_field = $('.result_field')[0];
 
 	function handle_from_changed(event){
 		check_radio();
@@ -261,6 +262,7 @@
 		update_way_dependent(); //Здесь
 		var $calc = $('.artkli-calc');
 
+		var result_field = $calc.find('.result_field')[0];
 		var from = $calc.find("[name = 'artkli-from']")[0].value; 
 		var where = $calc.find("[name = 'artkli-where']")[0].value;
 		var mass = $calc.find("[name = 'artkli-massa']")[0].value = "";
@@ -319,6 +321,7 @@
 	function fill_text(){ //Зависит от грязной, изменяет кучу всего
 		var $calc = $('.artkli-calc');
 
+		var result_field = $calc.find('.result_field')[0];
 		var from = $calc.find("[name = 'artkli-from']")[0].value;
 		var where = $calc.find("[name = 'artkli-where']")[0].value;
 		var mass = $calc.find("[name = 'artkli-massa']")[0];
