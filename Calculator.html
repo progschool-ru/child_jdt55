@@ -187,11 +187,12 @@
 		fill_text();
 	}
 	function init_event_handlers(){
-		var from = $('.artkli-from')[0];
-		var where = $('.artkli-where_select')[0];
-		var button = $('.butt')[0];
-		var massa = $('.artkli-massa')[0];
-		var volume = $('.artkli-volume')[0];
+		var $calc = $('.artkli-calc');
+		var from = $calc.find('.artkli-from')[0];
+		var where = $calc.find('.artkli-where_select')[0];
+		var button = $calc.find('.butt')[0];
+		var massa = $calc.find('.artkli-massa')[0];
+		var volume = $calc.find('.artkli-volume')[0];
 
 		from.addEventListener('change', handle_from_changed);
 		where.addEventListener('change', handle_where_changed);
@@ -201,14 +202,15 @@
 	}
 	var radioListener = 0;
 	function update_way_dependent(tarifs, from, to) { // Меняет состояние элементов
-		var chooser_dep = $('.artkli-chooser')[0];
-		var dependency = $('.artkli-choose_way')[0];
+		var $calc = $('.artkli-calc');
+		var chooser_dep = $calc.find('.artkli-chooser')[0];
+		var dependency = $calc.find('.artkli-choose_way')[0];
 
 		if(chooser_dep == undefined){
-			chooser_dep = $('.artkli_chooser.artkli-hidden')[0];
+			chooser_dep = $calc.find('.artkli_chooser.artkli-hidden')[0];
 		}
 		if(dependency == undefined){
-			dependency = $('.artkli-choose_way.artkli-hidden')[0];
+			dependency = $calc.find('.artkli-choose_way.artkli-hidden')[0];
 		}
 		var buttons = [];
 		var chooser = artkli_calculator.build_radio_chooser();
@@ -226,9 +228,9 @@
 			var buttons = buttons.join("\n");
 			chooser_dep.innerHTML = chooser;
 			dependency.innerHTML = buttons;
-			if($('.artkli-auto_way')[0]){
-				var auto_way = $('.artkli-auto_way')[0];
-				var jd_way = $('.artkli-jd_way')[0];
+			if($calc.find('.artkli-auto_way')[0]){
+				var auto_way = $calc.find('.artkli-auto_way')[0];
+				var jd_way = $calc.find('.artkli-jd_way')[0];
 				auto_way.addEventListener('change', handle_radio_changed);
 				jd_way.addEventListener('change', handle_radio_changed);
 			}
@@ -245,32 +247,39 @@
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
 
 	function update_from(){// Зависит от грязной, изменяет элементы
-		var from_elem = $("[name = 'artkli-from']")[0]; 
-		var where = $("[name = 'artkli-where']")[0].value;
+		var $calc = $('.artkli-calc');
+
+		var from_elem = $calc.find("[name = 'artkli-from']")[0]; 
+		var where = $calc.find("[name = 'artkli-where']")[0].value;
 
 		artkli_calculator.update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);//Здесь
 	}
 	function update_where(){
-		var where_elem = $("[name = 'artkli-where']")[0];
-		var from = $("[name = 'artkli-from']")[0].value; 
+		var $calc = $('.artkli-calc');
+
+		var where_elem = $calc.find("[name = 'artkli-where']")[0];
+		var from = $calc.find("[name = 'artkli-from']")[0].value; 
 
 		artkli_calculator.update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);
 	}
 	
 	function check_radio(){//Зависит от грязной
-		var from = $("[name = 'artkli-from']")[0].value; 
-		var where = $("[name = 'artkli-where']")[0].value;
+		var $calc = $('.artkli-calc');
+
+		var from = $calc.find("[name = 'artkli-from']")[0].value; 
+		var where = $calc.find("[name = 'artkli-where']")[0].value;
 		update_way_dependent(artkli_tarifs, from, where); //Здесь
 	}
 	function reset(){//Зависит от грязной		
 		update_way_dependent(); //Здесь
+		var $calc = $('.artkli-calc');
 
-		var from = $("[name = 'artkli-from']")[0].value; 
-		var where = $("[name = 'artkli-where']")[0].value;
-		var mass = $("[name = 'artkli-massa']")[0].value = "";
-		var volume = $("[name = 'artkli-volume']")[0].value = ""; 
+		var from = $calc.find("[name = 'artkli-from']")[0].value; 
+		var where = $calc.find("[name = 'artkli-where']")[0].value;
+		var mass = $calc.find("[name = 'artkli-massa']")[0].value = "";
+		var volume = $calc.find("[name = 'artkli-volume']")[0].value = ""; 
 
-		var call = $('.call')[0];
+		var call = $calc.find('.call')[0];
 		call.setAttribute('class', 'artkli-hidden call');
 
 		result_field.setAttribute('class','alert alert-info result_field');
@@ -278,14 +287,15 @@
 		var resultat = "Итог";
 		$('.artkli-result')[0].innerHTML = resultat;
 
-		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
+		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);
 		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
+
 		from_cities.sort(function(a, b){
 			return a < b ? -1 : a > b ? 1 : 0;
 		});
 
-		var from_select = $('.artkli-from')[0];
-		var where_select = $('.artkli-where_select')[0];
+		var from_select = $calc.find('.artkli-from')[0];
+		var where_select = $calc.find('.artkli-where_select')[0];
 
 		var options_html = artkli_calculator.init_build_selectors(from_cities);
 		from_select.innerHTML = options_html;
@@ -296,13 +306,14 @@
 	function initialization(){//Зависит от грязной
 		reset();//Здесь
 		init_event_handlers();
-		
-		var call = $('.call')[0];
+		var $calc = $('.artkli-calc');
+
+		var call = $calc.find('.call')[0];
 		call.setAttribute('class', 'artkli-hidden call');
 
 		update_way_dependent(); //Здесь
 
-		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);//Здесь
+		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);
 		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
 		
 		from_cities.sort(function(a, b){
@@ -310,22 +321,24 @@
 		});
 
 		var options_html = artkli_calculator.init_build_selectors(from_cities);	
-		var from_select = $('.artkli-from')[0];
+		var from_select = $calc.find('.artkli-from')[0];
 		from_select.innerHTML = options_html;
 		
 		var options_html = artkli_calculator.init_build_selectors(where_cities)
-		var where_select = $('.artkli-where_select')[0];
+		var where_select = $calc.find('.artkli-where_select')[0];
 		where_select.innerHTML = options_html;
 	}
 	var resultat;
 	function fill_text(){ //Зависит от грязной, изменяет кучу всего
-		var from = $("[name = 'artkli-from']")[0].value;
-		var where = $("[name = 'artkli-where']")[0].value;
-		var mass = $("[name = 'artkli-massa']")[0];
-		var volume = $("[name = 'artkli-volume']")[0];
+		var $calc = $('.artkli-calc');
+
+		var from = $calc.find("[name = 'artkli-from']")[0].value;
+		var where = $calc.find("[name = 'artkli-where']")[0].value;
+		var mass = $calc.find("[name = 'artkli-massa']")[0];
+		var volume = $calc.find("[name = 'artkli-volume']")[0];
 		var check_auto = from + where;
 		var tarifs = get_tarifs();//Здесь
-		var way = $("[name = 'artkli-way']");
+		var way = $calc.find("[name = 'artkli-way']");
 		var way = artkli_calculator.what_is_way(way);
 			if(from == "undefined_city" && where == "undefined_city" && mass.value == 0 && volume.value == 0){
 				resultat = "Итог";
@@ -343,13 +356,13 @@
 			else if(mass.value == 0){					
 				resultat = "Введите вес груза!";
 				result_field.setAttribute('class','alert alert-warning result_field');
-				var call = $('.call')[0];
+				var call = $calc.find('.call')[0];
 				call.setAttribute('class', 'artkli-hidden call');
 			}
 			else if(volume.value == 0){
 				resultat = "Введите объем груза!";
 				result_field.setAttribute('class','alert alert-warning result_field');
-				var call = $('.call')[0];
+				var call = $calc.find('.call')[0];
 				call.setAttribute('class', 'artkli-hidden call');
 			}
 			else{
@@ -374,7 +387,7 @@
 						else{
 						resultat = artkli_calculator.digit(String(Math.round(resultat)));
 						result_field.setAttribute('class','alert alert-success result_field');
-						var call = $('.call')[0];
+						var call = $calc.find('.call')[0];
 						call.setAttribute('class', 'dump-noborder call');
 						resultat = "Автоперевозка! Итоговая сумма: "+resultat+" руб."; 
 						}
@@ -389,7 +402,7 @@
 					else{
 						resultat = artkli_calculator.digit(String(Math.round(resultat)));
 						result_field.setAttribute('class','alert alert-success result_field');
-						var call = $('.call')[0];
+						var call = $calc.find('.call')[0];
 						call.setAttribute('class', 'dump-noborder call');
 						resultat = "Итоговая сумма: "+ resultat +" руб.";
 					}
