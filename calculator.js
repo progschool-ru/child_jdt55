@@ -1,8 +1,7 @@
 'use strict';
 var artkli_calculator = (function() {
 
-	function find_depedency_var(){
-		var $calc = $('.artkli-calc');
+	function find_depedency_var($calc){
 		var dependency = $calc.find('.artkli-choose_way')[0];
 		var chooser_dep = $calc.find('.artkli-chooser')[0];
 		if(dependency == undefined)
@@ -14,9 +13,9 @@ var artkli_calculator = (function() {
 			chooser_dep: chooser_dep
 		}
 	}
-	function dev_update_dependent(tarifs, to, from){
-		var dependency = find_depedency_var().dependency;
-		var chooser_dep = find_depedency_var().chooser_dep;
+	function dev_update_dependent(tarifs, to, from, $calc){
+		var dependency = find_depedency_var($calc).dependency;
+		var chooser_dep = find_depedency_var($calc).chooser_dep;
 		var buttons = [];
 		var chooser = build_radio_chooser();
 
@@ -42,13 +41,13 @@ var artkli_calculator = (function() {
 		else
 			return false;
 	}
-	function init_build_selectors(way_cities){
+	function init_build_selectors(way_cities, city_names){
 		var options = [];
-		var f_option = artkli_calculator.build_first_option();
+		var f_option = build_first_option();
 		options.push(f_option);
 		for(var i = 0; i < way_cities.length; i++){
 			var city = way_cities[i];
-				var option = artkli_calculator.build_option_html(city, artkli_city_names[city]);
+				var option = build_option_html(city, city_names[city]);
 				options.push(option);		
 		}
 		return options.join("\n");
@@ -123,7 +122,7 @@ var artkli_calculator = (function() {
 		}
 	}
 	function build_radio(radio_name, radio, value){
-		return "<label class=\"radio-inline \" style=\"margin-bottom:-10px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" class=\"artkli-"+radio_name+"\" name=\"artkli-way\" onchange=\"\" checked value="+value+">"+radio+"</input></label>";
+		return "<label class=\"radio-inline \" style=\"margin-bottom:-10px; width:50px; height:27px; margin-left:10px;\"><input type = \"radio\" class=\"artkli-way artkli-"+radio_name+"\" name=\"artkli-way\" checked value="+value+">"+radio+"</input></label>";
 	}
 	function build_radio_chooser(){
 		return "<label class=\"col-sm-2 control-label\" style=\"margin-bottom:-10px; width: 80px; margin-left: -14px; text-align: left; margin-top:2px;\" >Доставка</label>";

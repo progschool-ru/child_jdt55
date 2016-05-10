@@ -60,7 +60,7 @@
 				<select name="artkli-where" class="artkli-where_select form-control">	
 				</select>
 			</div>
-			<button type="button" class="butt btn btn-default"  data-toggle="tooltip" data-placement="top" title="Сброс" onclick="this.blur();"><span class="octicon octicon-x"></span>
+			<button type="button" class="artkli-butt btn btn-default"  data-toggle="tooltip" data-placement="top" title="Сброс" onclick="this.blur();"><span class="octicon octicon-x"></span>
 			</button>
 		</div>
 				<div class="form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
@@ -69,19 +69,19 @@
 					<br/>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px;"><b>Вес</b></div>
+					<label for="artkli-massa" class="col-sm-2 control-label" style="width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px;">Вес</label>
 					<div class="col-sm-10" style="width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; ">
-						<input name= "artkli-massa" class="form-control artkli-massa" type="text" placeholder = "Кг" style="text-align: right;" value=""/>
+						<input name="artkli-massa" id="artkli-massa" class="form-control artkli-massa" type="text" placeholder = "Кг" style="text-align: right;" value=""/>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-2 control-label" style=" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;"><b>Объем</b></div>
+					<label for="artkli-volume" class="col-sm-2 control-label" style=" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;">Объем</label>
 					<div class="col-sm-10" style="width: 200px;">
-						<input name= "artkli-volume" class="form-control artkli-volume" type="text" placeholder = "Куб.м." style="text-align: right;" value=""/>
+						<input name= "artkli-volume" id="artkli-volume" class="form-control artkli-volume" type="text" placeholder = "Куб.м." style="text-align: right;" value=""/>
 					</div>
 				</div>
-					<div name="result_field" class="alert alert-info result_field" style="height: 36px width: 100%; margin-right: 76px; margin-left: -15px;" role="alert"><font size="3"><span style="margin-bottom: 180px" class="artkli-result">Итог</span></font></div>		
-<table border="0" class="dump-noborder form-group call" style="font-size: 12px; padding-left:12px; margin-left: -14px;">	
+					<div name="result_field" class="alert alert-info artkli-result_field" style="height: 36px width: 100%; margin-right: 76px; margin-left: -15px;" role="alert"><font size="3"><span style="margin-bottom: 180px" class="artkli-result">Итог</span></font></div>		
+<table border="0" class="dump-noborder form-group artkli-call" style="font-size: 12px; padding-left:12px; margin-left: -14px;">	
 	<tbody>
 		<tr>
 			<td style="width: 22px;height: 16px; padding-bottom: 10px; ">
@@ -142,10 +142,8 @@
 	<script>
 (function() {
 
-	function send_ya_goal_complete(){
-		var $calc = $('.artkli-calc');
-		var call = $('.call')[0];
-		if(call.className == 'dump-noborder call')
+	function send_ya_goal_complete(call){
+		if(call.className == 'dump-noborder artkli-call')
 			window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_form'); return true;
 	}
 	function send_ya_goal_change(){
@@ -154,44 +152,44 @@
 	$(document).ready(function(){ // Добавляет элемент
 		$('[data-toggle="tooltip"]').tooltip();   
 	});
-	// var result_field = $('.result_field')[0];
 
 	function handle_from_changed(event){
-		check_radio();
-		update_where();
-		update_from();
-		fill_text();
-		send_ya_goal_complete();
+		// $('.artkli-calc')
+		check_radio($('.artkli-calc'));
+		update_where($('.artkli-calc'));
+		update_from($('.artkli-calc'));
+		fill_text($('.artkli-calc'));
+		send_ya_goal_complete($('.artkli-calc').find('.artkli-call')[0]);
 		send_ya_goal_change();
 	}
 	function handle_where_changed(event){
-		check_radio();
-		update_from();
-		update_where();
-		fill_text();
-		send_ya_goal_complete();
+		check_radio($('.artkli-calc'));
+		update_from($('.artkli-calc'));
+		update_where($('.artkli-calc'));
+		fill_text($('.artkli-calc'));
+		send_ya_goal_complete($('.artkli-calc').find('.artkli-call')[0]);
 		send_ya_goal_change();
 	}
 	function handle_reset_changed(event){
 		reset();
 	}
 	function handle_massa_and_volume_changed(event){
-		send_ya_goal_complete();
+		send_ya_goal_complete($('.artkli-calc').find('.artkli-call')[0]);
 		send_ya_goal_change();
-		fill_text();
+		fill_text($('.artkli-calc'));
 		if(this.value != 0 && this.value != '.'){
 			this.value = parseFloat(this.value)  || 0; 
-			fill_text();
+			fill_text($('.artkli-calc'));
 		}
 	}
 	function handle_radio_changed(event){
-		fill_text();
+		fill_text($('.artkli-calc'));
 	}
 	function init_event_handlers(){
 		var $calc = $('.artkli-calc');
 		var from = $calc.find('.artkli-from')[0];
 		var where = $calc.find('.artkli-where_select')[0];
-		var button = $calc.find('.butt')[0];
+		var button = $calc.find('.artkli-butt')[0];
 		var massa = $calc.find('.artkli-massa')[0];
 		var volume = $calc.find('.artkli-volume')[0];
 
@@ -201,11 +199,10 @@
 		massa.addEventListener('input', handle_massa_and_volume_changed);
 		volume.addEventListener('input', handle_massa_and_volume_changed);
 	}
-	
-	function update_way_dependent(tarifs, from, to) { // Меняет состояние элементов
-		var check = artkli_calculator.dev_update_dependent(tarifs, to, from);
-		var dependency = artkli_calculator.find_depedency_var().dependency;
-		var chooser_dep = artkli_calculator.find_depedency_var().chooser_dep;
+	function update_way_dependent($calc, tarifs, from, to) { // Меняет состояние элементов
+		var check = artkli_calculator.dev_update_dependent(tarifs, to, from, $calc);
+		var dependency = artkli_calculator.find_depedency_var($calc).dependency;
+		var chooser_dep = artkli_calculator.find_depedency_var($calc).chooser_dep;
 		if(check == -1){
 			dependency.setAttribute('class', 'artkli-choose_way artkli-hidden');
 			chooser_dep.setAttribute('class', 'artkli_chooser artkli-hidden');
@@ -220,7 +217,6 @@
 				dependency.setAttribute('class', 'artkli-choose_way artkli-hidden'); 
 				chooser_dep.setAttribute('class', 'artkli-chooser artkli-hidden'); 
 			}
-
 			dependency.innerHTML = check.buttons;
 			chooser_dep.innerHTML = check.chooser;
 			var $calc = $('.artkli-calc');
@@ -234,44 +230,44 @@
 	} 
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
 
-	function update_from(){// Зависит от грязной, изменяет элементы
+	function update_from($calc){// Зависит от грязной, изменяет элементы
 		var $calc = $('.artkli-calc');
 
-		var from_elem = $calc.find("[name = 'artkli-from']")[0]; 
-		var where = $calc.find("[name = 'artkli-where']")[0].value;
+		var from_elem = $calc.find('.artkli-from')[0]; 
+		var where = $calc.find('.artkli-where_select')[0].value;
 
-		artkli_calculator.update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);//Здесь
+		artkli_calculator.update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);
 	}
-	function update_where(){
-		var $calc = $('.artkli-calc');
+	function update_where($calc){
+		// var $calc = $('.artkli-calc');
 
-		var where_elem = $calc.find("[name = 'artkli-where']")[0];
-		var from = $calc.find("[name = 'artkli-from']")[0].value; 
+		var where_elem = $calc.find('.artkli-where_select')[0];
+		var from = $calc.find('.artkli-from')[0].value; 
 
 		artkli_calculator.update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);
 	}
 	
-	function check_radio(){//Зависит от грязной
-		var $calc = $('.artkli-calc');
+	function check_radio($calc){//Зависит от грязной
+		// var $calc = $('.artkli-calc');
 
-		var from = $calc.find("[name = 'artkli-from']")[0].value; 
-		var where = $calc.find("[name = 'artkli-where']")[0].value;
-		update_way_dependent(artkli_tarifs, from, where); //Здесь
+		var from = $calc.find('.artkli-from')[0].value; 
+		var where = $calc.find('.artkli-where_select')[0].value;
+		update_way_dependent($calc, artkli_tarifs, from, where); //Здесь
 	}
 	function reset(){//Зависит от грязной		
-		update_way_dependent(); //Здесь
 		var $calc = $('.artkli-calc');
+		update_way_dependent($calc); //Здесь
 
-		var result_field = $calc.find('.result_field')[0];
-		var from = $calc.find("[name = 'artkli-from']")[0].value; 
-		var where = $calc.find("[name = 'artkli-where']")[0].value;
-		var mass = $calc.find("[name = 'artkli-massa']")[0].value = "";
-		var volume = $calc.find("[name = 'artkli-volume']")[0].value = ""; 
+		var result_field = $calc.find('.artkli-result_field')[0];
+		var from = $calc.find('.artkli-from')[0].value; 
+		var where = $calc.find('.artkli-where_select')[0].value;
+		var mass = $calc.find('.artkli-massa')[0].value = "";
+		var volume = $calc.find('.artkli-volume')[0].value = ""; 
 
-		var call = $calc.find('.call')[0];
-		call.setAttribute('class', 'artkli-hidden call');
+		var call = $calc.find('.artkli-call')[0];
+		call.setAttribute('class', 'artkli-hidden artkli-call');
 
-		result_field.setAttribute('class','alert alert-info result_field');
+		result_field.setAttribute('class','alert alert-info artkli-result_field');
 
 		var resultat = "Итог";
 		$('.artkli-result')[0].innerHTML = resultat;
@@ -286,10 +282,10 @@
 		var from_select = $calc.find('.artkli-from')[0];
 		var where_select = $calc.find('.artkli-where_select')[0];
 
-		var options_html = artkli_calculator.init_build_selectors(from_cities);
+		var options_html = artkli_calculator.init_build_selectors(from_cities, artkli_city_names);
 		from_select.innerHTML = options_html;
 		
-		var options_html = artkli_calculator.init_build_selectors(where_cities);
+		var options_html = artkli_calculator.init_build_selectors(where_cities, artkli_city_names);
 		where_select.innerHTML = options_html;
 	}
 	function initialization(){//Зависит от грязной
@@ -297,10 +293,10 @@
 		init_event_handlers();
 		var $calc = $('.artkli-calc');
 
-		var call = $calc.find('.call')[0];
-		call.setAttribute('class', 'artkli-hidden call');
+		var call = $calc.find('.artkli-call')[0];
+		call.setAttribute('class', 'artkli-hidden artkli-call');
 
-		update_way_dependent(); //Здесь
+		update_way_dependent($calc); //Здесь
 
 		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);
 		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
@@ -309,51 +305,51 @@
 			return a < b ? -1 : a > b ? 1 : 0;
 		});
 
-		var options_html = artkli_calculator.init_build_selectors(from_cities);	
+		var options_html = artkli_calculator.init_build_selectors(from_cities, artkli_city_names);	
 		var from_select = $calc.find('.artkli-from')[0];
 		from_select.innerHTML = options_html;
 		
-		var options_html = artkli_calculator.init_build_selectors(where_cities)
+		var options_html = artkli_calculator.init_build_selectors(where_cities, artkli_city_names);
 		var where_select = $calc.find('.artkli-where_select')[0];
 		where_select.innerHTML = options_html;
 	}
-	var resultat;
-	function fill_text(){ //Зависит от грязной, изменяет кучу всего
-		var $calc = $('.artkli-calc');
+	function fill_text($calc){ //Зависит от грязной, изменяет кучу всего
+		// var $calc = $('.artkli-calc');
 
-		var result_field = $calc.find('.result_field')[0];
-		var from = $calc.find("[name = 'artkli-from']")[0].value;
-		var where = $calc.find("[name = 'artkli-where']")[0].value;
-		var mass = $calc.find("[name = 'artkli-massa']")[0];
-		var volume = $calc.find("[name = 'artkli-volume']")[0];
+		var resultat;
+		var result_field = $calc.find('.artkli-result_field')[0];
+		var from = $calc.find('.artkli-from')[0].value;
+		var where = $calc.find('.artkli-where_select')[0].value;
+		var mass = $calc.find('.artkli-massa')[0];
+		var volume = $calc.find('.artkli-volume')[0];
 		var check_auto = from + where;
 		var tarifs = get_tarifs();//Здесь
-		var way = $calc.find("[name = 'artkli-way']");
+		var way = $calc.find('.artkli-way');
 		var way = artkli_calculator.what_is_way(way);
 			if(from == "undefined_city" && where == "undefined_city" && mass.value == 0 && volume.value == 0){
 				resultat = "Итог";
-				result_field.setAttribute('class','alert alert-info result_field');
+				result_field.setAttribute('class','alert alert-info artkli-result_field');
 			}
 			else if(from == "undefined_city" ){
 				resultat = "Выберите пункт отправления!";
-				result_field.setAttribute('class','alert alert-warning result_field');
+				result_field.setAttribute('class','alert alert-warning artkli-result_field');
 
 			}
 			else if(where == "undefined_city" ){
 				resultat = "Выберите пункт назначения!";
-				result_field.setAttribute('class','alert alert-warning result_field');
+				result_field.setAttribute('class','alert alert-warning artkli-result_field');
 			}
 			else if(mass.value == 0){					
 				resultat = "Введите вес груза!";
-				result_field.setAttribute('class','alert alert-warning result_field');
-				var call = $calc.find('.call')[0];
-				call.setAttribute('class', 'artkli-hidden call');
+				result_field.setAttribute('class','alert alert-warning artkli-result_field');
+				var call = $calc.find('.artkli-call')[0];
+				call.setAttribute('class', 'artkli-hidden artkli-call');
 			}
 			else if(volume.value == 0){
 				resultat = "Введите объем груза!";
-				result_field.setAttribute('class','alert alert-warning result_field');
-				var call = $calc.find('.call')[0];
-				call.setAttribute('class', 'artkli-hidden call');
+				result_field.setAttribute('class','alert alert-warning artkli-result_field');
+				var call = $calc.find('.artkli-call')[0];
+				call.setAttribute('class', 'artkli-hidden artkli-call');
 			}
 			else{
 					var tax = artkli_calculator.conclusion_tax(artkli_tarifs, from, where, mass.value, volume.value, way);//?
@@ -372,13 +368,13 @@
 					if(artkli_calculator.auto_way_check(from, where, artkli_auto_way_tarifs)){
 						if( mass.value > 5000 || volume.value >  25){
 							resultat = "Цена договорная";
-							result_field.setAttribute('class','alert alert-success result_field');
+							result_field.setAttribute('class','alert alert-success artkli-result_field');
 						}
 						else{
 						resultat = artkli_calculator.digit(String(Math.round(resultat)));
-						result_field.setAttribute('class','alert alert-success result_field');
-						var call = $calc.find('.call')[0];
-						call.setAttribute('class', 'dump-noborder call');
+						result_field.setAttribute('class','alert alert-success artkli-result_field');
+						var call = $calc.find('.artkli-call')[0];
+						call.setAttribute('class', 'dump-noborder artkli-call');
 						resultat = "Автоперевозка! Итоговая сумма: "+resultat+" руб."; 
 						}
 					}
@@ -387,17 +383,17 @@
 					}
 					else if(tax_by_volume == -2 || tax_by_mass == -2){
 						resultat = "Цена договорная";
-						result_field.setAttribute('class','alert alert-success result_field');
+						result_field.setAttribute('class','alert alert-success artkli-result_field');
 					}
 					else{
 						resultat = artkli_calculator.digit(String(Math.round(resultat)));
-						result_field.setAttribute('class','alert alert-success result_field');
-						var call = $calc.find('.call')[0];
-						call.setAttribute('class', 'dump-noborder call');
+						result_field.setAttribute('class','alert alert-success artkli-result_field');
+						var call = $calc.find('.artkli-call')[0];
+						call.setAttribute('class', 'dump-noborder artkli-call');
 						resultat = "Итоговая сумма: "+ resultat +" руб.";
 					}
 				}
-			$('.artkli-result')[0].innerHTML = resultat;
+			$calc.find('.artkli-result')[0].innerHTML = resultat;
 	}
 	initialization();//Грязь?
 })();
