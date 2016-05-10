@@ -154,24 +154,23 @@
 	});
 
 	function handle_from_changed(event){
-		// $('.artkli-calc')
 		check_radio($('.artkli-calc'));
-		update_where($('.artkli-calc'));
-		update_from($('.artkli-calc'));
+		artkli_calculator.update_where($('.artkli-calc'));
+		artkli_calculator.update_from($('.artkli-calc'));
 		fill_text($('.artkli-calc'));
 		send_ya_goal_complete($('.artkli-calc').find('.artkli-call')[0]);
 		send_ya_goal_change();
 	}
 	function handle_where_changed(event){
 		check_radio($('.artkli-calc'));
-		update_from($('.artkli-calc'));
-		update_where($('.artkli-calc'));
+		artkli_calculator.update_from($('.artkli-calc'));
+		artkli_calculator.update_where($('.artkli-calc'));
 		fill_text($('.artkli-calc'));
 		send_ya_goal_complete($('.artkli-calc').find('.artkli-call')[0]);
 		send_ya_goal_change();
 	}
 	function handle_reset_changed(event){
-		reset();
+		reset($('.artkli-calc'));
 	}
 	function handle_massa_and_volume_changed(event){
 		send_ya_goal_complete($('.artkli-calc').find('.artkli-call')[0]);
@@ -230,32 +229,14 @@
 	} 
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
 
-	function update_from($calc){// Зависит от грязной, изменяет элементы
-		var $calc = $('.artkli-calc');
-
-		var from_elem = $calc.find('.artkli-from')[0]; 
-		var where = $calc.find('.artkli-where_select')[0].value;
-
-		artkli_calculator.update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);
-	}
-	function update_where($calc){
-		// var $calc = $('.artkli-calc');
-
-		var where_elem = $calc.find('.artkli-where_select')[0];
-		var from = $calc.find('.artkli-from')[0].value; 
-
-		artkli_calculator.update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);
-	}
 	
-	function check_radio($calc){//Зависит от грязной
-		// var $calc = $('.artkli-calc');
-
+	
+	function check_radio($calc){//Зависит от грязно
 		var from = $calc.find('.artkli-from')[0].value; 
 		var where = $calc.find('.artkli-where_select')[0].value;
 		update_way_dependent($calc, artkli_tarifs, from, where); //Здесь
 	}
-	function reset(){//Зависит от грязной		
-		var $calc = $('.artkli-calc');
+	function reset($calc){//Зависит от грязной		
 		update_way_dependent($calc); //Здесь
 
 		var result_field = $calc.find('.artkli-result_field')[0];
@@ -289,9 +270,10 @@
 		where_select.innerHTML = options_html;
 	}
 	function initialization(){//Зависит от грязной
-		reset();//Здесь
 		init_event_handlers();
+
 		var $calc = $('.artkli-calc');
+		reset($calc);//Здесь
 
 		var call = $calc.find('.artkli-call')[0];
 		call.setAttribute('class', 'artkli-hidden artkli-call');
@@ -314,8 +296,6 @@
 		where_select.innerHTML = options_html;
 	}
 	function fill_text($calc){ //Зависит от грязной, изменяет кучу всего
-		// var $calc = $('.artkli-calc');
-
 		var resultat;
 		var result_field = $calc.find('.artkli-result_field')[0];
 		var from = $calc.find('.artkli-from')[0].value;

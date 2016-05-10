@@ -1,6 +1,18 @@
 'use strict';
 var artkli_calculator = (function() {
 
+	function update_where($calc){
+		var where_elem = $calc.find('.artkli-where_select')[0];
+		var from = $calc.find('.artkli-from')[0].value; 
+
+		update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);
+	}
+	function update_from($calc){
+		var from_elem = $calc.find('.artkli-from')[0]; 
+		var where = $calc.find('.artkli-where_select')[0].value;
+
+		update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);
+	}
 	function find_depedency_var($calc){
 		var dependency = $calc.find('.artkli-choose_way')[0];
 		var chooser_dep = $calc.find('.artkli-chooser')[0];
@@ -284,6 +296,8 @@ var artkli_calculator = (function() {
 
 
 	return {
+		update_where: update_where,
+		update_from: update_from,
 		find_depedency_var: find_depedency_var,
 		dev_update_dependent: dev_update_dependent,
 		state_way_dependent: state_way_dependent,
