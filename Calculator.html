@@ -144,7 +144,7 @@
 
 	function send_ya_goal_complete(yaCounter, target){
 		if(target.className == 'dump-noborder artkli-call')
-			yaCounter.reachGoal('fill_form'); return true;
+			window[yaCounter].reachGoal('fill_form'); return true;
 	}
 	function send_ya_goal_change(yaCounter){
 		window[yaCounter].reachGoal('change_some_fields'); return true;
@@ -294,7 +294,7 @@
 	function initialization(){
 		var $calc = $('.artkli-calc');
 		var yaCounter = 'yaCounter'+artkli_yandex_metrika_id;
-
+		console.log(yaCounter);
 		init_event_handlers($calc, artkli_tarifs, yaCounter);
 		artkli_calculator.reset($calc);
 
