@@ -1,6 +1,75 @@
 'use strict';
 var artkli_calculator = (function() {
 
+
+
+	function update_way_dependent($calc, tarifs, from, to) {
+		var check = artkli_calculator.dev_update_dependent(tarifs, to, from, $calc);
+		var way_dependent = artkli_calculator.find_depedency_var($calc);
+		var dependency = way_dependent.dependency;
+		var chooser_dep = way_dependent.chooser_dep;
+		if(check == -1){
+			dependency.setAttribute('class', 'artkli-choose_way artkli-hidden');
+			chooser_dep.setAttribute('class', 'artkli_chooser artkli-hidden');
+		}	
+		else{
+			var state = artkli_calculator.state_way_dependent(tarifs, from, to);
+			if(state){
+				dependency.setAttribute('class', 'artkli-choose_way'); 
+				chooser_dep.setAttribute('class', 'artkli-chooser'); 
+			}
+			else{
+				dependency.setAttribute('class', 'artkli-choose_way artkli-hidden'); 
+				chooser_dep.setAttribute('class', 'artkli-chooser artkli-hidden'); 
+			}
+			dependency.innerHTML = check.buttons;
+			chooser_dep.innerHTML = check.chooser;
+			if($calc.find('.artkli-auto_way')[0]){
+				var auto_way = $calc.find('.artkli-auto_way')[0];
+				var jd_way = $calc.find('.artkli-jd_way')[0];
+				auto_way.addEventListener('change', handle_radio_changed);
+				jd_way.addEventListener('change', handle_radio_changed);
+			}		
+		}	
+	} 
+	function reset($calc){	
+		update_way_dependent($calc);
+
+		var result_field = $calc.find('.artkli-result_field')[0];
+		var from = $calc.find('.artkli-from')[0].value; 
+		var where = $calc.find('.artkli-where_select')[0].value;
+		var mass = $calc.find('.artkli-massa')[0].value = "";
+		var volume = $calc.find('.artkli-volume')[0].value = ""; 
+
+		var call = $calc.find('.artkli-call')[0];
+		call.setAttribute('class', 'artkli-hidden artkli-call');
+
+		result_field.setAttribute('class','alert alert-info artkli-result_field');
+
+		var resultat = "Итог";
+		$calc.find('.artkli-result')[0].innerHTML = resultat;
+
+		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);
+		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
+
+		from_cities.sort(function(a, b){
+			return a < b ? -1 : a > b ? 1 : 0;
+		});
+
+		var from_select = $calc.find('.artkli-from')[0];
+		var where_select = $calc.find('.artkli-where_select')[0];
+
+		var options_html = artkli_calculator.init_build_selectors(from_cities, artkli_city_names);
+		from_select.innerHTML = options_html;
+		
+		var options_html = artkli_calculator.init_build_selectors(where_cities, artkli_city_names);
+		where_select.innerHTML = options_html;
+	}
+	function check_radio($calc){
+		var from = $calc.find('.artkli-from')[0].value; 
+		var where = $calc.find('.artkli-where_select')[0].value;
+		update_way_dependent($calc, artkli_tarifs, from, where);
+	}
 	function update_where($calc){
 		var where_elem = $calc.find('.artkli-where_select')[0];
 		var from = $calc.find('.artkli-from')[0].value; 
@@ -185,24 +254,9 @@ var artkli_calculator = (function() {
 	function build_first_option(){
 		return  "<option selected disabled value=\"undefined_city\">Выберите город</option>";
 	}
-	function auto_way_check(from, where, auto_way_tarifs){
-		var count = 0;
-		if(auto_way_tarifs[from]){
-			var where_cities = [];
-			where_cities.push(auto_way_tarifs[from]);
-			for(var i = 0; i < where_cities.length; i++){
-				if(where_cities[i] == where){
-					break;
-				}
-				else{
-					count++;
-				}
-			}
-			if(count == where_cities.length){
-				return false;
-			}
-			return true;
-		}
+	function auto_way_check(from, where, tarifs){
+		if(tarifs[from][where]['default_way']['mass_price'][1] == -2)return true;
+		return false;
 	}
 	function get_where_cities_by_from(from, tarifs, city_names){
 		var cities = {};
@@ -289,13 +343,15 @@ var artkli_calculator = (function() {
 		}
 		return end;
 	}  
-
+	
 
 
 
 
 
 	return {
+		update_way_dependent: update_way_dependent,
+		check_radio: check_radio,
 		update_where: update_where,
 		update_from: update_from,
 		find_depedency_var: find_depedency_var,
@@ -317,7 +373,8 @@ var artkli_calculator = (function() {
 		get_where_cities_by_from: get_where_cities_by_from,
 		selector_update: selector_update,
 		update_where_selector: update_where_selector,
-		digit: digit
+		digit: digit,
+		reset: reset
 
 	};
 })()
