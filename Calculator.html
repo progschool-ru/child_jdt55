@@ -152,27 +152,24 @@
 	$(document).ready(function(){ // Добавляет элемент
 		$('[data-toggle="tooltip"]').tooltip();   
 	});
-	function get_handle_from_changed($calc){
+	function get_handle_from_changed($calc, tarifs, yaCounter){
 		return function handle_from_changed(event){
 			var $calc = $('.artkli-calc');
-			var yaCounter = 'yaCounter'+artkli_yandex_metrika_id;
 			artkli_calculator.check_radio($calc);
 			artkli_calculator.update_where($calc);
 			artkli_calculator.update_from($calc);
-			fill_text($calc, artkli_tarifs);
+			fill_text($calc, tarifs);
 			send_ya_goal_complete(yaCounter, $calc.find('.artkli-call')[0]);
 			send_ya_goal_change(yaCounter);
-			console.log();
 		}
 	}
-	function get_handle_where_changed($calc){
+	function get_handle_where_changed($calc, tarifs, yaCounter){
 		return function handle_where_changed(event){
 			var $calc = $('.artkli-calc');
-			var yaCounter = 'yaCounter'+artkli_yandex_metrika_id;
 			artkli_calculator.check_radio($calc);
 			artkli_calculator.update_from($calc);
 			artkli_calculator.update_where($calc);
-			fill_text($calc, artkli_tarifs);
+			fill_text($calc, tarifs);
 			send_ya_goal_complete(yaCounter, $calc.find('.artkli-call')[0]);
 			send_ya_goal_change(yaCounter);
 		}
@@ -182,43 +179,38 @@
 			artkli_calculator.reset($('.artkli-calc'));
 		}
 	}
-	function get_handle_massa_and_volume_changed($calc){
+	function get_handle_massa_and_volume_changed($calc, tarifs, yaCounter){
 		return function handle_massa_and_volume_changed(event){
 			var $calc = $('.artkli-calc');
-			var yaCounter = 'yaCounter'+artkli_yandex_metrika_id;
 			send_ya_goal_complete(yaCounter, $calc.find('.artkli-call')[0]);
 			send_ya_goal_change(yaCounter);
-			fill_text($calc, artkli_tarifs);
+			fill_text($calc, tarifs);
 			if(this.value != 0 && this.value != '.'){
 				this.value = parseFloat(this.value)  || 0; 
-				fill_text($calc, artkli_tarifs);
+				fill_text($calc, tarifs);
 			}
 		}
 	}
-	function get_handle_radio_changed($calc){
+	function get_handle_radio_changed($calc, tarifs){
 		return function handle_radio_changed(event){
-			fill_text($('.artkli-calc'), artkli_tarifs);
+			fill_text($calc.find('.artkli-calc'), tarifs);
 		}
 	}
-	function init_event_handlers($calc){
+	function init_event_handlers($calc, tarifs, yaCounter){
 		var from = $calc.find('.artkli-from')[0];
 		var where = $calc.find('.artkli-where_select')[0];
 		var button = $calc.find('.artkli-butt')[0];
 		var massa = $calc.find('.artkli-massa')[0];
 		var volume = $calc.find('.artkli-volume')[0];
 
-		from.addEventListener('change', get_handle_from_changed($calc));
-		where.addEventListener('change', get_handle_where_changed($calc));
+		from.addEventListener('change', get_handle_from_changed($calc, tarifs, yaCounter));
+		where.addEventListener('change', get_handle_where_changed($calc, tarifs, yaCounter));
 		button.addEventListener('click', get_handle_reset_changed($calc));
-		massa.addEventListener('input', get_handle_massa_and_volume_changed($calc));
-		volume.addEventListener('input', get_handle_massa_and_volume_changed($calc));
+		massa.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, yaCounter));
+		volume.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, yaCounter));
 	}
 	
 	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
-
-	
-	
-	
 	
 	function fill_text($calc, tarifs){ //Зависит от грязной, изменяет кучу всего
 		var resultat;
@@ -301,7 +293,9 @@
 	}
 	function initialization(){
 		var $calc = $('.artkli-calc');
-		init_event_handlers($calc);
+		var yaCounter = 'yaCounter'+artkli_yandex_metrika_id;
+
+		init_event_handlers($calc, artkli_tarifs, yaCounter);
 		artkli_calculator.reset($calc);
 
 		var call = $calc.find('.artkli-call')[0];
