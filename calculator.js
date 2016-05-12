@@ -1,8 +1,90 @@
 'use strict';
 var artkli_calculator = (function() {
 
+		function fill_text($calc, tarifs){
+		var resultat;
+		var result_field = $calc.find('.artkli-result_field')[0];
+		var from = $calc.find('.artkli-from')[0].value;
+		var where = $calc.find('.artkli-where_select')[0].value;
+		var mass = $calc.find('.artkli-massa')[0];
+		var volume = $calc.find('.artkli-volume')[0];
+		var check_auto = from + where;
+		var way = $calc.find('.artkli-way');
+		var way = what_is_way(way);
+			if(from == "undefined_city" && where == "undefined_city" && mass.value == 0 && volume.value == 0){
+				resultat = "Итог";
+				result_field.setAttribute('class','alert alert-info artkli-result_field');
+			}
+			else if(from == "undefined_city" ){
+				resultat = "Выберите пункт отправления!";
+				result_field.setAttribute('class','alert alert-warning artkli-result_field');
 
+			}
+			else if(where == "undefined_city" ){
+				resultat = "Выберите пункт назначения!";
+				result_field.setAttribute('class','alert alert-warning artkli-result_field');
+			}
+			else if(mass.value == 0){					
+				resultat = "Введите вес груза!";
+				result_field.setAttribute('class','alert alert-warning artkli-result_field');
+				var call = $calc.find('.artkli-call')[0];
+				call.setAttribute('class', 'artkli-hidden artkli-call');
+			}
+			else if(volume.value == 0){
+				resultat = "Введите объем груза!";
+				result_field.setAttribute('class','alert alert-warning artkli-result_field');
+				var call = $calc.find('.artkli-call')[0];
+				call.setAttribute('class', 'artkli-hidden artkli-call');
+			}
+			else{
+					var tax = conclusion_tax(tarifs, from, where, mass.value, volume.value, way);
+					var tax_by_mass = tax.by_mass;
+					var tax_by_volume = tax.by_volume;
 
+					var ans1 = tax_by_mass * mass.value;
+					var ans2 = tax_by_volume * volume.value;
+
+					if(ans1 > ans2){
+						resultat = ans1;
+					}
+					else{
+						resultat = ans2;
+					}
+					if(auto_way_check(from, where, tarifs)){
+						if( mass.value > 5000 || volume.value >  25){
+							resultat = "Цена договорная";
+							result_field.setAttribute('class','alert alert-success artkli-result_field');
+						}
+						else{
+						resultat = digit(String(Math.round(resultat)));
+						result_field.setAttribute('class','alert alert-success artkli-result_field');
+						var call = $calc.find('.artkli-call')[0];
+						call.setAttribute('class', 'dump-noborder artkli-call');
+						resultat = "Автоперевозка! Итоговая сумма: "+resultat+" руб."; 
+						}
+					}
+					else if(isNaN(resultat)){
+						resultat = " ";
+					}
+					else if(tax_by_volume == -2 || tax_by_mass == -2){
+						resultat = "Цена договорная";
+						result_field.setAttribute('class','alert alert-success artkli-result_field');
+					}
+					else{
+						resultat = digit(String(Math.round(resultat)));
+						result_field.setAttribute('class','alert alert-success artkli-result_field');
+						var call = $calc.find('.artkli-call')[0];
+						call.setAttribute('class', 'dump-noborder artkli-call');
+						resultat = "Итоговая сумма: "+ resultat +" руб.";
+					}
+				}
+			$calc.find('.artkli-result')[0].innerHTML = resultat;
+	}
+	function get_handle_reset_changed($calc){
+		return function handle_reset_changed(event){
+			reset($calc);
+		}
+	}
 	function update_way_dependent($calc, tarifs, from, to) {
 		var check = artkli_calculator.dev_update_dependent(tarifs, to, from, $calc);
 		var way_dependent = artkli_calculator.find_depedency_var($calc);
@@ -350,6 +432,8 @@ var artkli_calculator = (function() {
 
 
 	return {
+		fill_text: fill_text,
+		get_handle_reset_changed: get_handle_reset_changed,
 		update_way_dependent: update_way_dependent,
 		check_radio: check_radio,
 		update_where: update_where,

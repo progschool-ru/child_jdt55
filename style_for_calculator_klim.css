@@ -24,14 +24,14 @@
 				padding: 0px;
 				clear: right;
 				margin-left: 100px;
-
 			}
 			.artkli-calc .form-group{
 				margin-right:15px;
 				margin-left:-15px;
 			}
 			.artkli-calc .form-group:after, .artkli-calc .form-group:before{
-				display:table;content:" ";
+				display:table;
+				content:" ";
 			}
 			.artkli-calc .form-group:after{
 				clear: both;
