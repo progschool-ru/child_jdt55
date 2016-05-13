@@ -45,7 +45,7 @@ var artkli_calculator = (function() {
 		var massa = $calc.find('.artkli-massa')[0];
 		var volume = $calc.find('.artkli-volume')[0];
 
-		var form = $calc.find('.calcin')[0];
+		var form = $calc[0];
 		form.addEventListener('click', get_handle_form_changed(get_yaCounter));
 		from.addEventListener('change', get_handle_from_changed($calc, tarifs, get_yaCounter));
 		where.addEventListener('change', get_handle_where_changed($calc, tarifs, get_yaCounter));
