@@ -81,29 +81,29 @@
 					</div>
 				</div>
 					<div name="result_field" class="alert alert-info artkli-result_field" style="height: 36px width: 100%; margin-right: 76px; margin-left: -15px;" role="alert"><font size="3"><span style="margin-bottom: 180px" class="artkli-result">Итог</span></font></div>		
-<table border="0" class="dump-noborder form-group artkli-call" style="font-size: 12px; padding-left:12px; margin-left: -14px;">	
-	<tbody>
-		<tr>
-			<td style="width: 22px;height: 16px; padding-bottom: 10px; ">
-				<span class="octicon octicon-device-mobile" style="margin-left: 2px;vertical-align: bottom;"></span></td>
-			<td style="padding-bottom: 6px;"> 
-				<span style="text-align: justify;padding-bottom: 3px;" onmouseover="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('focus_phone'); return true;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
-		</tr>
-		<tr>
-			<td style="padding-bottom: 10px;">
-				<span class="octicon octicon-mail-read" style="vertical-align: bottom;"></span></td>
-			<td style="padding-bottom: 6px;">
-				<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru" onclick="console.log(123)">office@jdt55.ru</a>.</span></td>
-		</tr>
-		<tr>
-			<td style="padding-bottom: 10px;">
-				<span class="octicon octicon-globe" style="vertical-align: bottom;"></span></td>
-			<td style="padding-bottom: 6px;"> 
-				<span style="text-align: justify;"><a target="_blank" href="/contact" onclick="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_blank'); return true;">Оставить заявку на сайте.</a></span></td>
-		</tr>
-	</tbody>
-</table>
-	</form>
+	<table border="0" class="dump-noborder form-group artkli-call" style="font-size: 12px; padding-left:12px; margin-left: -14px;">	
+		<tbody>
+			<tr>
+				<td style="width: 22px;height: 16px; padding-bottom: 10px; ">
+					<span class="octicon octicon-device-mobile" style="margin-left: 2px;vertical-align: bottom;"></span></td>
+				<td style="padding-bottom: 6px;"> 
+					<span class="phone_num" style="text-align: justify;padding-bottom: 3px;" onmouseover="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('focus_phone'); return true;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
+			</tr>
+			<tr>
+				<td style="padding-bottom: 10px;">
+					<span class="octicon octicon-mail-read" style="vertical-align: bottom;"></span></td>
+				<td style="padding-bottom: 6px;">
+					<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru" onclick="console.log(123)">office@jdt55.ru</a>.</span></td>
+			</tr>
+			<tr>
+				<td style="padding-bottom: 10px;">
+					<span class="octicon octicon-globe" style="vertical-align: bottom;"></span></td>
+				<td style="padding-bottom: 6px;"> 
+					<span style="text-align: justify;"><a target="_blank" href="/contact" onclick="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_blank'); return true;">Оставить заявку на сайте.</a></span></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
 	<div class="layer2" id="tarifs_links">
 		<h2>Цены на доставку груза</h2>
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin1/prais-list_no1_zhd_perevozki.doc"><span class="span_tarif">ЖД доставка сборных грузов</span></a></p><br>
@@ -141,7 +141,7 @@
 </body>
 	<script>
 (function() {
-	artkli_calculator.initialization($('.calcin'), artkli_tarifs, artkli_city_names, artkli_way_names, function get_yaCounter(){
+	artkli_calculator.initialization($('.artkli-calc'), artkli_tarifs, artkli_city_names, artkli_way_names, function get_yaCounter(){
 			return window['yaCounter'+artkli_yandex_metrika_id];
 		});
 })();

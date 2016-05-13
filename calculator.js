@@ -45,15 +45,14 @@ var artkli_calculator = (function() {
 		var massa = $calc.find('.artkli-massa')[0];
 		var volume = $calc.find('.artkli-volume')[0];
 
-		//window['yaCounter' + artkli_yandex_metrika_id].reachGoal('was_click'); return true;
-		$calc.addEventListener('click', get_handle_from_changed($calc, tarifs, get_yaCounter));
+		var form = $calc.find('.calcin')[0];
+		form.addEventListener('click', get_handle_form_changed(get_yaCounter));
 		from.addEventListener('change', get_handle_from_changed($calc, tarifs, get_yaCounter));
 		where.addEventListener('change', get_handle_where_changed($calc, tarifs, get_yaCounter));
 		button.addEventListener('click', get_handle_reset_changed($calc));
 		massa.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter));
 		volume.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter));
 	}
-	
 	function fill_text($calc, tarifs){
 		var resultat;
 		var result_field = $calc.find('.artkli-result_field')[0];
@@ -519,6 +518,11 @@ var artkli_calculator = (function() {
 	function get_handle_reset_changed($calc){
 		return function handle_reset_changed(event){
 			reset($calc);
+		}
+	}
+	function get_handle_form_changed(get_yaCounter){
+		return function handle_from_changed(event){
+			get_yaCounter().reachGoal('was_click'); return true;
 		}
 	}
 
