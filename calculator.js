@@ -2,12 +2,10 @@
 var artkli_calculator = (function() {
 
 	function initialization($calc, tarifs, city_names, way_names, get_yaCounter){
-		$('[data-toggle="tooltip"]').tooltip();   
-		init_event_handlers($calc, artkli_tarifs, function get_yaCounter(){
-			return window['yaCounter'+artkli_yandex_metrika_id];
-		});
+		$calc.find('[data-toggle="tooltip"]').tooltip();   
+		init_event_handlers($calc, tarifs, get_yaCounter, city_names, way_names);
 
-		reset($calc);
+		reset($calc, tarifs, city_names);
 
 		var call = $calc.find('.artkli-call')[0];
 		call.setAttribute('class', 'artkli-hidden artkli-call');
@@ -38,7 +36,7 @@ var artkli_calculator = (function() {
 
 
 
-	function init_event_handlers($calc, tarifs, get_yaCounter){
+	function init_event_handlers($calc, tarifs, get_yaCounter, city_names, way_names){
 		var from = $calc.find('.artkli-from')[0];
 		var where = $calc.find('.artkli-where_select')[0];
 		var button = $calc.find('.artkli-butt')[0];
@@ -47,9 +45,9 @@ var artkli_calculator = (function() {
 
 		var form = $calc[0];
 		form.addEventListener('click', get_handle_form_changed(get_yaCounter));
-		from.addEventListener('change', get_handle_from_changed($calc, tarifs, get_yaCounter));
-		where.addEventListener('change', get_handle_where_changed($calc, tarifs, get_yaCounter));
-		button.addEventListener('click', get_handle_reset_changed($calc));
+		from.addEventListener('change', get_handle_from_changed($calc, tarifs, get_yaCounter, city_names, way_names));
+		where.addEventListener('change', get_handle_where_changed($calc, tarifs, get_yaCounter, way_names));
+		button.addEventListener('click', get_handle_reset_changed($calc, tarifs, city_names));
 		massa.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter));
 		volume.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter));
 	}
@@ -132,8 +130,8 @@ var artkli_calculator = (function() {
 				}
 			$calc.find('.artkli-result')[0].innerHTML = resultat;
 	}
-	function update_way_dependent($calc, tarifs, from, to) {
-		var check = dev_update_dependent(tarifs, to, from, $calc);
+	function update_way_dependent($calc, tarifs, from, to, way_names) {
+		var check = dev_update_dependent(tarifs, to, from, $calc, way_names);
 		var way_dependent = find_depedency_var($calc);
 		var dependency = way_dependent.dependency;
 		var chooser_dep = way_dependent.chooser_dep;
@@ -161,7 +159,7 @@ var artkli_calculator = (function() {
 			}		
 		}	
 	} 
-	function reset($calc){	
+	function reset($calc, tarifs, city_names){	
 		update_way_dependent($calc);
 
 		var result_field = $calc.find('.artkli-result_field')[0];
@@ -178,8 +176,8 @@ var artkli_calculator = (function() {
 		var resultat = "Итог";
 		$calc.find('.artkli-result')[0].innerHTML = resultat;
 
-		var from_cities = get_from_cities_keys(artkli_tarifs, artkli_city_names);
-		var where_cities = get_where_cities(artkli_tarifs, artkli_city_names);
+		var from_cities = get_from_cities_keys(tarifs, city_names);
+		var where_cities = get_where_cities(tarifs, city_names);
 
 		from_cities.sort(function(a, b){
 			return a < b ? -1 : a > b ? 1 : 0;
@@ -188,28 +186,28 @@ var artkli_calculator = (function() {
 		var from_select = $calc.find('.artkli-from')[0];
 		var where_select = $calc.find('.artkli-where_select')[0];
 
-		var options_html = init_build_selectors(from_cities, artkli_city_names);
+		var options_html = init_build_selectors(from_cities, city_names);
 		from_select.innerHTML = options_html;
 		
-		var options_html = init_build_selectors(where_cities, artkli_city_names);
+		var options_html = init_build_selectors(where_cities, city_names);
 		where_select.innerHTML = options_html;
 	}
-	function check_radio($calc){
+	function check_radio($calc, tarifs, way_names){
 		var from = $calc.find('.artkli-from')[0].value; 
 		var where = $calc.find('.artkli-where_select')[0].value;
-		update_way_dependent($calc, artkli_tarifs, from, where);
+		update_way_dependent($calc, tarifs, from, where, way_names);
 	}
-	function update_where($calc){
+	function update_where($calc, city_names, tarifs){
 		var where_elem = $calc.find('.artkli-where_select')[0];
 		var from = $calc.find('.artkli-from')[0].value; 
 
-		update_where_selector(artkli_tarifs, artkli_city_names, from, where_elem);
+		update_where_selector(tarifs, city_names, from, where_elem);
 	}
-	function update_from($calc){
+	function update_from($calc, tarifs, city_names){
 		var from_elem = $calc.find('.artkli-from')[0]; 
 		var where = $calc.find('.artkli-where_select')[0].value;
 
-		update_from_selector(artkli_tarifs, artkli_city_names, from_elem, where);
+		update_from_selector(tarifs, city_names, from_elem, where);
 	}
 	function find_depedency_var($calc){
 		var dependency = $calc.find('.artkli-choose_way')[0];
@@ -223,7 +221,7 @@ var artkli_calculator = (function() {
 			chooser_dep: chooser_dep
 		}
 	}
-	function dev_update_dependent(tarifs, to, from, $calc){
+	function dev_update_dependent(tarifs, to, from, $calc, way_names){
 		var dependency = find_depedency_var($calc).dependency;
 		var chooser_dep = find_depedency_var($calc).chooser_dep;
 		var buttons = [];
@@ -235,7 +233,7 @@ var artkli_calculator = (function() {
 			var ways = Object.keys(tarifs[from][to]);
 			for(var i = 0; i < ways.length; i++){
 				var radio_name = ways[i];
-				var radio = build_radio(radio_name, artkli_way_names[radio_name], i+1);
+				var radio = build_radio(radio_name, way_names[radio_name], i+1);
 				buttons.push(radio);
 			}
 			var buttons = buttons.join("\n");
@@ -266,7 +264,7 @@ var artkli_calculator = (function() {
 		return Object.keys(tarifs);
 	}
 	function get_from_cities_by_where(where, all_from, tarifs, city_names){
-		var all_from = get_from_cities_keys(artkli_tarifs, city_names);
+		var all_from = get_from_cities_keys(tarifs, city_names);
 		var cities = {};
 		if(where == "undefined_city"){
 			where = null;
@@ -469,25 +467,27 @@ var artkli_calculator = (function() {
 		}
 		return end;
 	}  
-	function get_handle_from_changed($calc, tarifs, get_yaCounter){
+	function get_handle_from_changed($calc, tarifs, get_yaCounter, city_names, way_names){
 		return function handle_from_changed(event){
 			var $calc = $('.artkli-calc');
-			check_radio($calc);
-			update_where($calc);
-			update_from($calc);
+			check_radio($calc, tarifs, way_names);
+			update_where($calc, city_names, tarifs);
+			update_from($calc, tarifs, city_names);
 			fill_text($calc, tarifs);
 			send_ya_goal_complete(get_yaCounter, $calc.find('.artkli-call')[0]);
+			send_ya_goals_phone_and_request(get_yaCounter, $calc.find('.artkli-call')[0], $calc);
 			send_ya_goal_change(get_yaCounter);
 		}
 	}
-	function get_handle_where_changed($calc, tarifs, get_yaCounter){
+	function get_handle_where_changed($calc, tarifs, get_yaCounter, way_names){
 		return function handle_where_changed(event){
 			var $calc = $('.artkli-calc');
-			check_radio($calc);
-			update_from($calc);
-			update_where($calc);
+			check_radio($calc, tarifs, way_names);
+			update_from($calc, tarifs, city_names);
+			update_where($calc, city_names, tarifs);
 			fill_text($calc, tarifs);
 			send_ya_goal_complete(get_yaCounter, $calc.find('.artkli-call')[0]);
+			send_ya_goals_phone_and_request(get_yaCounter, $calc.find('.artkli-call')[0], $calc);
 			send_ya_goal_change(get_yaCounter);
 		}
 	}
@@ -495,6 +495,7 @@ var artkli_calculator = (function() {
 		return function handle_massa_and_volume_changed(event){
 			var $calc = $('.artkli-calc');
 			send_ya_goal_complete(get_yaCounter, $calc.find('.artkli-call')[0]);
+			send_ya_goals_phone_and_request(get_yaCounter, $calc.find('.artkli-call')[0], $calc);
 			send_ya_goal_change(get_yaCounter);
 			fill_text($calc, tarifs);
 			if(this.value != 0 && this.value != '.'){
@@ -512,12 +513,33 @@ var artkli_calculator = (function() {
 		if(target.className == 'dump-noborder artkli-call')
 			get_yaCounter().reachGoal('fill_form'); return true;
 	}
+
+	function send_ya_goals_phone_and_request(get_yaCounter, target, $calc){
+		if(target.className == 'dump-noborder artkli-call'){
+			var phone_field = $calc.find('.phone_num')[0];
+			var request_field = $calc.find('.request')[0];
+
+			phone_field.addEventListener('mouseover', get_handle_phone_focus(get_yaCounter));
+			request_field.addEventListener('click', get_handle_request_click(get_yaCounter));
+		}
+	}
+	function get_handle_phone_focus(get_yaCounter){
+		return function handle_phone_focus(event){
+			get_yaCounter().reachGoal('focus_phone'); return true;
+		}
+	}
+	function get_handle_request_click(get_yaCounter){
+		return function handle_request_click(event){
+			get_yaCounter().reachGoal('fill_blank'); return true;
+		}
+	}
+
 	function send_ya_goal_change(get_yaCounter){
 		get_yaCounter().reachGoal('change_some_fields'); return true;
 	}
-	function get_handle_reset_changed($calc){
+	function get_handle_reset_changed($calc, tarifs, city_names){
 		return function handle_reset_changed(event){
-			reset($calc);
+			reset($calc, tarifs, city_names);
 		}
 	}
 	function get_handle_form_changed(get_yaCounter){

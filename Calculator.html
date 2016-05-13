@@ -49,7 +49,7 @@
 			<p>&nbsp;</p>		
 </div>
 <div class="artkli-calc">
-	<form name="calc" class="calcin lalala" onclick=""> 
+	<form name="calc" class="artkli-calcin"> 
 		<h2 style="margin-left:-15px; ">Предварительный расчет</h2>
 		<div class="form-group" style="margin-bottom: 0px;">
 			<div align="left" class="selector">
@@ -87,19 +87,19 @@
 				<td style="width: 22px;height: 16px; padding-bottom: 10px; ">
 					<span class="octicon octicon-device-mobile" style="margin-left: 2px;vertical-align: bottom;"></span></td>
 				<td style="padding-bottom: 6px;"> 
-					<span class="phone_num" style="text-align: justify;padding-bottom: 3px;" onmouseover="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('focus_phone'); return true;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
+					<span class="phone_num" style="text-align: justify;padding-bottom: 3px;">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td>
 			</tr>
 			<tr>
 				<td style="padding-bottom: 10px;">
 					<span class="octicon octicon-mail-read" style="vertical-align: bottom;"></span></td>
 				<td style="padding-bottom: 6px;">
-					<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru" onclick="console.log(123)">office@jdt55.ru</a>.</span></td>
+					<span style="text-align: justify;">Написать: <a href="mailto:office@jdt55.ru">office@jdt55.ru</a>.</span></td>
 			</tr>
 			<tr>
 				<td style="padding-bottom: 10px;">
 					<span class="octicon octicon-globe" style="vertical-align: bottom;"></span></td>
 				<td style="padding-bottom: 6px;"> 
-					<span style="text-align: justify;"><a target="_blank" href="/contact" onclick="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_blank'); return true;">Оставить заявку на сайте.</a></span></td>
+					<span style="text-align: justify;"><a target="_blank" href="/contact" class="request" onclick="window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_blank'); return true;">Оставить заявку на сайте.</a></span></td>
 			</tr>
 		</tbody>
 	</table>
@@ -141,7 +141,7 @@
 </body>
 	<script>
 (function() {
-	artkli_calculator.initialization($('.calcin'), artkli_tarifs, artkli_city_names, artkli_way_names, function get_yaCounter(){
+	artkli_calculator.initialization($('.artkli-calcin'), artkli_tarifs, artkli_city_names, artkli_way_names, function get_yaCounter(){
 			return window['yaCounter'+artkli_yandex_metrika_id];
 		});
 })();
