@@ -56,7 +56,7 @@ var artkli_calculator = (function() {
 		var form = $calc[0];
 		form.addEventListener('click', get_handle_form_changed(get_yaCounter));
 		from.addEventListener('change', get_handle_from_changed($calc, tarifs, get_yaCounter, city_names, way_names));
-		where.addEventListener('change', get_handle_where_changed($calc, tarifs, get_yaCounter, way_names));
+		where.addEventListener('change', get_handle_where_changed($calc, tarifs, get_yaCounter, way_names, city_names));
 		button.addEventListener('click', get_handle_reset_changed($calc, tarifs, city_names));
 		massa.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter));
 		volume.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter));
@@ -489,7 +489,7 @@ var artkli_calculator = (function() {
 			send_ya_goal_change(get_yaCounter);
 		}
 	}
-	function get_handle_where_changed($calc, tarifs, get_yaCounter, way_names){
+	function get_handle_where_changed($calc, tarifs, get_yaCounter, way_names, city_names){
 		return function handle_where_changed(event){
 			var $calc = $('.artkli-calc');
 			check_radio($calc, tarifs, way_names);
@@ -503,7 +503,6 @@ var artkli_calculator = (function() {
 	}
 	function get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter){
 		return function handle_massa_and_volume_changed(event){
-			var $calc = $('.artkli-calc');
 			send_ya_goal_complete(get_yaCounter, $calc.find('.artkli-call')[0]);
 			send_ya_goals_phone_and_request(get_yaCounter, $calc.find('.artkli-call')[0], $calc);
 			send_ya_goal_change(get_yaCounter);

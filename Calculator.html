@@ -4,7 +4,9 @@
 	<script src="https://code.jquery.com/jquery.min.js"></script>
 	 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="calculator.js"></script>
+	<script src="calculator2.js"></script>
 	<script src="tarifs_for_calculator.js"></script>
+	<script src="tarifs_for_calculator2.js"></script>
 	<script src="metrika.js"></script> 
 	<link href="octicons.css" rel="stylesheet">
 	<link href="style_for_calculator_klim.css" rel="stylesheet">
@@ -49,8 +51,9 @@
 			<p>&nbsp;</p>		
 </div>
 <div class="artkli-calc">
-	<form name="calc" class="artkli-calcin"> 
-</form>
+	<form name="calc" class="artkli-calcin" style="margin-bottom: 50px;"></form>
+	<form name="calc" class="artkli-auto"></form>
+
 	<div class="layer2" id="tarifs_links">
 		<h2>Цены на доставку груза</h2>
 			<p class="tarif" ><a href="/sites/jdt55/files/users/admin1/prais-list_no1_zhd_perevozki.doc"><span class="span_tarif">ЖД доставка сборных грузов</span></a></p><br>
@@ -91,6 +94,7 @@
 	artkli_calculator.initialization($('.artkli-calcin'), artkli_tarifs, artkli_city_names, artkli_way_names, function get_yaCounter(){
 			return window['yaCounter'+artkli_yandex_metrika_id];
 		});
+	artkli_calculator2.initialization($('.artkli-auto'), artkli_city_names2, artkli_tarifs2);
 })();
 
 	</script>

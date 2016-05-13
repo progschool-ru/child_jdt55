@@ -1,0 +1,196 @@
+			.tarif{
+				display: inline-block;
+			}
+			.span_tarif{
+				color: rgb(102, 153, 102);
+			}
+			.selector{
+				width: 150px;
+				float: left;
+				margin-right: 10px;
+				margin-bottom: 0px;
+				margin-left: 0px;
+			}
+			.tarif{
+				margin-bottom: 5px;
+				margin-top: 0px;
+				padding: 0px;
+
+			}	
+			.artkli-calc{
+				float: left;
+				vertical-align: middle;
+				width: 420px;
+				padding: 0px;
+				clear: right;
+				margin-left: 100px;
+			}
+			.artkli-calc .form-group{
+				margin-right:15px;
+				margin-left:-15px;
+			}
+			.artkli-calc .form-group:after, .artkli-calc .form-group:before{
+				display:table;
+				content:" ";
+			}
+			.artkli-calc .form-group:after{
+				clear: both;
+			}
+			.tarif{
+				font-size: 12px;
+			}
+			h2{
+				padding-bottom: 15px;
+				padding-top: 0px;
+			}
+			.htooltip{
+				display: inline-block;
+			}
+			html{
+				width: 100%;
+			}
+			@media (max-width: 930px) and (min-width: 470px) {
+				.layer1{
+					margin-left: 105px;
+				}
+			}
+			@media (max-width: 470px) and (min-width: 10px) {
+				.later1{
+					margin-left: 105px;
+				}
+				.col-sm-10, .artkli-massa, .artkli-volume, .artkli-select{
+					width: 100px;
+				}
+
+			}
+			.htooltip .reset { 
+				background-color: rgba(0,0,0, 0.8);
+				border-radius: 15px 15px 15px 0px;
+				box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+				display: inline-block;
+				color: #fff;
+				margin-left: 2px;
+				margin-top: -55px;
+				opacity: 0; 
+				padding: 10px 10px 10px 10px;
+				position: absolute;
+				text-decoration: none;
+				visibility: hidden; 
+				z-index: 10;
+			}	
+			.htooltip:hover .reset { 
+				opacity: 1;
+				visibility: visible;
+			}
+			
+			a{
+				text-decoration: none;
+			}
+			table{
+				display: inline-block;
+				border: none;
+			}
+			tbody{
+				border:none;
+			}
+			.artkli-chooser{
+				float: left;
+				margin-right: 45px;
+				padding-top: 12px;
+			}
+			.input2, .artkli-choose_way{
+				padding: 2px;
+			}
+			.artkli-custom-select{
+				width: 130px;
+				height: 40px;
+				overflow: hidden;
+				border-radius: 5px;
+				box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+				background: #f7f7f7;
+				float: left;
+				margin-right: 10px;
+			}
+			.input{
+				margin: 0px;
+				margin-top: 0px;
+				float: left;
+			}
+			.artkli-custom-input input{
+				width: 120px;
+				height: 25px;
+				overflow: hidden;
+				border-radius: 5px;
+				box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+				font: 15px Arial;
+				outline: 0;
+				padding: 3px 5px;
+				display: inline-block;
+			}
+			.artkli-footer {
+			  /*height:1px;*/
+			  clear: both;
+			  /*display: inline-block;*/
+			  float: left;
+			  text-align: left;
+			}
+			.artkli-hidden { 
+				display: none; 
+			} 
+			.col-sm-10, .form-control.artkli-massa, .form-control.artkli-volume, .form-control.artkli-select{
+				width: 295px;
+				margin-left: 0px; 
+			}
+			.form-group{
+				margin: 0px;
+			}
+			.layer1 {
+				float: left; /* Обтекание по правому краю */
+				border: 0px; /* Параметры рамки */
+				padding: 5px; /* Поля вокруг текста */
+				margin-right: 10px; /* Отступ справа */
+				display: block;
+			}
+			.layer2 {
+				float: left; /* Обтекание по правому краю */
+				border: 0px; /* Параметры рамки */
+				padding: 5px; /* Поля вокруг текста */
+				margin-right: 10px; /* Отступ справа */
+				display: none;
+				clear: both;
+				/*margin-left: 105px;*/
+			}
+			}
+			.cities{
+				display: inline-block;
+				padding: 5px;
+				width: 100%;
+				margin: 0px;
+				vertical-align: middle;
+				margin-bottom: 0px;
+			}
+			.artkli-choose_way{
+				margin: 10px;
+			}
+			@media (max-width: 930px) and (min-width: 470px) {
+				.layer1{
+					margin-left: 105px;
+					display: none;
+				}
+				.layer2{
+					display: block;
+				}
+			}
+			@media (max-width: 469px) and (min-width: 100px) {
+				.layer1{
+					margin-left: 105px;
+					display: none;
+				}
+				.layer2{
+					display: block;
+				}
+				.col-sm-10, .artkli-massa, .artkli-volume, .artkli-select{
+					width: 200px;
+					margin-left: 3px;
+				}
+			}
