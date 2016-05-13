@@ -49,7 +49,7 @@
 			<p>&nbsp;</p>		
 </div>
 <div class="artkli-calc">
-	<form name="calc" class="calcin" onclick="window['yaCounter' + artkli_yandex_metrika_id].reachGoal('was_click'); return true;"> 
+	<form name="calc" class="calcin" onclick=""> 
 		<h2 style="margin-left:-15px; ">Предварительный расчет</h2>
 		<div class="form-group" style="margin-bottom: 0px;">
 			<div align="left" class="selector">
@@ -141,105 +141,9 @@
 </body>
 	<script>
 (function() {
-
-	function send_ya_goal_complete(yaCounter, target){
-		if(target.className == 'dump-noborder artkli-call')
-			yaCounter.reachGoal('fill_form'); return true;
-	}
-	function send_ya_goal_change(yaCounter){
-		yaCounter.reachGoal('change_some_fields'); return true;
-	}
-	$(document).ready(function(){ // Добавляет элемент
-		
-	});
-	function get_handle_from_changed($calc, tarifs, yaCounter){
-		return function handle_from_changed(event){
-			var $calc = $('.artkli-calc');
-			artkli_calculator.check_radio($calc);
-			artkli_calculator.update_where($calc);
-			artkli_calculator.update_from($calc);
-			artkli_calculator.fill_text($calc, tarifs);
-			send_ya_goal_complete(yaCounter, $calc.find('.artkli-call')[0]);
-			send_ya_goal_change(yaCounter);
-		}
-	}
-	function get_handle_where_changed($calc, tarifs, yaCounter){
-		return function handle_where_changed(event){
-			var $calc = $('.artkli-calc');
-			artkli_calculator.check_radio($calc);
-			artkli_calculator.update_from($calc);
-			artkli_calculator.update_where($calc);
-			artkli_calculator.fill_text($calc, tarifs);
-			send_ya_goal_complete(yaCounter, $calc.find('.artkli-call')[0]);
-			send_ya_goal_change(yaCounter);
-		}
-	}
-	
-	function get_handle_massa_and_volume_changed($calc, tarifs, yaCounter){
-		return function handle_massa_and_volume_changed(event){
-			var $calc = $('.artkli-calc');
-			send_ya_goal_complete(yaCounter, $calc.find('.artkli-call')[0]);
-			send_ya_goal_change(yaCounter);
-			artkli_calculator.fill_text($calc, tarifs);
-			if(this.value != 0 && this.value != '.'){
-				this.value = parseFloat(this.value)  || 0; 
-				artkli_calculator.fill_text($calc, tarifs);
-			}
-		}
-	}
-	function get_handle_radio_changed($calc, tarifs){
-		return function handle_radio_changed(event){
-			artkli_calculator.fill_text($calc.find('.artkli-calc'), tarifs);
-		}
-	}
-	function init_event_handlers($calc, tarifs, yaCounter){
-		var from = $calc.find('.artkli-from')[0];
-		var where = $calc.find('.artkli-where_select')[0];
-		var button = $calc.find('.artkli-butt')[0];
-		var massa = $calc.find('.artkli-massa')[0];
-		var volume = $calc.find('.artkli-volume')[0];
-
-		from.addEventListener('change', get_handle_from_changed($calc, tarifs, yaCounter));
-		where.addEventListener('change', get_handle_where_changed($calc, tarifs, yaCounter));
-		button.addEventListener('click', artkli_calculator.get_handle_reset_changed($calc));
-		massa.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, yaCounter));
-		volume.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, yaCounter));
-	}
-	
-	function get_tarifs(){return artkli_tarifs;} // Глобальная переменная
-	
-
-	function initialization(){
-		var $calc = $('.artkli-calc');
-		// var yaCounter = 'yaCounter'+artkli_yandex_metrika_id;
-		$('[data-toggle="tooltip"]').tooltip();   
-		init_event_handlers($calc, artkli_tarifs, function get_yaCounter(){
+	artkli_calculator.initialization($('.calcin'), artkli_tarifs, artkli_city_names, artkli_way_names, function get_yaCounter(){
 			return window['yaCounter'+artkli_yandex_metrika_id];
 		});
-
-		artkli_calculator.reset($calc);
-
-		var call = $calc.find('.artkli-call')[0];
-		call.setAttribute('class', 'artkli-hidden artkli-call');
-
-		artkli_calculator.update_way_dependent($calc);
-
-		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);
-		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
-		
-		from_cities.sort(function(a, b){
-			return a < b ? -1 : a > b ? 1 : 0;
-		});
-
-		var options_html = artkli_calculator.init_build_selectors(from_cities, artkli_city_names);	
-		var from_select = $calc.find('.artkli-from')[0];
-		from_select.innerHTML = options_html;
-		
-		var options_html = artkli_calculator.init_build_selectors(where_cities, artkli_city_names);
-		var where_select = $calc.find('.artkli-where_select')[0];
-		where_select.innerHTML = options_html;
-	}
-	initialization();
 })();
 
 	</script>

@@ -1,7 +1,60 @@
 'use strict';
 var artkli_calculator = (function() {
 
-		function fill_text($calc, tarifs){
+	function initialization($calc, tarifs, city_names, way_names, get_yaCounter){
+		$('[data-toggle="tooltip"]').tooltip();   
+		init_event_handlers($calc, artkli_tarifs, function get_yaCounter(){
+			return window['yaCounter'+artkli_yandex_metrika_id];
+		});
+
+		reset($calc);
+
+		var call = $calc.find('.artkli-call')[0];
+		call.setAttribute('class', 'artkli-hidden artkli-call');
+
+		update_way_dependent($calc);
+
+		var from_cities = get_from_cities_keys(tarifs, city_names);
+		var where_cities = get_where_cities(tarifs, city_names);
+		
+		from_cities.sort(function(a, b){
+			return a < b ? -1 : a > b ? 1 : 0;
+		});
+
+		var options_html = init_build_selectors(from_cities, city_names);	
+		var from_select = $calc.find('.artkli-from')[0];
+		from_select.innerHTML = options_html;
+		
+		var options_html = init_build_selectors(where_cities, city_names);
+		var where_select = $calc.find('.artkli-where_select')[0];
+		where_select.innerHTML = options_html;
+	}
+
+
+
+
+
+
+
+
+
+	function init_event_handlers($calc, tarifs, get_yaCounter){
+		var from = $calc.find('.artkli-from')[0];
+		var where = $calc.find('.artkli-where_select')[0];
+		var button = $calc.find('.artkli-butt')[0];
+		var massa = $calc.find('.artkli-massa')[0];
+		var volume = $calc.find('.artkli-volume')[0];
+
+		//window['yaCounter' + artkli_yandex_metrika_id].reachGoal('was_click'); return true;
+		$calc.addEventListener('click', get_handle_from_changed($calc, tarifs, get_yaCounter));
+		from.addEventListener('change', get_handle_from_changed($calc, tarifs, get_yaCounter));
+		where.addEventListener('change', get_handle_where_changed($calc, tarifs, get_yaCounter));
+		button.addEventListener('click', get_handle_reset_changed($calc));
+		massa.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter));
+		volume.addEventListener('input', get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter));
+	}
+	
+	function fill_text($calc, tarifs){
 		var resultat;
 		var result_field = $calc.find('.artkli-result_field')[0];
 		var from = $calc.find('.artkli-from')[0].value;
@@ -56,11 +109,11 @@ var artkli_calculator = (function() {
 							result_field.setAttribute('class','alert alert-success artkli-result_field');
 						}
 						else{
-						resultat = digit(String(Math.round(resultat)));
-						result_field.setAttribute('class','alert alert-success artkli-result_field');
-						var call = $calc.find('.artkli-call')[0];
-						call.setAttribute('class', 'dump-noborder artkli-call');
-						resultat = "Автоперевозка! Итоговая сумма: "+resultat+" руб."; 
+							resultat = digit(String(Math.round(resultat)));
+							result_field.setAttribute('class','alert alert-success artkli-result_field');
+							var call = $calc.find('.artkli-call')[0];
+							call.setAttribute('class', 'dump-noborder artkli-call');
+							resultat = "Автоперевозка! Итоговая сумма: "+resultat+" руб."; 
 						}
 					}
 					else if(isNaN(resultat)){
@@ -80,14 +133,9 @@ var artkli_calculator = (function() {
 				}
 			$calc.find('.artkli-result')[0].innerHTML = resultat;
 	}
-	function get_handle_reset_changed($calc){
-		return function handle_reset_changed(event){
-			reset($calc);
-		}
-	}
 	function update_way_dependent($calc, tarifs, from, to) {
-		var check = artkli_calculator.dev_update_dependent(tarifs, to, from, $calc);
-		var way_dependent = artkli_calculator.find_depedency_var($calc);
+		var check = dev_update_dependent(tarifs, to, from, $calc);
+		var way_dependent = find_depedency_var($calc);
 		var dependency = way_dependent.dependency;
 		var chooser_dep = way_dependent.chooser_dep;
 		if(check == -1){
@@ -95,7 +143,7 @@ var artkli_calculator = (function() {
 			chooser_dep.setAttribute('class', 'artkli_chooser artkli-hidden');
 		}	
 		else{
-			var state = artkli_calculator.state_way_dependent(tarifs, from, to);
+			var state = state_way_dependent(tarifs, from, to);
 			if(state){
 				dependency.setAttribute('class', 'artkli-choose_way'); 
 				chooser_dep.setAttribute('class', 'artkli-chooser'); 
@@ -109,8 +157,8 @@ var artkli_calculator = (function() {
 			if($calc.find('.artkli-auto_way')[0]){
 				var auto_way = $calc.find('.artkli-auto_way')[0];
 				var jd_way = $calc.find('.artkli-jd_way')[0];
-				auto_way.addEventListener('change', handle_radio_changed);
-				jd_way.addEventListener('change', handle_radio_changed);
+				auto_way.addEventListener('change', get_handle_radio_changed($calc, tarifs));
+				jd_way.addEventListener('change', get_handle_radio_changed($calc, tarifs));
 			}		
 		}	
 	} 
@@ -131,8 +179,8 @@ var artkli_calculator = (function() {
 		var resultat = "Итог";
 		$calc.find('.artkli-result')[0].innerHTML = resultat;
 
-		var from_cities = artkli_calculator.get_from_cities_keys(artkli_tarifs, artkli_city_names);
-		var where_cities = artkli_calculator.get_where_cities(artkli_tarifs, artkli_city_names);
+		var from_cities = get_from_cities_keys(artkli_tarifs, artkli_city_names);
+		var where_cities = get_where_cities(artkli_tarifs, artkli_city_names);
 
 		from_cities.sort(function(a, b){
 			return a < b ? -1 : a > b ? 1 : 0;
@@ -141,10 +189,10 @@ var artkli_calculator = (function() {
 		var from_select = $calc.find('.artkli-from')[0];
 		var where_select = $calc.find('.artkli-where_select')[0];
 
-		var options_html = artkli_calculator.init_build_selectors(from_cities, artkli_city_names);
+		var options_html = init_build_selectors(from_cities, artkli_city_names);
 		from_select.innerHTML = options_html;
 		
-		var options_html = artkli_calculator.init_build_selectors(where_cities, artkli_city_names);
+		var options_html = init_build_selectors(where_cities, artkli_city_names);
 		where_select.innerHTML = options_html;
 	}
 	function check_radio($calc){
@@ -337,7 +385,9 @@ var artkli_calculator = (function() {
 		return  "<option selected disabled value=\"undefined_city\">Выберите город</option>";
 	}
 	function auto_way_check(from, where, tarifs){
-		if(tarifs[from][where]['default_way']['mass_price'][1] == -2)return true;
+		if(Object.keys(tarifs[from][where]) == 'default_way'){
+			if(tarifs[from][where]['default_way']['mass_price'][1] == -2)return true;
+		}
 		return false;
 	}
 	function get_where_cities_by_from(from, tarifs, city_names){
@@ -405,11 +455,6 @@ var artkli_calculator = (function() {
 		var options_html = selector_update(where_cities_n, where_select.value, city_names);
 		where_select.innerHTML = options_html;
 	}
-
-
-
-
-
 	function get_tax(valueRange, taxRange, tax){
 		var gradation = valueRange;
 		var amount = gradation.length;
@@ -425,40 +470,64 @@ var artkli_calculator = (function() {
 		}
 		return end;
 	}  
-	
+	function get_handle_from_changed($calc, tarifs, get_yaCounter){
+		return function handle_from_changed(event){
+			var $calc = $('.artkli-calc');
+			check_radio($calc);
+			update_where($calc);
+			update_from($calc);
+			fill_text($calc, tarifs);
+			send_ya_goal_complete(get_yaCounter, $calc.find('.artkli-call')[0]);
+			send_ya_goal_change(get_yaCounter);
+		}
+	}
+	function get_handle_where_changed($calc, tarifs, get_yaCounter){
+		return function handle_where_changed(event){
+			var $calc = $('.artkli-calc');
+			check_radio($calc);
+			update_from($calc);
+			update_where($calc);
+			fill_text($calc, tarifs);
+			send_ya_goal_complete(get_yaCounter, $calc.find('.artkli-call')[0]);
+			send_ya_goal_change(get_yaCounter);
+		}
+	}
+	function get_handle_massa_and_volume_changed($calc, tarifs, get_yaCounter){
+		return function handle_massa_and_volume_changed(event){
+			var $calc = $('.artkli-calc');
+			send_ya_goal_complete(get_yaCounter, $calc.find('.artkli-call')[0]);
+			send_ya_goal_change(get_yaCounter);
+			fill_text($calc, tarifs);
+			if(this.value != 0 && this.value != '.'){
+				this.value = parseFloat(this.value)  || 0; 
+				fill_text($calc, tarifs);
+			}
+		}
+	}
+	function get_handle_radio_changed($calc, tarifs){
+		return function handle_radio_changed(event){
+			fill_text($calc, tarifs);
+		}
+	}
+	function send_ya_goal_complete(get_yaCounter, target){
+		if(target.className == 'dump-noborder artkli-call')
+			get_yaCounter().reachGoal('fill_form'); return true;
+	}
+	function send_ya_goal_change(get_yaCounter){
+		get_yaCounter().reachGoal('change_some_fields'); return true;
+	}
+	function get_handle_reset_changed($calc){
+		return function handle_reset_changed(event){
+			reset($calc);
+		}
+	}
 
 
 
 
 
 	return {
-		fill_text: fill_text,
-		get_handle_reset_changed: get_handle_reset_changed,
-		update_way_dependent: update_way_dependent,
-		check_radio: check_radio,
-		update_where: update_where,
-		update_from: update_from,
-		find_depedency_var: find_depedency_var,
-		dev_update_dependent: dev_update_dependent,
-		state_way_dependent: state_way_dependent,
-		init_build_selectors: init_build_selectors,
-		build_radio_chooser: build_radio_chooser,
-		conclusion_tax: conclusion_tax,
-		get_from_cities_by_where: get_from_cities_by_where,
-		update_from_selector: update_from_selector,
-		build_radio: build_radio,
-		build_radio_chooser: build_radio_chooser,
-		get_where_cities: get_where_cities,
-		what_is_way: what_is_way,
-		build_option_html: build_option_html,
-		build_first_option: build_first_option,
-		auto_way_check: auto_way_check,
-		get_from_cities_keys: get_from_cities_keys,
-		get_where_cities_by_from: get_where_cities_by_from,
-		selector_update: selector_update,
-		update_where_selector: update_where_selector,
-		digit: digit,
-		reset: reset
+		initialization: initialization,
 
 	};
 })()
