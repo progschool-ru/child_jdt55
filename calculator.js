@@ -2,7 +2,7 @@
 var artkli_calculator = (function() {
 
 	function get_form_html(){
-		return "<h2 style=\"margin-left:-15px; \">Предварительный расчет</h2><div class=\"form-group\" style=\"margin-bottom: 0px;\"><div align=\"left\" class=\"selector\"><select name=\"artkli-from\" class=\"artkli-from form-control\" style=\"padding-left: 10px;\"></select></div><div align=\"left\" class=\"artkli-where selector\"><select name=\"artkli-where\" class=\"artkli-where_select form-control\"></select></div><button type=\"button\" class=\"artkli-butt btn btn-default\"  data-toggle=\"tooltip\" data-placement=\"top\" title=\"Сброс\" onclick=\"this.blur();\"><span class=\"octicon octicon-x\"></span></button></div><div class=\"form-group\" style=\"margin-bottom: 0px; padding-bottom: 0px;\"><div class=\"artkli-chooser\" align=\"left\" style=\"margin-right: 10px; margin-bottom: 0px; padding-bottom: 0px;\"></div><div class=\"artkli-choose_way\" align=\"left\" style=\"margin-bottom: 0px; padding-bottom: 0px;\" ></div><br/></div><div class=\"form-group\"><label for=\"artkli-massa\" class=\"col-sm-2 control-label\" style=\"width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px;\">Вес</label><div class=\"col-sm-10\" style=\"width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; \"><input name=\"artkli-massa\" id=\"artkli-massa\" class=\"form-control artkli-massa\" type=\"text\" placeholder = \"Кг\" style=\"text-align: right;\" value=\"\"/></div></div><div class=\"form-group\"><label for=\"artkli-volume\" class=\"col-sm-2 control-label\" style=\" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;\">Объем</label><div class=\"col-sm-10\" style=\"width: 200px;\"><input name= \"artkli-volume\" id=\"artkli-volume\" class=\"form-control artkli-volume\" type=\"text\" placeholder = \"Куб.м.\" style=\"text-align: right;\" value=\"\"/></div></div><div name=\"result_field\" class=\"alert alert-info artkli-result_field\" style=\"height: 36px width: 100%; margin-right: 76px; margin-left: -15px;\" role=\"alert\"><font size=\"3\"><span style=\"margin-bottom: 180px\" class=\"artkli-result\">Итог</span></font></div><table border=\"0\" class=\"dump-noborder form-group artkli-call\" style=\"font-size: 12px; padding-left:12px; margin-left: -14px;\"><tbody><tr><td style=\"width: 22px;height: 16px; padding-bottom: 10px; \"><span class=\"octicon octicon-device-mobile\" style=\"margin-left: 2px;vertical-align: bottom;\"></span></td><td style=\"padding-bottom: 6px;\"><span class=\"phone_num\" style=\"text-align: justify;padding-bottom: 3px;\">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td></tr><tr><td style=\"padding-bottom: 10px;\"><span class=\"octicon octicon-mail-read\" style=\"vertical-align: bottom;\"></span></td><td style=\"padding-bottom: 6px;\"><span style=\"text-align: justify;\">Написать: <a href=\"mailto:office@jdt55.ru\">office@jdt55.ru</a>.</span></td></tr><tr><td style=\"padding-bottom: 10px;\"><span class=\"octicon octicon-globe\" style=\"vertical-align: bottom;\"></span></td><td style=\"padding-bottom: 6px;\"><span style=\"text-align: justify;\"><a target=\"_blank\" href=\"/contact\" class=\"request\" onclick=\"window['yaCounter'+artkli_yandex_metrika_id].reachGoal('fill_blank'); return true;\">Оставить заявку на сайте.</a></span></td></tr></tbody></table>"
+		return "<h2 style=\"margin-left:-15px; \">Предварительный расчет</h2><div class=\"form-group\" style=\"margin-bottom: 0px;\"><div align=\"left\" class=\"selector\"><select name=\"artkli-from\" class=\"artkli-from form-control\" style=\"padding-left: 10px;\"></select></div><div align=\"left\" class=\"artkli-where selector\"><select name=\"artkli-where\" class=\"artkli-where_select form-control\"></select></div><button type=\"button\" class=\"artkli-butt btn btn-default\"  data-toggle=\"tooltip\" data-placement=\"top\" title=\"Сброс\" onclick=\"this.blur();\"><span class=\"octicon octicon-x\"></span></button></div><div class=\"form-group\" style=\"margin-bottom: 0px; padding-bottom: 0px;\"><div class=\"artkli-chooser\" align=\"left\" style=\"margin-right: 10px; margin-bottom: 0px; padding-bottom: 0px;\"></div><div class=\"artkli-choose_way\" align=\"left\" style=\"margin-bottom: 0px; padding-bottom: 0px;\" ></div><br/></div><div class=\"form-group\"><label for=\"artkli-massa\" class=\"col-sm-2 control-label\" style=\"width: 62px; margin-left: -14px; text-align: left; margin-bottom: 0px; margin-top: 5px;\">Вес</label><div class=\"col-sm-10\" style=\"width: 200px;margin-bottom: 0px;padding-right: 0px;margin-right:0px; \"><input name=\"artkli-massa\" id=\"artkli-massa\" class=\"form-control artkli-massa\" type=\"text\" placeholder = \"Кг\" style=\"text-align: right;\" value=\"\"/></div></div><div class=\"form-group\"><label for=\"artkli-volume\" class=\"col-sm-2 control-label\" style=\" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;\">Объем</label><div class=\"col-sm-10\" style=\"width: 200px;\"><input name= \"artkli-volume\" id=\"artkli-volume\" class=\"form-control artkli-volume\" type=\"text\" placeholder = \"Куб.м.\" style=\"text-align: right;\" value=\"\"/></div></div><div name=\"result_field\" class=\"alert alert-info artkli-result_field\" style=\"height: 36px width: 100%; margin-right: 76px; margin-left: -15px;\" role=\"alert\"><font size=\"3\"><span style=\"margin-bottom: 180px\" class=\"artkli-result\">Итог</span></font></div><table border=\"0\" class=\"dump-noborder form-group artkli-call\" style=\"font-size: 12px; padding-left:12px; margin-left: -14px;\"><tbody><tr><td style=\"width: 22px;height: 16px; padding-bottom: 10px; \"><span class=\"octicon octicon-device-mobile\" style=\"margin-left: 2px;vertical-align: bottom;\"></span></td><td style=\"padding-bottom: 6px;\"><span class=\"phone_num\" style=\"text-align: justify;padding-bottom: 3px;\">Позвонить: &nbsp; (3812) 45-04-39,&nbsp;&nbsp;8-913-967-98-98.</span></td></tr><tr><td style=\"padding-bottom: 10px;\"><span class=\"octicon octicon-mail-read\" style=\"vertical-align: bottom;\"></span></td><td style=\"padding-bottom: 6px;\"><span style=\"text-align: justify;\">Написать: <a href=\"mailto:office@jdt55.ru\">office@jdt55.ru</a>.</span></td></tr><tr><td style=\"padding-bottom: 10px;\"><span class=\"octicon octicon-globe\" style=\"vertical-align: bottom;\"></span></td><td style=\"padding-bottom: 6px;\"><span style=\"text-align: justify;\"><a target=\"_blank\" href=\"/contact\" class=\"request\"\">Оставить заявку на сайте.</a></span></td></tr></tbody></table>"
 	}
 
 
@@ -54,7 +54,7 @@ var artkli_calculator = (function() {
 		var volume = $calc.find('.artkli-volume')[0];
 
 		var form = $calc[0];
-		form.addEventListener('click', get_handle_form_changed(get_yaCounter));
+		// form.addEventListener('click', get_handle_form_changed(get_yaCounter));
 		from.addEventListener('change', get_handle_from_changed($calc, tarifs, get_yaCounter, city_names, way_names));
 		where.addEventListener('change', get_handle_where_changed($calc, tarifs, get_yaCounter, way_names, city_names));
 		button.addEventListener('click', get_handle_reset_changed($calc, tarifs, city_names));
@@ -557,164 +557,7 @@ var artkli_calculator = (function() {
 		}
 	}
 
-
-//second calc
-
-
-function get_form_html2(){
-		return "<h2 style=\"margin-left:-15px;\">Автоэкспед-ние грузов</h2><div class=\"form-group\"><label for=\"artkli-city\" class=\"col-sm-2 control-label\" style=\" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;\">Город</label> <div class=\"col-sm-10\"><select name=\"artkli-city\" class=\"form-control artkli-select\" style=\"width: 295px;\"></select></div></div><div class=\"form-group\"><label for=\"artkli-massa\" class=\"col-sm-2 control-label\" style=\" width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;\">Вес</label><div class=\"col-sm-10\"><input name=\"artkli-volume\" id=\"artkli-massa\" class=\"form-control artkli-massa\" type=\"text\" placeholder = \"Кг\" style=\"text-align: right;\" value=\"\"/></div></div><div class=\"form-group\"><label for=\"artkli-volume\" class=\"col-sm-2 control-label\" style=\"width: 62px; margin-left: -14px;text-align: left; margin-top: 5px;\">Объем</label><div class=\"col-sm-10\"><input name= \"artkli-volume\" id=\"artkli-volume\" class=\"form-control artkli-volume\" type=\"text\" placeholder = \"Куб.м.\" style=\"text-align: right;\" value=\"\"/></div></div><div name=\"result_field\" class=\"alert alert-info artkli-result_price\" style=\"height: 36px width: 100%; margin-right: 76px; margin-left: -15px;\" role=\"alert\"><font size=\"3\"><span style=\"margin-bottom: 180px\" class=\"artkli-result\">Итог</span></font></div><div name=\"result_field\" class=\"alert alert-info artkli-result_car artkli-hidden\" style=\"height: 36px width: 100%; margin-right: 76px; margin-left: -15px;\" role=\"alert\"><font size=\"3\"><span style=\"margin-bottom: 180px\" class=\"artkli-result\">Итог</span></font></div>"
-	}
-
-
-	function init_build_selector2(city_names){
-		var options = [];
-		var f_option = build_first_option();
-		options.push(f_option);
-		for(var i = 0; i < Object.keys(city_names).length; i++){
-			var city = Object.keys(city_names)[i];
-				var option = build_option_html(city, city_names[city]);
-				options.push(option);		
-		}
-		return options.join("\n");
-	}
-	function init_event_handlers2($calc, tarifs){
-		var select = $calc.find('.artkli-select')[0];
-		var volume = $calc.find('.artkli-volume')[0];
-		var massa = $calc.find('.artkli-massa')[0];
-
-		select.addEventListener('change', get_handle_select_changed($calc, tarifs));
-		volume.addEventListener('input', get_handle_volume_and_massa_changed2($calc, tarifs));
-		massa.addEventListener('input', get_handle_volume_and_massa_changed2($calc, tarifs));
-
-	}
-	function get_handle_select_changed($calc, tarifs){
-		return function handle_select_changed(event){
-			fill_text2($calc, tarifs);
-		}
-	}
-	function get_handle_volume_and_massa_changed2($calc, tarifs){
-		return function handle_volume_and_massa_changed(event){
-			fill_text2($calc, tarifs);
-			if(this.value != 0 && this.value != '.'){
-				this.value = parseFloat(this.value)  || 0; 
-				fill_text2($calc, tarifs);
-			}
-		}
-	}
-
-	function initialization2($calc, city_names, tarifs){
-		$calc.html(get_form_html2());
-		var select = $calc.find('.artkli-select')[0];
-		var volume = $calc.find('.artkli-volume')[0];
-		var massa = $calc.find('.artkli-massa')[0];
-		init_event_handlers2($calc, tarifs);
-		var options_html = init_build_selector2(city_names);
-		select.innerHTML = options_html;
-	}
-	function fill_text2($calc, tarifs){
-		var select = $calc.find('.artkli-select')[0].value;
-		var volume = $calc.find('.artkli-volume')[0].value;
-		var massa = $calc.find('.artkli-massa')[0].value;
-		var result_price = $calc.find('.artkli-result_price')[0];
-		var result_car = $calc.find('.artkli-result_car')[0];
-		var result;
-		var car = -1;
-
-		var city = select.value;
-
-		if(select == 'undefined_city'){
-			result = "Выберите город!";
-			result_price.setAttribute('class', 'alert alert-warning artkli-result_price');
-		}
-		else{
-			if(volume == "" && massa == ""){
-				result = "Введите массу или объем!";
-				result_price.setAttribute('class', 'alert alert-warning artkli-result_price');
-			}
-			else{
-				if(massa == ""){
-					var tax_by_volume = get_tax2(volume, tarifs, select, 'volume_range');
-					var car_by_volume = tax_by_volume.car;
-					var price_by_volume = tax_by_volume.price;
-					var price_by_mass = -5;
-				}
-				if(volume == ""){
-					var tax_by_mass = get_tax2(massa, tarifs, select, 'mass_range');
-					var car_by_mass = tax_by_mass.car;
-					var price_by_mass = tax_by_mass.price;
-					var price_by_volume = -5;
-
-				}
-				if(massa != "" && volume != ""){
-					var tax_by_mass = get_tax2(massa, tarifs, select, 'mass_range');
-					var car_by_mass = tax_by_mass.car;
-					var price_by_mass = tax_by_mass.price;
-
-					var tax_by_volume = get_tax2(volume, tarifs, select, 'volume_range');
-					var car_by_volume = tax_by_volume.car;
-					var price_by_volume = tax_by_volume.price;
-				}
-				if(price_by_volume == -2 || price_by_mass == -2){
-					ans = "Цена договорная";	
-				}
-				else{
-					if(price_by_mass > price_by_volume){
-						var ans = price_by_mass;
-						car = car_by_mass;
-					}
-					else{
-						var ans = price_by_volume;
-						car = car_by_volume;
-					}
-					if(ans == -2){
-						ans = "Цена договорная";
-					}
-				}
-				result = " Стоимость: "+ ans;
-				var car_ans = "Тр.средство: "+car;
-				result_price.setAttribute('class', 'alert alert-success artkli-result_price');
-
-			}
-		}
-		result_price.innerHTML = result;
-		result_car.innerHTML = car_ans;
-		if(car != -1){
-			result_car.setAttribute('class', 'alert alert-success artkli-result_car');
-		}
-		else{
-			result_car.setAttribute('class', 'alert alert-info artkli-result_car artkli-hidden');
-		}
-
-		//вывод времени погрузки + стоимость автомобиля + тип авто
-	}
-	function get_tax2(value, tarifs, city, type){
-		var taxRange = tarifs[city][type];
-		var taxPrice = tarifs[city]['price'];
-		var taxCars = tarifs[city]['car_range'];
-		var car;
-		var price;
-		var end = 1;
-		for(var i = taxRange.length-1; i >= 0; i--){
-			if(value < taxRange[i]){
-				price =	taxPrice[i+1];
-				car = taxCars[i+1];
-				end = 0;
-			}
-		}
-		if(end == 1){
-			price = -2;
-			car = -1;
-		}
-		return{
-			car: car,
-			price: price
-		};
-	}  
-
-
 	return {
 		initialization: initialization,
-		initialization2: initialization2
-
 	};
 })()
