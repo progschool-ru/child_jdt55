@@ -58,7 +58,7 @@
 				.later1{
 					margin-left: 105px;
 				}
-				.col-sm-10, .artkli-massa, .artkli-volume{
+				.col-sm-10, .artkli-massa, .artkli-volume, .artkli-select{
 					width: 100px;
 				}
 
@@ -137,7 +137,7 @@
 			.artkli-hidden { 
 				display: none; 
 			} 
-			.col-sm-10, .form-control.artkli-massa, .form-control.artkli-volume{
+			.col-sm-10, .form-control.artkli-massa, .form-control.artkli-volume, .form-control.artkli-select{
 				width: 295px;
 				margin-left: 0px; 
 			}
@@ -174,8 +174,6 @@
 			}
 			@media (max-width: 930px) and (min-width: 470px) {
 				.layer1{
-					/*text-align: center;*/
-					/*align-content: center;*/
 					margin-left: 105px;
 					display: none;
 				}
@@ -191,7 +189,7 @@
 				.layer2{
 					display: block;
 				}
-				.col-sm-10, .artkli-massa, .artkli-volume{
+				.col-sm-10, .artkli-massa, .artkli-volume, .artkli-select{
 					width: 200px;
 					margin-left: 3px;
 				}
