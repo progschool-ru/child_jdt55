@@ -110,6 +110,7 @@ var artkli_calculator = (function() {
 					else{
 						resultat = ans2;
 					}
+					if (resultat < 1150) resultat = 1150;
 					if(auto_way_check(from, where, tarifs)){
 						if( mass.value > 5000 || volume.value >  25){
 							resultat = "Цена договорная";
