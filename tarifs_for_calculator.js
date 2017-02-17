@@ -32,10 +32,10 @@ var artkli_tarifs = {
 		"moscow": {
 			"omsk": {
 				default_way: {
-					mass_range: [10000, 13000, 15000, 18000, 20000, 25000, 30000],
-					mass_price: [4.17, 4.06, 3.99, 3.86, 3.78, 3.67, 3.62, 3.19],
+					mass_range: [500, 5000, 10000, 13000, 15000, 18000, 20000, 25000, 30000],
+					mass_price: [4.6, 4.6, 4.6, 4.47, 4.39, 4.25, 4.16, 4.04],
 					volume_range: [10, 15, 20, 25, 30, 40, 45, 50, 60],
-					volume_price: [2099, 2044, 1988, 1946, 1904, 1862, 1820, 1778, 1736, 1599]
+					volume_price: [2300, 2249, 2187, 2141, 2094, 2048, 2002, 1956, 1910, 1759]
 				}
 			},
 			"aktau": {
@@ -128,6 +128,62 @@ var artkli_tarifs = {
 			}
 		},
 		"omsk": {
+			"tumen": {
+				default_way: {
+					mass_range: [100, 500, 1000, 5000, 10000],
+					mass_price: [5.5, 5.0, 4.8, 4.0, 3,9],
+					volume_range: [0.5, 5, 10, 20, 50],
+					volume_price: [1200, 1000, 850, 800, 730]
+				}
+			},
+			"ekat": {
+				default_way: {
+					mass_range: [100, 500, 1000, 5000, 10000],
+					mass_price: [5.6, 5.0, 4.6, 4.2, 4.1],
+					volume_range: [0.5, 5, 10, 20, 50],
+					volume_price: [1500, 1200, 1000, 900, 880]
+				}
+			},
+			"chita": {
+				default_way: {
+					mass_range: [100, 500, 1000, 5000, 10000],
+					mass_price: [11.5, 11.0, 10.5, 10.0, 9.2],
+					volume_range: [0.5, 5, 10, 20, 50],
+					volume_price: [2800, 2680, 2590, 2550, 2500]
+				}
+			},
+			"ulan_ude": {
+				default_way: {
+					mass_range: [100, 500, 1000, 5000, 10000],
+					mass_price: [10.5, 9.0, 9.5, 9.1, 8.9],
+					volume_range: [0.5, 5, 10, 20, 50],
+					volume_price: [2650, 2520, 2400, 2300, 2200]
+				}
+			},
+			"krasnoyarsk": {
+				default_way: {
+					mass_range: [100, 500, 1000, 5000, 10000],
+					mass_price: [7.0, 7.0, 7.0, 5.3, 5.3],
+					volume_range: [0.5, 5, 10, 20, 50],
+					volume_price: [1620, 1620, 1530, 1420, 1420]
+				}
+			},
+			"irkutsk": {
+				default_way: {
+					mass_range: [100, 500, 1000, 5000, 10000],
+					mass_price: [10, 9.8, 9.5, 9.0, 8.5],
+					volume_range: [0.5, 5, 10, 20, 50],
+					volume_price: [2400, 2280, 2250, 2200, 2190]
+				}
+			},
+			"novosib": {
+				default_way: {
+					mass_range: [500, 1000, 3000, 5000, 10000],
+					mass_price: [4.5, 3.5, 2.7, 2.5, 2.3],
+					volume_range: [2, 5, 10, 15, 20],
+					volume_price: [900, 750, 700, 650, 600]
+				}
+			},
 			"aktau": {
 				default_way: {
 					mass_range: [100, 200, 500, 1000, 1500, 2000, 3000, 5000, 10000, 14000, 18000],
@@ -146,10 +202,10 @@ var artkli_tarifs = {
 			},
 			"piter":{
 				default_way: {
-					mass_range: [5000],
-					mass_price: [9.5, -2],
-					volume_range: [25],
-					volume_price: [2500, -2]
+					mass_range: [500, 1000, 3000, 5000],
+					mass_price: [10.49, 10.49, 10.49, 10.49, -2],
+					volume_range: [2, 4, 12, 20],
+					volume_price: [2575, 2575, 2575, 2575, -2]
 				}	
 			},
 			"almati": {
@@ -244,17 +300,17 @@ var artkli_tarifs = {
 			},
 			"omsk":{ // !!!
 				jd_way: {
-					mass_range: [],
-					mass_price: [7],
-					volume_range: [],
-					volume_price: [2300]
-				},
-				auto_way: {
-					mass_range: [200, 500, 1000, 2000, 3000, 4000, 5000],
-					mass_price: [12.5, 12.1, 11.9, 11.7, 11.5, 11.3, -2],
-					volume_range: [1, 2.5, 5, 10, 15, 20, 25],
-					volume_price: [3000, 2950, 2910, 2860, 2820, 2770, 2720, -2]	
-				}	
+					mass_range: [500, 1000, 3000, 5000],
+					mass_price: [12.22, 12.02, 11.82, 11.62, -2],
+					volume_range: [2, 4, 12, 20],
+					volume_price: [3000, 2950, 2900, 2850, -2]
+				}
+				// auto_way: {
+				// 	mass_range: [200, 500, 1000, 2000, 3000, 4000, 5000],
+				// 	mass_price: [12.5, 12.1, 11.9, 11.7, 11.5, 11.3, -2],
+				// 	volume_range: [1, 2.5, 5, 10, 15, 20, 25],
+				// 	volume_price: [3000, 2950, 2910, 2860, 2820, 2770, 2720, -2]	
+				// }	
 			},
 			"almati": {
 				default_way: {
@@ -330,6 +386,14 @@ var artkli_tarifs = {
 			}
 		},
 		"ekat": {
+			"omsk": {
+				default_way: {
+					mass_range: [500, 1000, 3000, 5000, 10000],
+					mass_price: [5.0, 4.6, 4.4, 4.2, 4.0, 3.8],
+					volume_range: [2, 5, 10, 15, 20],
+					volume_price: [1300, 1100, 1000, 900, 850]
+				}
+			},
 			"aktau": {
 				default_way: {
 					mass_range: [100, 200, 500, 1000, 1500, 2000, 3000, 5000, 10000, 14000, 18000],
@@ -420,6 +484,14 @@ var artkli_tarifs = {
 			}
 		},
 		"tumen": {
+			"omsk": {
+				default_way: {
+					mass_range: [500, 1000, 3000, 5000, 10000],
+					mass_price: [5.0, 4.8, 4.4, 4.0, 3.8, 3.6],
+					volume_range: [2, 5, 10, 15, 20],
+					volume_price: [1100, 950, 850, 800, 750]
+				}
+			},
 			"aktau": {
 				default_way: {
 					mass_range: [100, 200, 500, 1000, 1500, 2000, 3000, 5000, 10000, 14000, 18000],
@@ -510,6 +582,14 @@ var artkli_tarifs = {
 			}
 		},
 		"novosib": {
+			"omsk": {
+				default_way: {
+					mass_range: [500, 1000, 3000, 5000, 10000],
+					mass_price: [3.2, 3.0, 2.5, 2.2, 2.1, -2],
+					volume_range: [2, 5, 10, 15, 20],
+					volume_price: [650, 600, 570, 550, 500]
+				}
+			},
 			"aktau": {
 				default_way: {
 					mass_range: [100, 200, 500, 1000, 1500, 2000, 3000, 5000, 10000, 14000, 18000],
